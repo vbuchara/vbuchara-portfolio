@@ -1,0 +1,47 @@
+@use '@styles/abstract/functions' as *;
+@use '@styles/abstract/mixins';
+@use '@styles/abstract/variables' as *;
+
+@include mixins.set-font-faces('IBMPlexSans', $ibm-plex-sans-fonts);
+
+:root {
+    --font-family: #{$font-family-primary}, #{$font-family-secondary};
+    --font-size: #{$font-size};
+    --text-color: #{$black};
+
+    --text-scale-ratio: 1.2;
+
+    --text-xs: calc(1em / (#{css-pow(var(--text-scale-ratio), 2)}));
+    --text-sm: calc(1em / var(--text-scale-ratio));
+    --text-md: calc(1em * var(--text-scale-ratio));
+    --text-lg: calc(1em * #{css-pow(var(--text-scale-ratio), 2)});
+    --text-xl: calc(1em * #{css-pow(var(--text-scale-ratio), 3)});
+    --text-xxl: calc(1em * #{css-pow(var(--text-scale-ratio), 4)});
+    --text-xxxl: calc(1em * #{css-pow(var(--text-scale-ratio), 5)});
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: var(--text-xxl);
+}
+
+h2 {
+    font-size: var(--text-xl);
+}
+
+h3 {
+    font-size: var(--text-lg);
+}
+
+h4 {
+    font-size: var(--text-md);
+}

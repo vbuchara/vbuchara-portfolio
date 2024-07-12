@@ -1,0 +1,9 @@
+@function css-pow($value, $exponent){
+    $finalValue: $value;
+
+    @for $i from 1 to $exponent {
+        $finalValue: "#{$finalValue} * #{$value}";
+    }
+    
+    @return $finalValue;
+}

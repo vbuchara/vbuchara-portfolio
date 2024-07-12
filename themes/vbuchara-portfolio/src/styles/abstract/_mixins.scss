@@ -1,0 +1,10 @@
+@mixin set-font-faces($font-family, $fonts){
+    @each $file, $info in $fonts {
+        @font-face {
+            font-family: $font-family;
+            src: url(@assets/fonts/#{$file}.ttf) format('truetype');
+            font-weight: map-get($info, 'weight');
+            font-style: map-get($info, 'style');
+        }
+    }
+}

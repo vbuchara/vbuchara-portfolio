@@ -1,0 +1,47 @@
+@use "@styles/abstract/variables" as *;
+
+.site-header {
+    position: sticky;
+    top: var(--wp-admin--admin-bar--height, 32px);
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+
+    background-color: $white-smoke;
+
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba($cool-gray, 0.5);
+
+    font-size: 2.8rem;
+    line-height: 1;
+
+    &__logo {
+        margin-left: 100px;
+    }
+
+    &__contact-button {
+        --background-color: #{$russian-violet};
+        --color: #{$white-smoke};
+        --border-color: var(--background-color);
+
+        background-color: var(--background-color);
+        color: var(--color);
+        border-color: var(--border-color);
+
+        font-weight: 600;
+
+        padding-block: 12px;
+        padding-inline: 36px;
+
+        border-radius: 10px;
+
+        &:hover{
+            background-color: var(--color);
+            color: var(--background-color);
+        }
+    }
+}

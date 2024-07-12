@@ -1,0 +1,36 @@
+{
+  "name": "vbuchara-portfolio-theme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "wp-scripts build --experimental-modules",
+    "start": "wp-scripts start --experimental-modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/browser-sync": "^2.29.0",
+    "@types/dotenv-webpack": "^7.0.7",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/wordpress__block-editor": "^11.5.15",
+    "@types/wordpress__blocks": "^12.5.14",
+    "@types/wordpress__editor": "^13.6.8",
+    "@wordpress/scripts": "^28.0.0"
+  },
+  "dependencies": {
+    "@wordpress/components": "^28.3.0",
+    "@wordpress/core-data": "^7.3.0",
+    "@wordpress/data": "^10.3.0",
+    "@wordpress/editor": "^14.3.0",
+    "@wordpress/icons": "^10.3.0",
+    "browser-sync": "^3.0.2",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "dotenv-webpack": "^8.1.0",
+    "webpack": "^5.88.2"
+  },
+  "resolutions": {
+    "webpack": "^5.88.2"
+  }
+}

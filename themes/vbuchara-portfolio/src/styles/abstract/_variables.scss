@@ -1,0 +1,78 @@
+// Main Colors
+$russian-violet: #14003fff;
+$white-smoke: #f7f4f3ff;
+$penn-red: #92140cff;
+$salmon-pink: #f48498ff;
+$cool-gray: #8789c0ff;
+
+// Other Colors
+$gray: #808080;
+$light-gray: #D3D3D3;
+$black: #0F0D0D;
+
+
+// Typography Variables
+
+$font-family-primary: 'IBMPlexSans';
+$font-family-secondary: sans-serif;
+
+$font-size: 1.4rem;
+
+$ibm-plex-sans-fonts: (
+    'IBMPlexSans-Bold': (
+        'weight': bold,
+        'style': normal
+    ),
+    'IBMPlexSans-Light': (
+        'weight': 300,
+        'style': normal
+    ),
+    'IBMPlexSans-ExtraLightItalic': (
+        'weight': 200,
+        'style': italic
+    ),
+    'IBMPlexSans-ExtraLight': (
+        'weight': 200,
+        'style': normal
+    ),
+    'IBMPlexSans-Italic': (
+        'weight': normal,
+        'style': italic
+    ),
+    'IBMPlexSans-BoldItalic': (
+        'weight': bold,
+        'style': italic
+    ),
+    'IBMPlexSans-LightItalic': (
+        'weight': 300,
+        'style': italic
+    ),
+    'IBMPlexSans-Regular': (
+        'weight': normal,
+        'style': normal
+    ),
+    'IBMPlexSans-MediumItalic': (
+        'weight': 500,
+        'style': italic
+    ),
+    'IBMPlexSans-Medium': (
+        'weight': 500,
+        'style': normal
+    ),
+    'IBMPlexSans-Thin': (
+        'weight': 100,
+        'style': normal
+    ),
+    'IBMPlexSans-ThinItalic': (
+        'weight': 100,
+        'style': italic
+    ),
+    'IBMPlexSans-SemiBoldItalic': (
+        'weight': 600,
+        'style': italic
+    ),
+    'IBMPlexSans-SemiBold': (
+        'weight': 600,
+        'style': normal
+    ),
+);

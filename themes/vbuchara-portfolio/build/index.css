@@ -1,0 +1,206 @@
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/styles/index.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/**
+* CSS Reset
+* Credits: joshwcomeau.com/css/custom-css-reset/#the-css-reset-1
+*/
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+    Typographic tweaks!
+    3. Add accessible line-height
+    4. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+    5. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+    6. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/*
+    7. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+    8. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+body {
+  background-color: #f7f4f3;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Bold.e933eba4.ttf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Light.f6a1d8cf.ttf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-ExtraLightItalic.d3201f07.ttf) format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-ExtraLight.80e51e08.ttf) format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Italic.2b311f7f.ttf) format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-BoldItalic.2078e351.ttf) format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-LightItalic.d7291019.ttf) format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Regular.d77342fd.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-MediumItalic.c269d94d.ttf) format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Medium.56fb541c.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-Thin.ce5a0c05.ttf) format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-ThinItalic.929fc3a9.ttf) format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-SemiBoldItalic.dc52201a.ttf) format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url(fonts/IBMPlexSans-SemiBold.f2e690b5.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+:root {
+  --font-family: IBMPlexSans, sans-serif;
+  --font-size: 1.4rem;
+  --text-color: #0F0D0D;
+  --text-scale-ratio: 1.2;
+  --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+  --text-sm: calc(1em / var(--text-scale-ratio));
+  --text-md: calc(1em * var(--text-scale-ratio));
+  --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: var(--text-xxl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+h4 {
+  font-size: var(--text-md);
+}
+
+/*# sourceMappingURL=index.css.map*/

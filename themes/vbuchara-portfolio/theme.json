@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+    "templateParts": [
+        {
+            "area": "header",
+            "name": "site-header",
+            "title": "Site Header"
+        },
+        {
+            "area": "footer",
+            "name": "site-footer",
+            "title": "Site Footer"
+        }
+    ],
+	"settings": {
+        "color": {
+            "palette": [
+                {
+                    "slug": "russian-violet",
+                    "color": "#14003fff",
+                    "name": "Russian Violet"
+                },
+                {
+                    "slug": "white-smoke",
+                    "color": "#f7f4f3ff",
+                    "name": "White Smoke"
+                },
+                {
+                    "slug": "penn-red",
+                    "color": "#92140cff",
+                    "name": "Penn Red"
+                },
+                {
+                    "slug": "salmon-pink",
+                    "color": "#f48498ff",
+                    "name": "Salmon Pink"
+                },
+                {
+                    "slug": "cool-gray",
+                    "color": "#8789c0ff",
+                    "name": "Cool Gray"
+                }
+            ]
+        },
+        "layout": {
+            "contentSize": "840px"
+        }
+    },
+    "customTemplates": [
+        {
+            "name": "empty-canvas",
+            "postTypes": ["page"],
+            "title": "Empty Canvas"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/header/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.site-header {
+  position: sticky;
+  top: var(--wp-admin--admin-bar--height, 32px);
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  background-color: #f7f4f3;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(135, 137, 192, 0.5);
+  font-size: 2.8rem;
+  line-height: 1;
+}
+.site-header__logo {
+  margin-right: 100px;
+}
+.site-header__contact-button {
+  --background-color: #14003f;
+  --color: #f7f4f3;
+  --border-color: var(--background-color);
+  background-color: var(--background-color);
+  color: var(--color);
+  border-color: var(--border-color);
+  font-weight: 600;
+  padding-block: 12px;
+  padding-inline: 36px;
+  border-radius: 10px;
+}
+.site-header__contact-button:hover {
+  background-color: var(--color);
+  color: var(--background-color);
+}

@@ -1,0 +1,12 @@
+{
+    "name": "kingcrash2000/vbuchara-portfolio",
+    "authors": [
+        {
+            "name": "Vinicius Buchara",
+            "email": "vbuchara31@gmail.com"
+        }
+    ],
+    "require": {
+        "masterminds/html5": "^2.9"
+    }
+}
