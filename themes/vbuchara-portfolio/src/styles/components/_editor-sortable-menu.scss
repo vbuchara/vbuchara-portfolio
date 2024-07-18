@@ -1,0 +1,71 @@
+@use "../abstract/variables" as *;
+
+@use "./editor-menu";
+
+.editor-sortable-menu {
+    @extend .editor-menu;
+
+    &__item {
+        @extend .editor-menu__item;
+
+        &-drag-handler{
+            grid-area: handler;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            border: 0;
+
+            background-color: $russian-violet;
+
+            padding-block: 0.2rem;
+
+            cursor: grab;
+
+            &-icon {
+                width: 2rem;
+                height: 2rem;
+                
+                fill: $white-smoke;
+                
+                rotate: 90deg;
+            }
+        }
+
+        &-title {
+            @extend .editor-menu__item-title;
+        }
+
+        &-url {
+            @extend .editor-menu__item-url;
+
+            &-view {
+                @extend .editor-menu__item-url-view;
+
+                &-icon {
+                    @extend .editor-menu__item-url-view-icon;
+                }
+
+                &-link {
+                    @extend .editor-menu__item-url-view-link;
+                }
+            }
+        }
+
+        &-delete {
+            @extend .editor-menu__item-delete;
+
+            &-icon {
+                @extend .editor-menu__item-delete-icon;
+            }
+        }
+    }
+
+    &__add-button {
+        @extend .editor-menu__add-button;
+
+        &-icon {
+            @extend .editor-menu__add-button-icon;
+        }
+    }
+}

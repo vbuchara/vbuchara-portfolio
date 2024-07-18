@@ -75,8 +75,38 @@ h6 {
   isolation: isolate;
 }
 
+html {
+  --total-view-height: calc(100vh - var(--wp-admin--admin-bar--height, 0px));
+  min-height: var(--total-view-height);
+  width: 100%;
+}
+
 body {
+  position: relative;
   background-color: #f7f4f3;
+  min-height: var(--total-view-height);
+  width: 100%;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-image: url(images/background.596a86a8.png);
+  background-repeat: repeat;
+  background-size: 25%;
+  opacity: 0.3;
+}
+
+button {
+  cursor: pointer;
+}
+
+.wp-site-blocks {
+  min-height: var(--total-view-height);
 }
 
 @font-face {

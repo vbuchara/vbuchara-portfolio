@@ -7,3 +7,38 @@
     
     @return $finalValue;
 }
+
+@function get-priority-id(
+    $priority: 1
+){
+    $priority-ids: "";
+
+    @for $index from 1 through $priority {
+        @if ($index == 1) {
+            $priority-ids: "#priority#{$index}";
+        } @else {
+            $priority-ids: $priority-ids + ", #priority#{$index}";
+        }
+    }
+
+    @return $priority-ids;
+}
+
+@function get-transitions(
+    $properties: (),
+    $duration: 1s,
+    $timing-function: linear,
+    $delay: 0s
+){
+    $final-transition: "";
+
+    @each $property in $properties {
+        @if ($final-transition == ""){
+            $final-transition: "#{$property} #{$duration} #{$timing-function} #{$delay}";
+        } @else {
+            $final-transition: "#{$final-transition}, #{$property} #{$duration} #{$timing-function} #{$delay}";
+        }
+    }
+
+    @return unquote($final-transition);
+}

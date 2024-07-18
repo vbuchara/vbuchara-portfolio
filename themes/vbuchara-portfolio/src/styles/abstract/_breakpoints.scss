@@ -1,0 +1,41 @@
+@use "variables" as *;
+
+@mixin media-breakpoint-at(
+    $breakpoint: 'xs'
+){
+    @media (min-width: map-get($breakpoints, $breakpoint)){
+        @content;
+    }
+}
+
+// Media breakpoint at 576px
+@mixin media-breakpoint-sm {
+    @include media-breakpoint-at('sm') {
+        @content;
+    };
+}
+
+// Media breakpoint at 768px
+@mixin media-breakpoint-md {
+    @include media-breakpoint-at('md') {
+        @content;
+    };
+}
+
+@mixin media-breakpoint-lg {
+    @include media-breakpoint-at('lg') {
+        @content;
+    };
+}
+
+@mixin media-breakpoint-xl {
+    @include media-breakpoint-at('xl') {
+        @content;
+    };
+}
+
+@mixin media-breakpoint-xxl {
+    @include media-breakpoint-at('xxl') {
+        @content;
+    };
+}

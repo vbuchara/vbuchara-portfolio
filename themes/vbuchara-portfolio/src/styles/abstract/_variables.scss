@@ -10,6 +10,7 @@ $gray: #808080;
 $light-gray: #D3D3D3;
 $black: #0F0D0D;
 
+$blue-link: #2271b1;
 
 // Typography Variables
 
@@ -75,4 +76,14 @@ $ibm-plex-sans-fonts: (
         'weight': 600,
         'style': normal
     ),
+);
+
+// Breakpoints 
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
 );

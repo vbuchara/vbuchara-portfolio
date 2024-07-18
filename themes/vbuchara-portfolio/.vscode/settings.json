@@ -1,0 +1,11 @@
+{
+    "alias-tool.mappings": {
+        "@assets": "${folder}/assets",
+        "@styles": "${folder}/src/styles"
+    },
+    "path-autocomplete.pathMappings": {
+        "@assets": "${folder}/assets",
+        "@styles": "${folder}/src/styles"
+    },
+    "html.customData": ["./.vscode/interactivity.html-data.json"],
+}

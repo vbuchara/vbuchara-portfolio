@@ -30,6 +30,11 @@ function vbuchara_portfolio_after_theme_setup(){
 
 add_action("init", "vbuchara_portfolio_init_blocks");
 function vbuchara_portfolio_init_blocks(){
+    /**
+     * @var array{dependencies: string[], version: string}
+     */
+    $vendorAssets = include get_theme_file_path("/build/vendors.asset.php");
+
     wp_register_script(
         'react-jsx-runtime',
         get_theme_file_uri("/assets/js/react-jsx-runtime.js"),
@@ -37,9 +42,15 @@ function vbuchara_portfolio_init_blocks(){
         '18.3.0',
         true
     );
+    wp_register_script(
+        'vbuchara-portfolio-blocks-vendor',
+        get_theme_file_uri("/build/vendors.js"),
+        isset($vendorAssets['dependencies']) ? $vendorAssets['dependencies'] : [],
+        isset($vendorAssets['version']) ? $vendorAssets["version"] : null,
+        true
+    );
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/footer/block.json"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/header/block.json"));
-
 }
 
 add_filter('block_categories_all', 'vbuchara_portfolio_blocks_category');

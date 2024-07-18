@@ -1,0 +1,80 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/main/docs/customData.schema.json",
+    "version": 1.1,
+    "tags": [],
+    "globalAttributes": [
+        {
+            "name": "data-wp-interactive", 
+            "description": "The wp-interactive directive “activates” the interactivity for the DOM element and its children through the Interactivity API (directives and store). The directive includes a namespace to reference a specific store, that can be set as a string or an object."
+        },
+        {
+            "name": "data-wp-context", 
+            "description": "It provides a local state available to a specific HTML node and its children. The wp-context directive accepts a stringified JSON as a value."
+        },
+        {
+            "name": "data-wp-bind",
+            "description": "This directive allows setting HTML attributes on elements based on a boolean or string value. It follows the syntax data-wp-bind--attribute."
+        },
+        {
+            "name": "data-wp-class",
+            "description": "This directive adds or removes a class to an HTML element, depending on a boolean value. It follows the syntax data-wp-class--classname."
+        },
+        {
+            "name": "data-wp-style",
+            "description": "This directive adds or removes inline style to an HTML element, depending on its value. It follows the syntax data-wp-style--css-property."
+        },
+        {
+            "name": "data-wp-text",
+            "description": "It sets the inner text of an HTML element."
+        },
+        {
+            "name": "data-wp-on",
+            "description": "This directive runs code on dispatched DOM events like click or keyup. The syntax is data-wp-on--[event] (like data-wp-on--click or data-wp-on--keyup)."
+        },
+        {
+            "name": "data-wp-on-async",
+            "description": "This directive is a more performant approach for wp-on. It immediately yields to main to avoid contributing to a long task, allowing other interactions that otherwise would be waiting on the main thread to run sooner. Use this async version whenever there is no need for synchronous access to the event object, in particular the methods event.preventDefault(), event.stopPropagation(), and event.stopImmediatePropagation()."
+        },
+        {
+            "name": "data-wp-on-window",
+            "description": "This directive allows you to attach global window events like resize, copy, and focus and then execute a defined callback when those happen. The syntax of this directive is data-wp-on-window--[window-event] (like data-wp-on-window--resize or data-wp-on-window--languagechange)."
+        },
+        {
+            "name": "data-wp-on-async-window",
+            "description": "Similar to wp-on-async, this is an optimized version of wp-on-window that immediately yields to main to avoid contributing to a long task. Use this async version whenever there is no need for synchronous access to the event object, in particular the methods event.preventDefault(), event.stopPropagation(), and event.stopImmediatePropagation(). This event listener is also added as passive."
+        },
+        {
+            "name": "data-wp-on-document",
+            "description": "This directive allows you to attach global document events like scroll, mousemove, and keydown and then execute a defined callback when those happen. The syntax of this directive is data-wp-on-document--[document-event] (like data-wp-on-document--keydown or data-wp-on-document--selectionchange)."
+        },
+        {
+            "name": "data-wp-on-async-document",
+            "description": "Similar to wp-on-async, this is an optimized version of wp-on-document that immediately yields to main to avoid contributing to a long task. Use this async version whenever there is no need for synchronous access to the event object, in particular the methods event.preventDefault(), event.stopPropagation(), and event.stopImmediatePropagation(). This event listener is also added as passive."
+        },
+        {
+            "name": "data-wp-watch",
+            "description": "It runs a callback when the node is created and runs it again when the state or context changes. You can attach several side effects to the same DOM element by using the syntax data-wp-watch--[unique-id]. The unique-id doesn’t need to be unique globally. It just needs to be different from the other unique IDs of the wp-watch directives of that DOM element."
+        },
+        {
+            "name": "data-wp-init",
+            "description": "This directive runs a callback only when the node is created. You can attach several wp-init to the same DOM element by using the syntax data-wp-init--[unique-id]. The unique-id doesn’t need to be unique globally. It just needs to be different from the other unique IDs of the wp-init directives of that DOM element."
+        },
+        {
+            "name": "data-wp-run",
+            "description": "This directive runs the passed callback during the node’s render execution. You can use and compose hooks like useState, useWatch, or useEffect inside the passed callback and create your own logic, providing more flexibility than previous directives. You can attach several wp-run to the same DOM element by using the syntax data-wp-run--[unique-id]. The unique-id doesn’t need to be unique globally. It just needs to be different from the other unique IDs of the wp-run directives of that DOM element."
+        },
+        {
+            "name": "data-wp-key",
+            "description": "The wp-key directive assigns a unique key to an element to help the Interactivity API identify it when iterating through arrays of elements. This becomes important if your array elements can move (e.g., due to sorting), get inserted, or get deleted. A well-chosen key value helps the Interactivity API infer what exactly has changed in the array, allowing it to make the correct updates to the DOM. The key should be a string that uniquely identifies the element among its siblings."
+        },
+        {
+            "name": "data-wp-each",
+            "description": "The wp-each directive is intended to render a list of elements. The directive can be used in <template> tags, being the value a path to an array stored in the global state or the context. The content inside the <template> tag is the template used to render each of the items. Each item is included in the context under the item name by default, so directives inside the template can access the current item."
+        },
+        {
+            "name": "data-wp-each-child",
+            "description": "For server-side rendered lists, another directive called data-wp-each-child ensures hydration works as expected. This directive is added automatically when the directive is processed on the server."
+        }
+    ],
+    "valueSets": []
+}

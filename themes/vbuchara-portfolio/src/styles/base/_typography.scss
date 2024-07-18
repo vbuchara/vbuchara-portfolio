@@ -1,6 +1,6 @@
-@use '@styles/abstract/functions' as *;
-@use '@styles/abstract/mixins';
-@use '@styles/abstract/variables' as *;
+@use '../abstract/functions' as *;
+@use '../abstract/mixins';
+@use '../abstract/variables' as *;
 
 @include mixins.set-font-faces('IBMPlexSans', $ibm-plex-sans-fonts);
 

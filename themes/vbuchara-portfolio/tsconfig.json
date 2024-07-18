@@ -33,6 +33,9 @@
 			"@functions/*": [
 				"./src/functions/*"
 			],
+			"@stores/*": [
+				"src/stores/*"
+			],
 			"@styles/*": [
 				"./src/styles/*"
 			],

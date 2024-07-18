@@ -4,7 +4,15 @@
   "name": "vbuchara-portfolio/header",
   "title": "Header",
   "category": "vbuchara-portfolio",
-  "editorScript": "file:./header.js",
+  "supports": {
+    "interactivity": true
+  },
+  "editorScript": [
+    "file:./header.js",
+    "vbuchara-portfolio-blocks-vendor"
+  ],
+  "editorStyle": "file:./header.css",
+  "viewScriptModule": "file:./view.js",
   "style": "file:./style-header.css",
   "render": "file:./render.php"
 }

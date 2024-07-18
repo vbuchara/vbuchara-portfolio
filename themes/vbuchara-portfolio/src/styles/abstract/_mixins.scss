@@ -1,3 +1,84 @@
+@use "functions" as *;
+@use "variables" as *;
+
+// Styles
+@mixin button-with-icon(
+    $color: $black,
+    $border-color: $gray,
+    $background-color: $white-smoke,
+    $hover-color: $white-smoke,
+    $hover-border-color: $russian-violet,
+    $hover-background-color: $russian-violet,
+){
+    $button-selector: &;
+
+    --icon-size: 1.3rem;
+    --icon-position-right: 0.5rem;
+    --padding-inline: 1rem;
+    --padding-block: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    color: $color;
+    background-color: $background-color;
+
+    padding-inline-start: var(--padding-inline);
+    padding-inline-end: var(--padding-inline);
+    padding-block-start: var(--padding-block);
+    padding-block-end: var(--padding-block);
+
+    border-width: 1px;
+    border-color: $border-color;
+    border-style: solid;
+    border-radius: 3px;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: padding-inline-end 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    will-change: padding-inline-end;
+
+    &-icon {
+        width: var(--icon-size);
+        height: var(--icon-size);
+
+        position: absolute;
+        right: var(--icon-position-right);
+        top: auto;
+        bottom: auto;
+        left: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10%;
+
+        fill: $color;
+
+        translate: calc(var(--icon-size) + var(--icon-position-right)) 0;
+
+        transition: translate 0.3s ease, fill 0.3s ease;
+        will-change: translate;
+    }
+
+    &:hover {
+        padding-inline-end: calc(var(--padding-inline) + var(--icon-size));
+
+        background-color: $hover-background-color;
+        border-color: $hover-border-color;
+        color: $hover-color;
+
+        #{$button-selector}-icon {
+            translate: 0 0;
+            fill: $hover-color;
+        }
+    }
+}
+
+// Set Fonts
 @mixin set-font-faces($font-family, $fonts){
     @each $file, $info in $fonts {
         @font-face {
@@ -6,5 +87,21 @@
             font-weight: map-get($info, 'weight');
             font-style: map-get($info, 'style');
         }
+    }
+}
+
+// Misc
+@mixin with-priority(
+    $priority: 1
+){
+    &:is(*, #{get-priority-id($priority)}){
+        @content;
+    }
+}
+
+// Support Mixins
+@mixin supports-has-selector(){
+    @supports(selector(*:has(*))){
+        @content;
     }
 }

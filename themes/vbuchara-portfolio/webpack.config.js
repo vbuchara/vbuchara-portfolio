@@ -86,6 +86,7 @@ const newScriptConfig = {
             "@classes": path.resolve(__dirname, "src/classes/"),
             "@components": path.resolve(__dirname, "src/components/"),
             "@functions": path.resolve(__dirname, "src/functions/"),
+            "@stores": path.resolve(__dirname, "src/stores/"),
             "@styles": path.resolve(__dirname, "src/styles/"),
             "@utils": path.resolve(__dirname, "src/utils/"),
         }
@@ -133,6 +134,7 @@ const newModuleConfig = {
             "@classes": path.resolve(__dirname, "src/classes/"),
             "@components": path.resolve(__dirname, "src/components/"),
             "@functions": path.resolve(__dirname, "src/functions/"),
+            "@stores": path.resolve(__dirname, "src/stores/"),
             "@styles": path.resolve(__dirname, "src/styles/"),
             "@utils": path.resolve(__dirname, "src/utils/"),
         }

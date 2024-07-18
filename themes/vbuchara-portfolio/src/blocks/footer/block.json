@@ -4,7 +4,7 @@
     "name": "vbuchara-portfolio/footer",
     "title": "Footer",
     "category": "vbuchara-portfolio",
-    "editorScript": "file:./footer.tsx",
+    "editorScript": ["file:./footer.tsx", "vbuchara-portfolio-blocks-vendor"],
     "style": "file:./styles.scss",
     "render": "file:./render.php"
 }   

@@ -10,7 +10,7 @@ class SvgHelpers {
     /**
      * @return string
      */
-    static function load_svg(string $file){
+    public static function load_svg(string $file){
         $svgFile = str_ends_with($file, ".svg") ? $file : "$file.svg";
         $svgFilePath = get_theme_file_path("/assets/svgs/$svgFile");
 
@@ -21,7 +21,7 @@ class SvgHelpers {
         return "";
     }
 
-    static function get_svg_element(string $file){
+    public static function get_svg_element(string $file){
         $svgContent = self::load_svg($file);
 
         $html5 = new HTML5();
@@ -33,7 +33,7 @@ class SvgHelpers {
         return $svgElement;
     }
 
-    static function get_svg_base64(string $file){
+    public static function get_svg_base64(string $file){
         $svgContent = self::load_svg($file);
 
         return 'data:image/svg+xml;base64,' . base64_encode($svgContent);

@@ -1,0 +1,115 @@
+@use "../abstract/variables" as *;
+@use "../abstract/mixins" as *;
+
+.editor-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding-inline: 0.7rem;
+    padding-block: 0.7rem;
+
+    border-radius: 5px;
+
+    background-color: $light-gray;
+    color: $black;
+    font-size: 1.1rem;
+
+    &__item {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas: 
+            "handler"
+            "title"
+            "url"
+            "delete"
+        ;
+
+        background-color: $white-smoke;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+        &-title, &-url {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.5;
+
+            padding-inline: 0.5rem;
+            padding-block: 0.5rem;
+
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+
+            @include with-priority {
+                max-width: none;
+                margin-right: 0;
+            }
+        }
+
+        &-title {
+            grid-area: title;
+        }
+
+        &-url {
+            --input-placeholder-color: #{$light-gray};
+
+            grid-area: url;
+
+            &-view {
+                display: grid;
+                grid-template-columns: auto auto;
+                grid-template-rows: 1fr;
+                justify-content: start;
+                align-items: center;
+                column-gap: 0.2rem;
+
+                &-icon {
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    fill: $penn-red;
+                }
+
+                &-link {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    color: $penn-red;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $penn-red;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &-delete {
+            @include button-with-icon(
+                $background-color: $penn-red,
+                $border-color: $penn-red,
+                $color: $white-smoke,
+                $hover-background-color: $white-smoke,
+                $hover-border-color: $penn-red,
+                $hover-color: $penn-red,
+            );
+            --padding-block: 0.5rem;
+        
+            grid-area: delete;
+
+            margin-inline: 0.5rem;
+            margin-block: 0.5rem;
+        }
+    }
+
+    &__add-button{
+        @include button-with-icon();
+    }
+}
