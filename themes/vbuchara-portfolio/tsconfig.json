@@ -33,6 +33,9 @@
 			"@functions/*": [
 				"./src/functions/*"
 			],
+			"@hooks/*": [
+				"./src/hooks/*"
+			],
 			"@stores/*": [
 				"src/stores/*"
 			],

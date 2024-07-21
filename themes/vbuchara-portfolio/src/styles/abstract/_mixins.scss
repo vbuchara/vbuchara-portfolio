@@ -22,6 +22,8 @@
     align-items: center;
     position: relative;
 
+    font-size: 1.1rem;
+
     color: $color;
     background-color: $background-color;
 
@@ -74,6 +76,134 @@
         #{$button-selector}-icon {
             translate: 0 0;
             fill: $hover-color;
+        }
+    }
+}
+
+@mixin highlight-animation(
+    $outline-width: 2px,
+    $outline-offset: 2px,
+    $background-color: rgba($white-smoke, 0),
+    $animation-delay: 0s
+){
+    $animation-id: unique-id();
+    $outline-inset: calc(-1 * (#{$outline-offset} + #{$outline-width}));
+
+    $linear-gradient-top: linear-gradient(to top, 
+        #{$penn-red} 0%,
+        #{$salmon-pink} 50%,
+        #{$cool-gray} 100%
+    );
+    $linear-gradient-right: linear-gradient(to right, 
+        #{$penn-red} 0%,
+        #{$salmon-pink} 50%,
+        #{$cool-gray} 100%
+    );
+
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+
+        visibility: hidden;
+
+        background: $linear-gradient-top;
+
+        animation-name: element-highlight-animation-#{$animation-id};
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: 5;
+        animation-delay: $animation-delay;
+        animation-direction: alternate-reverse;
+
+        border-radius: 10px;
+    }
+
+    @keyframes element-highlight-animation-#{$animation-id} {
+        0% {
+            visibility: visible;
+            
+            top: calc(100% + #{$outline-offset});
+            right: calc(100% + #{$outline-offset});
+            bottom: $outline-inset;
+            left: $outline-inset;
+
+            background: $linear-gradient-top;
+        }
+        12.5% {
+            top: $outline-inset;
+            right: calc(100% + #{$outline-offset});
+            bottom: $outline-inset;
+            left: $outline-inset;
+
+            background: $linear-gradient-top;
+        }
+        24.99% {
+            top: $outline-inset;
+            right: calc(100% + #{$outline-offset});
+            bottom: calc(100% + #{$outline-offset});
+            left: $outline-inset;
+
+            background: $linear-gradient-top;
+        } 
+        25% {
+            background: $linear-gradient-right;
+        }
+        37.5% {
+            top: $outline-inset;
+            right: $outline-inset;
+            bottom: calc(100% + #{$outline-offset});
+            left: $outline-inset;
+
+            background: $linear-gradient-right;
+        }
+        49.99% {
+            top: $outline-inset;
+            right: $outline-inset;
+            bottom: calc(100% + #{$outline-offset});
+            left: calc(100% + #{$outline-offset});
+
+            background: $linear-gradient-right;
+        }
+        50% {
+            background: $linear-gradient-top; 
+        }
+        62.5% {
+            top: $outline-inset;
+            right: $outline-inset;
+            bottom: $outline-inset;
+            left: calc(100% + #{$outline-offset});
+
+            background: $linear-gradient-top;
+        }
+        74.99% {
+            top: calc(100% + #{$outline-offset});
+            right: $outline-inset;
+            bottom: $outline-inset;
+            left: calc(100% + #{$outline-offset});
+
+            background: $linear-gradient-top;
+        }
+        75% {
+            background: $linear-gradient-right;
+        }
+        87.5% {
+            top: calc(100% + #{$outline-offset});
+            right: $outline-inset;
+            bottom: $outline-inset;
+            left: $outline-inset;
+
+            background: $linear-gradient-right;
+        }
+        100% {
+            top: calc(100% + #{$outline-offset});
+            right: calc(100% + (#{$outline-offset} + #{$outline-width}));
+            bottom: $outline-inset;
+            left: $outline-inset;
+
+            background: $linear-gradient-right;
         }
     }
 }

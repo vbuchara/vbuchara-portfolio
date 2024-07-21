@@ -83,6 +83,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  font-size: 1.1rem;
   color: #f7f4f3;
   background-color: #92140c;
   padding-inline-start: var(--padding-inline);
@@ -138,6 +139,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  font-size: 1.1rem;
   color: #0F0D0D;
   background-color: #f7f4f3;
   padding-inline-start: var(--padding-inline);

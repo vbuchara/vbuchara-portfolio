@@ -7,7 +7,7 @@
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"vbuchara-portfolio/footer","title":"Footer","category":"vbuchara-portfolio","editorScript":["file:./footer.tsx","vbuchara-portfolio-blocks-vendor"],"style":"file:./styles.scss","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"vbuchara-portfolio/footer","title":"Footer","category":"vbuchara-portfolio","supports":{"interactivity":true},"editorScript":["file:./footer.tsx","vbuchara-portfolio-blocks-vendor"],"editorStyle":"file:./footer.css","viewScriptModule":"file:./view.ts","style":"file:./style-footer.css","render":"file:./render.php"}');
 
 /***/ })
 

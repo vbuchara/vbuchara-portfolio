@@ -1,6 +1,43 @@
 /*!*****************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/header/style.scss ***!
   \*****************************************************************************************************************************************************************************************************************************************************/
+.menu-link, .site-header__menu-item-link {
+  --color: #f7f4f3;
+  --focus-visible-outline-color: #92140c;
+  position: relative;
+  color: var(--color);
+  font-weight: 600;
+  font-size: inherit;
+  outline-color: var(--focus-visible-outline-color);
+  outline-style: solid;
+  outline-width: 0px;
+}
+.menu-link:is(*, #priority1), .site-header__menu-item-link:is(*, #priority1) {
+  text-decoration: none;
+}
+.menu-link::after, .site-header__menu-item-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 0.1em;
+  margin-inline: auto;
+  background-color: var(--color);
+  scale: 0 1;
+  transform-origin: center;
+  transition: scale 300ms ease-in 0s;
+  will-change: scale;
+}
+.menu-link:hover::after, .site-header__menu-item-link:hover::after, .menu-link:focus-visible::after, .site-header__menu-item-link:focus-visible::after {
+  scale: 1 1;
+}
+.menu-link:focus-visible, .site-header__menu-item-link:focus-visible {
+  outline-offset: 4px;
+  outline-width: 2px;
+}
+
 .site-header {
   --header-items-margin-inline: clamp(10px, 3.25vw, 50px);
   --focus-visible-outline-color: #92140c;
@@ -14,6 +51,7 @@
   left: 0;
   right: 0;
   min-height: 80px;
+  z-index: 999;
   display: grid;
   grid-template-columns: var(--grid-template-columns);
   grid-template-rows: var(--grid-template-rows);
@@ -47,17 +85,20 @@
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: logo;
+  justify-self: start;
   margin-left: var(--header-items-margin-inline);
   z-index: 100;
   transition: color 0.5s ease-out;
 }
 .site-header__logo-link {
+  display: block;
   outline-color: var(--focus-visible-outline-color);
+  outline-style: solid;
   outline-width: 0px;
   transition: color 0.5s ease-out;
 }
 .site-header__logo-link:focus-visible {
-  outline-width: 1px;
+  outline-width: 2px;
   outline-offset: 4px;
 }
 .site-header__logo-icon {
@@ -132,37 +173,8 @@
   scale: 1 1;
 }
 .site-header__menu-item-link {
-  position: relative;
-  color: var(--color);
-  font-weight: 600;
-  outline-color: var(--focus-visible-outline-color);
-  outline-style: solid;
-  outline-width: 0px;
-}
-.site-header__menu-item-link:is(*, #priority1) {
-  text-decoration: none;
-}
-.site-header__menu-item-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 90%;
-  height: 0.1em;
-  margin-inline: auto;
-  background-color: var(--color);
-  scale: 0 1;
-  transform-origin: center;
-  transition: scale 300ms ease-in 0s;
-  will-change: scale;
-}
-.site-header__menu-item-link:hover::after, .site-header__menu-item-link:focus-visible::after {
-  scale: 1 1;
-}
-.site-header__menu-item-link:focus-visible {
-  outline-offset: 4px;
-  outline-width: 2px;
+  --color: inherit;
+  --focus-visible-outline-color: inherit;
 }
 .site-header__menu-contact-button {
   --background-color: #f7f4f3;
@@ -170,7 +182,7 @@
   --border-offset-color: var(--background-color);
   --box-shadow-1-color: #f7f4f3;
   --box-shadow-2-color: #f7f4f3;
-  --outline-final-color: #14003f;
+  --outline-final-color: transparent;
   background-color: var(--background-color);
   color: var(--color);
   font-weight: 600;
@@ -192,7 +204,7 @@
   .site-header__menu-contact-button {
     --background-color: #14003f;
     --color: #f7f4f3;
-    --outline-final-color: #f7f4f3;
+    --outline-final-color: transparent;
   }
 }
 .site-header__menu-contact-button::after {
@@ -227,6 +239,9 @@
   align-items: center;
   gap: 3rem;
   height: 100%;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(247, 244, 243, 0.5);
   visibility: visible;
   pointer-events: all;
   translate: 0 0;

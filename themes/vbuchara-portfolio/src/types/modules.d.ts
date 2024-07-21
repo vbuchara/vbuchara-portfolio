@@ -8,11 +8,17 @@ declare module '*.stylus' {}
 declare module '*.pcss' {}
 declare module '*.sss' {}
 
-// SVG
+// SVG and Image Formats
 declare module '*.svg' {
     const ReactComponent: React.FunctionComponent<React.SVGAttributes<SVGAElement>>;
     const url: string;
 
     export { ReactComponent };
+    export default url;
+}
+
+declare module '*.png' {
+    const url: string;
+
     export default url;
 }

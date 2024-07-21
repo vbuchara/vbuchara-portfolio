@@ -1,0 +1,51 @@
+@use "../abstract/variables" as *;
+
+.portfolio-popover {
+    --popover-arrow-size: 1rem;
+    --popover-background-color: #{$penn-red};
+    --popover-color: #{$white-smoke};
+
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + var(--popover-arrow-size));
+    width: auto;
+    translate: -50% 0;
+
+    margin-inline: auto;
+
+    background-color: var(--popover-background-color);
+    color: var(--popover-color);
+
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.1;
+    white-space: nowrap;
+
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+
+    border-radius: 10px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 99%;
+        width: 0;
+        height: 0;
+        translate: -50% 0;
+
+        color: transparent;
+
+        border-style: solid;
+        border-right-width: var(--popover-arrow-size);
+        border-right-color: transparent;
+
+        border-top-width: var(--popover-arrow-size);
+        border-top-color: var(--popover-background-color);
+
+        border-left-width: var(--popover-arrow-size);
+        border-left-color: transparent;
+    }
+}

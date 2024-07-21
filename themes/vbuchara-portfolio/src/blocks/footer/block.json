@@ -4,7 +4,12 @@
     "name": "vbuchara-portfolio/footer",
     "title": "Footer",
     "category": "vbuchara-portfolio",
+    "supports": {
+        "interactivity": true
+    },
     "editorScript": ["file:./footer.tsx", "vbuchara-portfolio-blocks-vendor"],
-    "style": "file:./styles.scss",
+    "editorStyle": "file:./footer.css",
+    "viewScriptModule": "file:./view.ts",
+    "style": "file:./style-footer.css",
     "render": "file:./render.php"
 }   

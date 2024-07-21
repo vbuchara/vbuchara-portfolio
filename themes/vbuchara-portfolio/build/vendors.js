@@ -12599,6 +12599,68 @@ var useEffectOnce = function (effect) {
 
 /***/ }),
 
+/***/ "./node_modules/react-use/esm/useIntersection.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/react-use/esm/useIntersection.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var useIntersection = function (ref, options) {
+    var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), intersectionObserverEntry = _a[0], setIntersectionObserverEntry = _a[1];
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+        if (ref.current && typeof IntersectionObserver === 'function') {
+            var handler = function (entries) {
+                setIntersectionObserverEntry(entries[0]);
+            };
+            var observer_1 = new IntersectionObserver(handler, options);
+            observer_1.observe(ref.current);
+            return function () {
+                setIntersectionObserverEntry(null);
+                observer_1.disconnect();
+            };
+        }
+        return function () { };
+    }, [ref.current, options.threshold, options.root, options.rootMargin]);
+    return intersectionObserverEntry;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useIntersection);
+
+
+/***/ }),
+
+/***/ "./node_modules/react-use/esm/useUnmount.js":
+/*!**************************************************!*\
+  !*** ./node_modules/react-use/esm/useUnmount.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useEffectOnce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useEffectOnce */ "./node_modules/react-use/esm/useEffectOnce.js");
+
+
+var useUnmount = function (fn) {
+    var fnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(fn);
+    // update the ref each render so if it change the newest callback will be invoked
+    fnRef.current = fn;
+    (0,_useEffectOnce__WEBPACK_IMPORTED_MODULE_1__["default"])(function () { return function () { return fnRef.current(); }; });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useUnmount);
+
+
+/***/ }),
+
 /***/ "./node_modules/use-isomorphic-layout-effect/dist/use-isomorphic-layout-effect.browser.esm.js":
 /*!****************************************************************************************************!*\
   !*** ./node_modules/use-isomorphic-layout-effect/dist/use-isomorphic-layout-effect.browser.esm.js ***!

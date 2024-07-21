@@ -259,6 +259,7 @@ function HeaderInspectorControls({
     group: "settings",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       title: "Menu Items Configuration",
+      initialOpen: false,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_editor_sortable_menu_controller__WEBPACK_IMPORTED_MODULE_2__.EditorSortableMenuController, {
           attributes: attributes,
@@ -284,22 +285,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useEffectOnce.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
-/* harmony import */ var _assets_svgs_logo_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @assets/svgs/logo.svg */ "./assets/svgs/logo.svg");
-/* harmony import */ var _assets_svgs_menu_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @assets/svgs/menu.svg */ "./assets/svgs/menu.svg");
-/* harmony import */ var _assets_svgs_close_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @assets/svgs/close.svg */ "./assets/svgs/close.svg");
-/* harmony import */ var _components_editor_anchor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-anchor */ "./src/components/editor-anchor.tsx");
-/* harmony import */ var _components_editor_wrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/editor-wrapper */ "./src/components/editor-wrapper.tsx");
-/* harmony import */ var _stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @stores/portfolio-blocks */ "./src/stores/portfolio-blocks.ts");
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/header/components/controls.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
+/* harmony import */ var _assets_svgs_logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @assets/svgs/logo.svg */ "./assets/svgs/logo.svg");
+/* harmony import */ var _assets_svgs_menu_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @assets/svgs/menu.svg */ "./assets/svgs/menu.svg");
+/* harmony import */ var _assets_svgs_close_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @assets/svgs/close.svg */ "./assets/svgs/close.svg");
+/* harmony import */ var _components_editor_anchor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/editor-anchor */ "./src/components/editor-anchor.tsx");
+/* harmony import */ var _components_editor_wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-wrapper */ "./src/components/editor-wrapper.tsx");
+/* harmony import */ var _src_hooks_useRegisterIds__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @src/hooks/useRegisterIds */ "./src/hooks/useRegisterIds.ts");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/header/components/controls.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -317,85 +311,54 @@ function EditComponent(props) {
   } = props;
   const [isMenuOpen, setIsMenuOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const headerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const menuItemsDependency = attributes.menuItems.reduce((result, {
-    id
-  }) => result + id, "");
-  const {
-    getRegisteredBlock,
-    isRegisteredId
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => select(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_7__["default"]), [menuItemsDependency, clientId]);
-  const {
-    registerBlock,
-    removeRegisteredBlockById
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_7__["default"]);
+  (0,_src_hooks_useRegisterIds__WEBPACK_IMPORTED_MODULE_6__.useRegisterIds)({
+    clientId: clientId,
+    items: attributes.menuItems,
+    setItems: items => setAttributes({
+      menuItems: items
+    })
+  });
   function handleOnClickMenuToggle() {
     setIsMenuOpen(prev => !prev);
   }
-  (0,react_use__WEBPACK_IMPORTED_MODULE_10__["default"])(() => {
-    const registeredBlock = getRegisteredBlock(clientId);
-    const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
-    const validatedMenuItems = attributes.menuItems.map(item => {
-      if (!isRegisteredId(item.id)) {
-        blockRegisteredIds.add(item.id);
-        return item;
-      }
-      const newId = (0,uuid__WEBPACK_IMPORTED_MODULE_11__["default"])();
-      blockRegisteredIds.add(newId);
-      return {
-        ...item,
-        id: newId
-      };
-    });
-    setAttributes({
-      menuItems: validatedMenuItems
-    });
-    registerBlock({
-      ...registeredBlock,
-      clientId: clientId,
-      registeredIds: blockRegisteredIds
-    });
-    return () => {
-      removeRegisteredBlockById(clientId);
-    };
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_6__.EditorWrapper, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_8__.HeaderInspectorControls, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_5__.EditorWrapper, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_7__.HeaderInspectorControls, {
       attributes: attributes,
       setAttributes: setAttributes,
       clientId: clientId
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("header", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("header", {
       ref: headerRef,
       className: `site-header ${isMenuOpen ? "site-header--menu-open" : ""}`,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
         className: "site-header__logo",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_5__.EditorAnchor, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_4__.EditorAnchor, {
           className: "site-header_logo-link",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_assets_svgs_logo_svg__WEBPACK_IMPORTED_MODULE_2__.ReactComponent, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_assets_svgs_logo_svg__WEBPACK_IMPORTED_MODULE_1__.ReactComponent, {
             className: "site-header__logo-icon"
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
         type: "button",
         className: "site-header__menu-toggle",
         onClick: handleOnClickMenuToggle,
-        children: !isMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_assets_svgs_menu_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, {
+        children: !isMenuOpen ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_assets_svgs_menu_svg__WEBPACK_IMPORTED_MODULE_2__.ReactComponent, {
           className: "site-header__menu-toggle-icon"
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_assets_svgs_close_svg__WEBPACK_IMPORTED_MODULE_4__.ReactComponent, {
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_assets_svgs_close_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, {
           className: "site-header__menu-toggle-icon"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("nav", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("nav", {
         className: "site-header__menu",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("ul", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("ul", {
           className: "site-header__menu-items",
-          children: attributes.menuItems.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("li", {
-            className: `site-header__menu-item`,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_5__.EditorAnchor, {
+          children: attributes.menuItems.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("li", {
+            className: "site-header__menu-item",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_4__.EditorAnchor, {
               className: "site-header__menu-item-link",
               href: item.url,
               children: item.title
             })
           }, item.id))
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
           type: "button",
           className: "site-header__menu-contact-button",
           children: "Contact Me"
@@ -986,6 +949,74 @@ function EditorWrapper({
 
 /***/ }),
 
+/***/ "./src/hooks/useRegisterIds.ts":
+/*!*************************************!*\
+  !*** ./src/hooks/useRegisterIds.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useRegisterIds: () => (/* binding */ useRegisterIds)
+/* harmony export */ });
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useEffectOnce.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var _stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @stores/portfolio-blocks */ "./src/stores/portfolio-blocks.ts");
+/* harmony import */ var _src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @src/utils/getArrayDependency */ "./src/utils/getArrayDependency.ts");
+
+
+
+
+
+function useRegisterIds(props) {
+  const {
+    items,
+    setItems,
+    clientId
+  } = props;
+  const itemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__.getArrayDependency)(items, ["id"]);
+  const {
+    getRegisteredBlock,
+    isRegisteredId
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => select(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__["default"]), [itemsDependency, clientId]);
+  const {
+    registerBlock,
+    removeRegisteredBlockById
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useDispatch)(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  (0,react_use__WEBPACK_IMPORTED_MODULE_3__["default"])(() => {
+    const registeredBlock = getRegisteredBlock(clientId);
+    const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
+    const validatedMenuItems = items.map(item => {
+      if (!isRegisteredId(item.id)) {
+        blockRegisteredIds.add(item.id);
+        return item;
+      }
+      const newId = (0,uuid__WEBPACK_IMPORTED_MODULE_4__["default"])();
+      blockRegisteredIds.add(newId);
+      return {
+        ...item,
+        id: newId
+      };
+    });
+    const validatedMenuItemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__.getArrayDependency)(validatedMenuItems, ["id"]);
+    if (itemsDependency !== validatedMenuItemsDependency) {
+      setItems(validatedMenuItems);
+    }
+    registerBlock({
+      ...registeredBlock,
+      clientId: clientId,
+      registeredIds: blockRegisteredIds
+    });
+    return () => {
+      removeRegisteredBlockById(clientId);
+    };
+  });
+}
+
+/***/ }),
+
 /***/ "./src/stores/portfolio-blocks.ts":
 /*!****************************************!*\
   !*** ./src/stores/portfolio-blocks.ts ***!
@@ -1091,8 +1122,45 @@ const portfolioBlocksStore = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.cre
   selectors: selectors,
   initialState: defaultState
 });
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(portfolioBlocksStore);
+if (!(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.select)(portfolioBlocksStore)) {
+  (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(portfolioBlocksStore);
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (portfolioBlocksStore);
+
+/***/ }),
+
+/***/ "./src/utils/getArrayDependency.ts":
+/*!*****************************************!*\
+  !*** ./src/utils/getArrayDependency.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getArrayDependency: () => (/* binding */ getArrayDependency)
+/* harmony export */ });
+function getArrayDependency(arrayDependency, keys) {
+  if (!arrayDependency) return "";
+  return arrayDependency.reduce((result, value) => {
+    if (!isValidDependency(value)) return result;
+    if (typeof value === "string" || typeof value === "number") {
+      return result + value;
+    }
+    if (typeof value === "object" && isArrayOfKeys(keys, value)) {
+      return result + keys.reduce((result, key) => {
+        return result + value[key];
+      }, "");
+    }
+    return result;
+  }, "");
+}
+function isValidDependency(value) {
+  const typesAllowed = ["number", "string", "object"];
+  return typesAllowed.includes(typeof value);
+}
+function isArrayOfKeys(arrayKey, object) {
+  return Array.isArray(arrayKey) && arrayKey.every(key => key in object);
+}
 
 /***/ }),
 

@@ -47,10 +47,10 @@
     $closeIcon->setAttribute("data-wp-bind--hidden", "!context.isMenuOpen");
 ?>
 <header 
-    <?= $context ?>
     data-wp-interactive="vbuchara-portfolio/header"
     class="site-header site-header--menu-open"
     data-wp-class--site-header--menu-open="context.isMenuOpen"
+    <?= $context ?>
 >
     <h1 class="site-header__logo">
         <a 

@@ -26,6 +26,7 @@ export function HeaderInspectorControls({
     >
         <PanelBody
             title="Menu Items Configuration"
+            initialOpen={false}
         >
             <PanelRow>
                 <EditorSortableMenuController

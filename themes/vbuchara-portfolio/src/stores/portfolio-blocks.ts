@@ -1,4 +1,4 @@
-import { createReduxStore, register } from "@wordpress/data";
+import { createReduxStore, register, select } from "@wordpress/data";
 import type { ValueOf } from "type-fest";
 
 export type ClientId = string;
@@ -124,6 +124,8 @@ const portfolioBlocksStore = createReduxStore<
     initialState: defaultState,
 });
 
-register(portfolioBlocksStore);
+if(!select(portfolioBlocksStore)){
+    register(portfolioBlocksStore);
+}
 
 export default portfolioBlocksStore;
