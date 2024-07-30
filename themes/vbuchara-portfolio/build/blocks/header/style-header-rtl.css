@@ -79,7 +79,6 @@
   --border-bottom-color: #14003f;
   --grid-template-rows: minmax(80px, 1fr) fit-content(100%);
   border-bottom-width: 2px;
-  transition: grid-template-rows 10ms linear;
 }
 .site-header__logo {
   -ms-grid-row: 1;

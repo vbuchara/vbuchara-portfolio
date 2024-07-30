@@ -147,7 +147,7 @@ export function EditComponent(props: FooterEditComponentProps){
                         <EditorAnchor
                             className={linkedinClasses}
                             href={attributes.socialLinks.linkedin}
-                            title={attributes.socialLinks.linkedin}
+                            title={`Linkedin: ${attributes.socialLinks.linkedin}`}
                             target="_blank"
                             rel="noopener"
                             onAnimationEnd={handleOnAnimationEndSocialLinks}
@@ -161,7 +161,7 @@ export function EditComponent(props: FooterEditComponentProps){
                         <EditorAnchor
                             className={githubClasses}
                             href={attributes.socialLinks.github}
-                            title={attributes.socialLinks.github}
+                            title={`Github: ${attributes.socialLinks.github}`}
                             target="_blank"
                             rel="noopener"
                             onAnimationEnd={handleOnAnimationEndSocialLinks}
@@ -174,7 +174,7 @@ export function EditComponent(props: FooterEditComponentProps){
                     <li className="site-footer__social-contact-item">
                         <button
                             type="button"
-                            title={attributes.socialLinks.gmail}
+                            title={`Gmail: ${attributes.socialLinks.gmail}`}
                             className={gmailLinkClasses}
                             onClick={handleOnClickGmailLink}
                             onAnimationEnd={handleOnAnimationEndSocialLinks}

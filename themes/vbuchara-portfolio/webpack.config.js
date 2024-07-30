@@ -57,7 +57,6 @@ const getNewPlugins = (config) => [
     }),
 ].filter(Boolean);
 
-console.log(process.execArgv);
 // Scripts Config
 
 const newScriptPlugins = [
@@ -70,7 +69,8 @@ const newScriptConfig = {
     ...scriptConfig,
     entry: {
         ...(typeof scriptConfigEntries === "object" ? scriptConfigEntries : {}),
-        index: "./src/index.ts"
+        index: "./src/index.ts",
+        "editor-styles": "./src/styles/editor.scss"
     },
     output: {
         ...scriptConfig.output,
@@ -85,6 +85,7 @@ const newScriptConfig = {
             "@blocks": path.resolve(__dirname, "src/blocks/"),
             "@classes": path.resolve(__dirname, "src/classes/"),
             "@components": path.resolve(__dirname, "src/components/"),
+            "@constants": path.resolve(__dirname, "src/constants/"),
             "@functions": path.resolve(__dirname, "src/functions/"),
             "@hooks": path.resolve(__dirname, "src/hooks/"),
             "@stores": path.resolve(__dirname, "src/stores/"),
@@ -134,6 +135,7 @@ const newModuleConfig = {
             "@blocks": path.resolve(__dirname, "src/blocks/"),
             "@classes": path.resolve(__dirname, "src/classes/"),
             "@components": path.resolve(__dirname, "src/components/"),
+            "@constants": path.resolve(__dirname, "src/constants/"),
             "@functions": path.resolve(__dirname, "src/functions/"),
             "@hooks": path.resolve(__dirname, "src/hooks/"),
             "@stores": path.resolve(__dirname, "src/stores/"),

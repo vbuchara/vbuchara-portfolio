@@ -1,0 +1,16 @@
+
+
+.portfolio-formats {
+    &__text-color {
+        --color: inherit;
+
+        color: var(--color);
+
+        &[style*='--background-image']{
+            background-image: var(--background-image);
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vbuchara-portfolio/paragraph",
+  "title": "Paragraph",
+  "category": "vbuchara-portfolio",
+  "editorScript": [
+    "file:./paragraph.js",
+    "vbuchara-portfolio-blocks-vendor"
+  ],
+  "editorStyle": "file:./paragraph.css",
+  "style": "file:./style-paragraph.css",
+  "render": "file:./render.php"
+}

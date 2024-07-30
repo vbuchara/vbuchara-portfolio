@@ -1,0 +1,71 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@mixin image-hidden(){
+    display: block;
+    height: 1.6rem;
+    pointer-events: auto;
+}
+
+.portfolio-image {
+    &__editor-control {
+        flex: 1;
+    }
+
+    &[data-hide-on-xxs]{
+        @include media-exclusive-breakpoint-at("xxs", "xs") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-xs]{
+        @include media-exclusive-breakpoint-at("xs", "sm") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-sm]{
+        @include media-exclusive-breakpoint-at("sm", "md") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-md]{
+        @include media-exclusive-breakpoint-at("md", "lg") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-lg]{
+        @include media-exclusive-breakpoint-at("lg", "xl") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-xl]{
+        @include media-exclusive-breakpoint-at("xl", "xxl") {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+
+    &[data-hide-on-xxl]{
+        @include media-breakpoint-xxl {
+            @include with-priority($priority: 2) {
+                @include image-hidden;
+            }
+        }
+    }
+}

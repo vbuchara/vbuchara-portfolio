@@ -114,9 +114,8 @@
         animation-name: element-highlight-animation-#{$animation-id};
         animation-duration: 1s;
         animation-timing-function: linear;
-        animation-iteration-count: 5;
+        animation-iteration-count: 3;
         animation-delay: $animation-delay;
-        animation-direction: alternate-reverse;
 
         border-radius: 10px;
     }
@@ -206,6 +205,18 @@
             background: $linear-gradient-right;
         }
     }
+}
+
+@mixin hidden() {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+@mixin visible() {
+    display: block;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 // Set Fonts

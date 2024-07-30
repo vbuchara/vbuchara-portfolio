@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
+    'Ds\\' => array($vendorDir . '/php-ds/php-ds/src'),
 );

@@ -1,0 +1,28 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.components-panel__row {
+    .components-font-size-picker {
+        flex: 1;
+
+        .components-input-control__input {
+            @include with-priority {
+                width: 100%;
+            }
+        }
+
+        .components-input-control__suffix {
+            @include with-priority {
+                width: 2.5rem;
+            }
+        }
+
+        .components-unit-control__select {
+            @include with-priority {
+                width: 100%;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

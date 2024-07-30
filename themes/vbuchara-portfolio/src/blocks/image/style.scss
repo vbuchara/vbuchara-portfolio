@@ -1,0 +1,49 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-image {
+    max-width: 100%;
+
+    &[data-hide-on-xxs]{
+        @include media-exclusive-breakpoint-at("xxs", "xs") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-xs]{
+        @include media-exclusive-breakpoint-at("xs", "sm") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-sm]{
+        @include media-exclusive-breakpoint-at("sm", "md") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-md]{
+        @include media-exclusive-breakpoint-at("md", "lg") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-lg]{
+        @include media-exclusive-breakpoint-at("lg", "xl") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-xl]{
+        @include media-exclusive-breakpoint-at("xl", "xxl") {
+            @include hidden;
+        }
+    }
+
+    &[data-hide-on-xxl]{
+        @include media-breakpoint-xxl {
+            @include hidden;
+        }
+    }
+}

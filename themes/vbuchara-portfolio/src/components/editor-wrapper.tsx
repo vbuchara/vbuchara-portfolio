@@ -10,11 +10,12 @@ export type EditorWrapperProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement
 export function EditorWrapper({ children, style, ...props }: EditorWrapperProps){
 
     const blockProps = useBlockProps();
-
+    
     return (
     <div
         {...blockProps}
         {...props}
+        className={`${blockProps.className} ${props.className ? props.className : ""}`}
         style={{
             ...blockProps.style,
             padding: 0,

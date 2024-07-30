@@ -1,0 +1,17 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-paragraph {
+    --color: #{$black};
+    --font-size-xxl: clamp(var(--font-size-md), 2.153vw + 0.5rem, 3.6rem);
+    --font-size-xl: clamp(var(--font-size-sm), 1.875vw + 0.5rem, 3.2rem);
+    --font-size-lg: clamp(var(--font-size-sm), 1.6vw + 0.5rem, 2.8rem);
+    --font-size-md: clamp(var(--font-size-sm), 1.459vw + 0.3rem, 2.4rem);
+    --font-size-sm: clamp(1.8rem, 1.32vw + 0.1rem, 2rem);
+    --font-size: inherit;
+
+    color: var(--color);
+    font-weight: 500;
+    font-size: var(--font-size);
+}

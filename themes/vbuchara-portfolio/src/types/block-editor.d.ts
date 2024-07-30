@@ -1,3 +1,4 @@
+
 declare module "@wordpress/block-editor"{
     import {
         ReduxStoreConfig,
@@ -5,7 +6,15 @@ declare module "@wordpress/block-editor"{
         StoreInstance,
     } from "@wordpress/data/build-types/types";
     import { Reserved } from "@wordpress/block-editor/components/use-block-props";
-    
+    import * as BlockEditorTypes from "@wordpress/block-editor/index";
+    import {
+        ColorPalette,
+        PanelBody
+    } from "@wordpress/components/build-types/index";
+    import { Merge } from "type-fest";
+
+    // LINK CONTROL
+
     /** Default properties associated with a link control value. */
     export type WPLinkControlDefaultValue = {
         url: string;
@@ -62,6 +71,7 @@ declare module "@wordpress/block-editor"{
         ViewerFill: unknown;
     };
 
+    // MEDIA UPLOAD
     export namespace MediaUpload {
         export type MediaSelected = {
             id: number;
@@ -115,7 +125,70 @@ declare module "@wordpress/block-editor"{
             width: number;
             orientation: string;
         }
+
+        export interface Props<T extends boolean> extends BlockEditorTypes.MediaUpload.Props<T> {}
     }
+
+    export function MediaUpload<T extends boolean = false>(props: MediaUpload.Props<T>): JSX.Element;
+
+    // COLOR GRADIENT
+    
+    export namespace PanelColorSettings {
+        export type ColorSetting =
+            & Partial<React.ComponentProps<typeof ColorPalette>>
+            & Pick<React.ComponentProps<typeof ColorPalette>, "onChange" | "value">
+            & { 
+                label: string,
+                __experimentalIsRenderedInSidebar?: boolean
+            }
+        ;
+
+        export interface Props extends Omit<React.ComponentProps<typeof PanelBody>, "children"> {
+            colorSettings: ColorSetting[];
+            disableCustomColors?: boolean | undefined;
+            __experimentalIsRenderedInSidebar?: boolean;
+        }
+    }
+
+    type __PartialColorPaletteProps = Partial<React.ComponentProps<typeof ColorPalette>>;
+    
+    export namespace PanelColorGradientSettings {
+        export type ColorSetting = Omit<__PartialColorPaletteProps, "onChange" | "value"> 
+            & { 
+                colorValue?: __PartialColorPaletteProps["value"]  
+                gradientValue?: __PartialColorPaletteProps["value"],
+                onColorChange?: __PartialColorPaletteProps["onChange"],
+                onGradientChange?: __PartialColorPaletteProps["onChange"],
+                label?: string,
+                disableCustomColors?: boolean,
+	            disableCustomGradients?: boolean,
+            };
+
+        export interface Props extends Omit<PanelColorSettings.Props, "colorSettings"> {
+            settings: ColorSetting[];
+            disableCustomColors?: boolean;
+	        disableCustomGradients?: boolean;
+            __experimentalIsRenderedInSidebar?: boolean;
+        }
+    }
+
+    // SETTINGS
+
+    export interface EditorGradient {
+        name: string;
+        slug: string;
+        gradient: string;
+    }
+
+    export interface EditorSettings extends BlockEditorTypes.EditorSettings{
+        gradients: EditorGradient[],
+    }
+
+    // STORE
+
+    export type FixedBlockEditorStoreSelectors = AppendStateToSelectors<{
+        getSettings(): EditorSettings
+    }>;
 
     export type BlockEditorStoreSelectors = AppendStateToSelectors<typeof import("@wordpress/block-editor/store/selectors")>;
 
@@ -124,7 +197,7 @@ declare module "@wordpress/block-editor"{
     export interface BlockEditorStoreConfig extends ReduxStoreConfig<any, BlockEditorStoreActions, BlockEditorStoreSelectors>{
         reducer: any;
         dispatch: BlockEditorStoreActions;
-        selectors: BlockEditorStoreSelectors;
+        selectors: Merge<BlockEditorStoreSelectors, FixedBlockEditorStoreSelectors>;
         controls: any;
     }
 
@@ -141,6 +214,7 @@ declare module "@wordpress/block-editor"{
             : T[K];
     }
 
+    // USE BLOCK PROPS
     export interface Merged {
         className: string;
         style: Record<string, string | number>;
@@ -160,7 +234,12 @@ declare module "@wordpress/block-editor"{
         save: (props?: Record<string, unknown>) => Record<string, unknown>;
     }
 
+    // EXPORTS
+
     export * from "@wordpress/block-editor/index";
     export const useBlockProps: UseBlockProps;
     export const store: BlockEditorStoreDescriptor;
+
+    export const PanelColorSettings: React.ComponentType<PanelColorSettings.Props>;
+    export const __experimentalPanelColorGradientSettings: React.ComponentType<PanelColorGradientSettings.Props>;
 }

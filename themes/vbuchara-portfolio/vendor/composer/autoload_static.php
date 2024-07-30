@@ -11,12 +11,20 @@ class ComposerStaticInit98153f723dd29aa0c4c3670b24354728
         array (
             'Masterminds\\' => 12,
         ),
+        'D' => 
+        array (
+            'Ds\\' => 3,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'Ds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ds/php-ds/src',
         ),
     );
 

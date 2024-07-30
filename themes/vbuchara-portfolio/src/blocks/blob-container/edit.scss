@@ -1,0 +1,32 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@use "./style.scss";
+
+.blob-container {
+    .block-editor-inner-blocks {
+        grid-row: heading1 / button;
+        grid-column: heading1 / button;
+
+        height: 100%;
+
+        .block-editor-block-list__layout {
+            @extend .blob-container;
+
+            height: 100%;
+        }
+    }
+
+    &__heading-2:is(.portfolio-heading) {
+        margin-top: 0px;
+    }
+
+    &__paragraph:is(.portfolio-paragraph) {
+        margin-top: 0px;
+    }
+
+    &__button:is(.portfolio-button) {
+        margin-top: 0px;
+    }
+}

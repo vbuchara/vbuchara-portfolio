@@ -497,7 +497,7 @@ function EditComponent(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_6__.EditorAnchor, {
               className: linkedinClasses,
               href: attributes.socialLinks.linkedin,
-              title: attributes.socialLinks.linkedin,
+              title: `Linkedin: ${attributes.socialLinks.linkedin}`,
               target: "_blank",
               rel: "noopener",
               onAnimationEnd: handleOnAnimationEndSocialLinks,
@@ -510,7 +510,7 @@ function EditComponent(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_6__.EditorAnchor, {
               className: githubClasses,
               href: attributes.socialLinks.github,
-              title: attributes.socialLinks.github,
+              title: `Github: ${attributes.socialLinks.github}`,
               target: "_blank",
               rel: "noopener",
               onAnimationEnd: handleOnAnimationEndSocialLinks,
@@ -522,7 +522,7 @@ function EditComponent(props) {
             className: "site-footer__social-contact-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("button", {
               type: "button",
-              title: attributes.socialLinks.gmail,
+              title: `Gmail: ${attributes.socialLinks.gmail}`,
               className: gmailLinkClasses,
               onClick: handleOnClickGmailLink,
               onAnimationEnd: handleOnAnimationEndSocialLinks,
@@ -1126,6 +1126,7 @@ function EditorWrapper({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ...blockProps,
     ...props,
+    className: `${blockProps.className} ${props.className ? props.className : ""}`,
     style: {
       ...blockProps.style,
       padding: 0,
@@ -1312,6 +1313,7 @@ const portfolioBlocksStore = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.cre
 });
 if (!(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.select)(portfolioBlocksStore)) {
   (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(portfolioBlocksStore);
+  (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(portfolioBlocksStore).clearRegisteredBlocks();
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (portfolioBlocksStore);
 
@@ -1480,13 +1482,16 @@ module.exports = window["wp"]["primitives"];
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -1753,6 +1758,15 @@ module.exports = window["wp"]["primitives"];
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
 /******/ 		};
 /******/ 	})();
 /******/ 	

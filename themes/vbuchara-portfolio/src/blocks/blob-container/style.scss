@@ -1,0 +1,104 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.blob-container {
+    --container-width: 375px;
+    --container-height: fit-content;
+    --grid-template-columns: 5fr 90fr 5fr;
+    --grid-template-rows: repeat(5, auto);
+
+    position: relative;
+    z-index: 1;
+        
+    display: grid;
+    grid-template-columns: var(--grid-template-columns);
+    grid-template-rows: var(--grid-template-rows);
+    grid-template-areas: 
+       "left-space heading1   right-space"
+       "left-space heading2  right-space"
+       "left-space paragraph right-space"
+       "left-space button    right-space"
+       "left-space bottom    right-space"
+    ;
+    align-items: start;
+
+    width: var(--container-width);
+    height: var(--container-height);
+    max-width: 100vw;
+
+    @include media-breakpoint-xs {
+        --grid-template-columns: 13.723fr 72.407fr 13.87fr;
+    }
+
+    @include media-breakpoint-md {
+        --container-width: min(47.57vw, 685px);
+        
+        overflow-x: visible;
+    }
+
+    &__heading-1 {
+        grid-row: heading1;
+        grid-column: heading1;
+    }
+
+    &__heading-2 {
+        grid-row: heading2;
+        grid-column: heading2;
+
+        margin-top: clamp(2rem, 1.7vw + 0.2rem, 2.5rem);
+    }
+
+    &__paragraph {
+        grid-row: paragraph;
+        grid-column: paragraph;
+
+        margin-top: clamp(3.2rem, 4.17vw + 0.2rem, 6.2rem);
+    }
+
+    &__button {
+        grid-row: button;
+        grid-column: button;
+        justify-self: center;
+
+        margin-top: clamp(4.5rem, 5.07vw + 0.2rem, 7.5rem);
+    }
+
+    &__background {
+        --blob-width: calc(100% + 16px);
+        --blob-height: var(--container-height);
+        --blob-min-width: 375px; 
+        --blob-left: 50%;
+        --blob-translate: -50% 0;
+
+        grid-row: heading1 / bottom;
+        grid-column: left-space / right-space;
+
+        position: relative;
+        top: 0;
+        left: var(--blob-left);
+        translate: var(--blob-translate);
+        z-index: -1;
+
+        width: var(--blob-width);
+        height: var(--blob-height);
+
+        svg {
+            position: relative;
+            left: var(--blob-left);
+            translate: var(--blob-translate);
+
+            min-width: var(--blob-min-width);
+            max-width: none;
+            width: 100%;
+            height: var(--blob-height);
+        }
+
+        @include media-breakpoint-md {
+            --blob-width: 100%;
+            --blob-min-width: none; 
+            --blob-left: 0;
+            --blob-translate: initial;
+        }
+    }
+}

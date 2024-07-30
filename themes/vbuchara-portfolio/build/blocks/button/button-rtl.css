@@ -1,0 +1,44 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/button/edit.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+.portfolio-button {
+  white-space: nowrap !important;
+}
+.portfolio-button__editor-control {
+  flex: 1;
+  overflow-x: hidden;
+}
+.portfolio-button__editor-control .components-base-control__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.portfolio-button__editor-control .components-base-control__label:is(*, #priority1) {
+  margin-bottom: 0px;
+}
+.portfolio-button__editor-control-url-view {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  justify-content: start;
+  align-items: center;
+  -moz-column-gap: 0.2rem;
+       column-gap: 0.2rem;
+}
+.portfolio-button__editor-control-url-view-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: #92140c;
+}
+.portfolio-button__editor-control-url-view-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #92140c;
+  text-decoration: none;
+  font-weight: 600;
+}
+.portfolio-button__editor-control-url-view-link:hover {
+  color: #92140c;
+  text-decoration: underline;
+}

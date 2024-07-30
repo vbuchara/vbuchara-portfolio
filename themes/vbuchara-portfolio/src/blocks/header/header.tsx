@@ -2,11 +2,9 @@ import "./style.scss";
 import "./edit.scss";
 
 import { registerBlockType } from "@wordpress/blocks";
-import { dispatch } from "@wordpress/data";
 import { header } from "@wordpress/icons";
 
 import { EditorMenuItemType } from "@components/editor-menu-item";
-import portfolioBlocksStore from "@stores/portfolio-blocks";
 
 import { EditComponent } from "./edit";
 
@@ -27,5 +25,3 @@ registerBlockType<HeaderAttributesType>(block.name, {
     icon: header,
     edit: EditComponent
 });
-
-dispatch(portfolioBlocksStore).clearRegisteredBlocks();

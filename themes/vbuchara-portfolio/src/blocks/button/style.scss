@@ -1,0 +1,77 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+@use "@styles/abstract/functions" as *;
+
+.portfolio-button {
+    --color: #{$white-smoke};
+    --background-color: #{$russian-violet};
+    --background-image: none;
+    --border-color: var(--background-color);
+
+    --border-width: 2px;
+    --border-style: solid;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(3.2rem, 2.639vw + 0.2rem, 4rem);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: var(--color);
+    background-color: var(--background-color);
+    background-image: var(--background-image);
+
+    border-color: var(--border-color);
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+
+    position: relative;
+
+    padding-block: clamp(1.5rem, 1.25vw + 0.2rem, 2rem);
+    padding-inline: clamp(4rem, 5.07vw + 0.2rem, 7.5rem);
+
+    border-radius: 10px;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: get-transitions(
+            (-webkit-text-fill-color, background-clip),
+            0.3s,
+            ease-in-out
+        );
+
+    &:hover {
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        &::before {
+            background-color: var(--color);
+            background-image: none;
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        z-index: -1;
+
+        border-radius: 10px;
+
+        background-color: var(--background-color);
+
+        transition: get-transitions(
+            (background-color, background-image),
+            0.3s,
+            ease-in-out
+        );
+    }
+}

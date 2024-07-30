@@ -17,7 +17,7 @@
         @if ($index == 1) {
             $priority-ids: "#priority#{$index}";
         } @else {
-            $priority-ids: $priority-ids + ", #priority#{$index}";
+            $priority-ids: $priority-ids + "#priority#{$index}";
         }
     }
 

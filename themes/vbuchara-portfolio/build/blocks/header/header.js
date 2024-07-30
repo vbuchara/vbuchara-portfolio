@@ -382,13 +382,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit.scss */ "./src/blocks/header/edit.scss");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/header.js");
-/* harmony import */ var _stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @stores/portfolio-blocks */ "./src/stores/portfolio-blocks.ts");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/blocks/header/edit.tsx");
-
-
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/header.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/header/edit.tsx");
 
 
 
@@ -405,10 +400,9 @@ const {
       default: []
     }
   },
-  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
-  edit: _edit__WEBPACK_IMPORTED_MODULE_5__.EditComponent
+  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__.EditComponent
 });
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.dispatch)(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_4__["default"]).clearRegisteredBlocks();
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
 
@@ -938,6 +932,7 @@ function EditorWrapper({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ...blockProps,
     ...props,
+    className: `${blockProps.className} ${props.className ? props.className : ""}`,
     style: {
       ...blockProps.style,
       padding: 0,
@@ -1124,6 +1119,7 @@ const portfolioBlocksStore = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.cre
 });
 if (!(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.select)(portfolioBlocksStore)) {
   (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(portfolioBlocksStore);
+  (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(portfolioBlocksStore).clearRegisteredBlocks();
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (portfolioBlocksStore);
 
@@ -1292,13 +1288,16 @@ module.exports = window["wp"]["primitives"];
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -1565,6 +1564,15 @@ module.exports = window["wp"]["primitives"];
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
 /******/ 		};
 /******/ 	})();
 /******/ 	

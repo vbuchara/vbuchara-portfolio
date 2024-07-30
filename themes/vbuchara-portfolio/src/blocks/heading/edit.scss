@@ -1,0 +1,14 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-heading {
+    
+    &__editor-control {
+        flex: 1;
+    }
+
+    .block-editor-block-list__block & {
+        white-space: var(--white-space) !important;
+    }
+}

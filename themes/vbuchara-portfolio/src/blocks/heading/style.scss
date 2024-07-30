@@ -1,0 +1,33 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-heading {
+    --text-align: left;
+    --line-height: 1.5;
+    --white-space: normal;
+
+    text-align: var(--text-align);
+    line-height: var(--line-height);
+    white-space: pre-wrap;
+
+    @include media-breakpoint-sm {
+        white-space: var(--white-space);
+    }
+
+    &:is(h1) {
+        font-size: clamp(var(--text-lg), 4.26vw + 0.5rem, var(--text-xxl));
+    }
+
+    &:is(h2) {
+        font-size: clamp(var(--text-md) + 4px, 3.04vw + 0.5rem, var(--text-xl));
+    }
+
+    &:is(h3) {
+        font-size: clamp(var(--text-md) + 2px, 2.18vw + 0.5rem, var(--text-lg));
+    }
+
+    &:is(h4) {
+        font-size: var(--text-md);
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "vbuchara-portfolio/button",
+    "title": "Button",
+    "category": "vbuchara-portfolio",
+    "editorScript": ["file:./button.tsx", "vbuchara-portfolio-blocks-vendor"],
+    "editorStyle": "file:./button.css",
+    "style": "file:./style-button.css",
+    "render": "file:./render.php"
+}   

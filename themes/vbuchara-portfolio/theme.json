@@ -40,6 +40,43 @@
                     "slug": "cool-gray",
                     "color": "#8789c0ff",
                     "name": "Cool Gray"
+                },
+                {
+                    "slug": "navy-blue",
+                    "color": "#240072",
+                    "name": "Navy Blue"
+                },
+                {
+                    "slug": "tropical-indigo",
+                    "color": "#8F93EF",
+                    "name": "Tropical Indigo"
+                },
+                {
+                    "slug": "soot-black",
+                    "color": "#0F0D0D",
+                    "name": "Soot Black"
+                }
+            ],
+            "gradients": [
+                {
+                    "name": "Cool Gray to Russian Violet",
+                    "slug": "cool-gray-to-russian-violet",
+                    "gradient": "linear-gradient(-180deg, #8789c0ff 0%, #14003fff 100%)"
+                },
+                {
+                    "name": "Salmon Pink to Peen Red",
+                    "slug": "salmon-pink-to-penn-red",
+                    "gradient": "linear-gradient(180deg, #f48498ff 0%, #92140cff 70%)"
+                },
+                {
+                    "name": "Navy Blue to Russian Violet",
+                    "slug": "navy-blue-to-russian-violet",
+                    "gradient": "linear-gradient(-180deg, #240072 0%, #14003fff 100%)"
+                },
+                {
+                    "name": "Tropical Indigo to Cool Gray",
+                    "slug": "tropical-indigo-to-cool-gray",
+                    "gradient": "linear-gradient(180deg, #8F93EF 0%, #8789c0ff 100%)"
                 }
             ]
         },

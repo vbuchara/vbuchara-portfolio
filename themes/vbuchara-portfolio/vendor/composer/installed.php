@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'kingcrash2000/vbuchara-portfolio',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'f5e702a1ba5aaa4150c7b6e7c80c153ca72894b8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'kingcrash2000/vbuchara-portfolio' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'f5e702a1ba5aaa4150c7b6e7c80c153ca72894b8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -25,6 +25,15 @@
             'reference' => 'f5ac2c0b0a2eefca70b2ce32a5809992227e75a6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../masterminds/html5',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'php-ds/php-ds' => array(
+            'pretty_version' => 'v1.5.0',
+            'version' => '1.5.0.0',
+            'reference' => '7b2c5f1843466d50769a0682ce6fa9ddaaa99cb4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-ds/php-ds',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

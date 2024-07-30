@@ -1,4 +1,5 @@
 // Main Colors
+
 $russian-violet: #14003fff;
 $white-smoke: #f7f4f3ff;
 $penn-red: #92140cff;
@@ -6,18 +7,29 @@ $salmon-pink: #f48498ff;
 $cool-gray: #8789c0ff;
 
 // Other Colors
+
 $gray: #808080;
 $light-gray: #D3D3D3;
 $black: #0F0D0D;
 
+$navy-blue: #240072;
+$tropical-indigo: #8F93EF;
+
 $blue-link: #2271b1;
+
+// Gradients
+
+$cool-gray-russian-violet-gradient: linear-gradient(-180deg, #{$cool-gray} 0%, #{$russian-violet} 100%);
+$salmon-pink-penn-red-gradient: linear-gradient(180deg, #{$salmon-pink} 0%, #{$penn-red} 70%);
+$navy-blue-russian-violet-gradient: linear-gradient(-180deg, #{$navy-blue} 0%, #{$russian-violet} 100%);
+$tropical-indigo-cool-gray: linear-gradient(180deg, #{$tropical-indigo} 0%, #{$cool-gray} 100%);
 
 // Typography Variables
 
 $font-family-primary: 'IBMPlexSans';
 $font-family-secondary: sans-serif;
 
-$font-size: 1.4rem;
+$font-size: 1.6rem;
 
 $ibm-plex-sans-fonts: (
     'IBMPlexSans-Bold': (
@@ -79,11 +91,13 @@ $ibm-plex-sans-fonts: (
 );
 
 // Breakpoints 
+
 $breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
+    xxs: 0,
+    xs: 360px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
 );

@@ -1,4 +1,4 @@
-import { createReduxStore, register, select } from "@wordpress/data";
+import { createReduxStore, dispatch, register, select } from "@wordpress/data";
 import type { ValueOf } from "type-fest";
 
 export type ClientId = string;
@@ -126,6 +126,8 @@ const portfolioBlocksStore = createReduxStore<
 
 if(!select(portfolioBlocksStore)){
     register(portfolioBlocksStore);
+    
+    dispatch(portfolioBlocksStore).clearRegisteredBlocks();
 }
 
 export default portfolioBlocksStore;
