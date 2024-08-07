@@ -1,5 +1,17 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
 @use "@styles/components/editor-sortable-menu";
 
 .editor-sortable-menu {
     flex: 1;
+}
+
+.wp-block-vbuchara-portfolio-header{
+    @include with-priority {
+        &::after {
+            outline-offset: 0px;
+        }
+    }
 }

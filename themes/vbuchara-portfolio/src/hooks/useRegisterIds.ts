@@ -40,7 +40,7 @@ export function useRegisterIds<
         const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
 
         const validatedMenuItems = items.map((item) => {
-            if(!isRegisteredId(item.id)){
+            if(!isRegisteredId(item.id) && item.id){
                 blockRegisteredIds.add(item.id);
                 return item;
             }

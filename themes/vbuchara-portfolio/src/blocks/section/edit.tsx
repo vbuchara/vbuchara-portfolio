@@ -14,6 +14,10 @@ import type { SectionAttributesType } from "./section";
 const { default: sectionBlock } = await import("./block.json") as BlockJsonDefault<SectionAttributesType>;
 const { default: blobContainerBlock } = await import("@blocks/blob-container/block.json") as BlockJsonDefault;
 const { default: imageBlock } = await import("@blocks/image/block.json") as BlockJsonDefault;
+const { default: headingBlock } = await import("@blocks/heading/block.json") as BlockJsonDefault;
+const { default: buttonBlock } = await import("@blocks/button/block.json") as BlockJsonDefault;
+const { default: skillsBlock } = await import("@blocks/skills/block.json") as BlockJsonDefault;
+const { default: projectsBlock } = await import("@blocks/projects/block.json") as BlockJsonDefault;
 
 export type SectionEditComponentProps = BlockEditProps<SectionAttributesType>;
 
@@ -62,7 +66,11 @@ export function EditComponent(props: SectionEditComponentProps){
             <InnerBlocks
                 allowedBlocks={[
                     blobContainerBlock.name,
-                    imageBlock.name
+                    imageBlock.name,
+                    headingBlock.name,
+                    buttonBlock.name,
+                    skillsBlock.name,
+                    projectsBlock.name
                 ]}
             />
         </div>

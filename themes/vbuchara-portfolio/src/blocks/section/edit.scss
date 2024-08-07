@@ -34,8 +34,10 @@
             
             justify-content: normal;
             justify-items: center;
-            align-content: normal;
+            align-content: center;
             align-items: normal;
+
+            height: 100%;
             
             @include media-breakpoint-md {
                 grid-auto-flow: var(--grid-auto-flow);

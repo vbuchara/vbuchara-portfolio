@@ -21,12 +21,11 @@ body {
         bottom: 0;
         height: 100%;
         width: 100%;
-        z-index: -1;
+        z-index: -1000;
 
         background-image: url(@assets/images/background.png);
         background-repeat: repeat;
         background-size: 400px;
-        background-position: contain;
 
         opacity: 0.3;
     }

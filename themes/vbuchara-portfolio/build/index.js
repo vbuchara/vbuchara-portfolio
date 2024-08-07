@@ -41,6 +41,76 @@ var SvgColor = function SvgColor(props) {
 
 /***/ }),
 
+/***/ "./src/components/editor-color-gradient-picker.tsx":
+/*!*********************************************************!*\
+  !*** ./src/components/editor-color-gradient-picker.tsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorColorGradientPicker: () => (/* binding */ EditorColorGradientPicker)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+function EditorColorGradientPicker(props) {
+  const {
+    colors: themeColors,
+    gradients: themeGradients
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
+    return select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.store).getSettings();
+  }, []);
+  const colors = props.colors ? [...props.colors, ...(props.extraColors || [])] : [...themeColors, ...(props.extraColors || [])];
+  const gradients = props.gradients ? [...props.gradients, ...(props.extraGradients || [])] : [...themeGradients, ...(props.extraGradients || [])];
+  const TabPanels = {
+    Color: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      colors: colors,
+      value: props.colorValue,
+      onChange: props.onColorChange
+    }),
+    Gradient: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
+      gradients: gradients,
+      value: props.gradientValue,
+      onChange: props.onGradientChange
+    })
+  };
+  const [currentTabSelected, setCurrentTabSelected] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Color");
+  const CurrentTab = TabPanels[currentTabSelected];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+    tabs: [{
+      name: "Color",
+      title: "Color"
+    }, {
+      name: "Gradient",
+      title: "Gradient"
+    }],
+    onSelect: tabName => {
+      if (tabName in TabPanels) {
+        setCurrentTabSelected(tabName);
+      }
+    },
+    children: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "portfolio-editor-formats__text-color",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(CurrentTab, {})
+    })
+  });
+}
+
+/***/ }),
+
 /***/ "./src/formats/text-color/edit.tsx":
 /*!*****************************************!*\
   !*** ./src/formats/text-color/edit.tsx ***!
@@ -53,18 +123,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
-/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _assets_svgs_color_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @assets/svgs/color.svg */ "./assets/svgs/color.svg");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
+/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _assets_svgs_color_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @assets/svgs/color.svg */ "./assets/svgs/color.svg");
+/* harmony import */ var _src_components_editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @src/components/editor-color-gradient-picker */ "./src/components/editor-color-gradient-picker.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -73,12 +139,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function TextColorEditComponent(props) {
   const [showPopover, setShowPopover] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const {
-    colors,
-    gradients
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
-    return select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.store).getSettings();
-  }, []);
   const colorSelected = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     const dummyDiv = document.createElement("div");
     dummyDiv.style.cssText = props.activeAttributes.style;
@@ -92,10 +152,10 @@ function TextColorEditComponent(props) {
     return backgroundImageProperty ? backgroundImageProperty : undefined;
   }, [props.value.start, props.value.end, props.isActive, props.activeAttributes.style]);
   function handleOnColorChange(color) {
-    const removedValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__.removeFormat)(props.value, "vbuchara-portfolio/text-color", props.value.start, props.value.end);
+    const removedValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__.removeFormat)(props.value, "vbuchara-portfolio/text-color", props.value.start, props.value.end);
     props.onChange(removedValue);
     if (!color) return;
-    const newValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__.applyFormat)(props.value, {
+    const newValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__.applyFormat)(props.value, {
       type: "vbuchara-portfolio/text-color",
       attributes: {
         style: `--color: ${color};`
@@ -104,10 +164,10 @@ function TextColorEditComponent(props) {
     props.onChange(newValue);
   }
   function handleOnGradientChange(gradient) {
-    const removedValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__.removeFormat)(props.value, "vbuchara-portfolio/text-color", props.value.start, props.value.end);
+    const removedValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__.removeFormat)(props.value, "vbuchara-portfolio/text-color", props.value.start, props.value.end);
     props.onChange(removedValue);
     if (!gradient) return;
-    const newValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_4__.applyFormat)(props.value, {
+    const newValue = (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__.applyFormat)(props.value, {
       type: "vbuchara-portfolio/text-color",
       attributes: {
         style: `--background-image: ${gradient};`
@@ -115,25 +175,11 @@ function TextColorEditComponent(props) {
     }, props.value.start, props.value.end);
     props.onChange(newValue);
   }
-  const TabPanels = {
-    Color: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-      colors: colors,
-      value: colorSelected,
-      onChange: handleOnColorChange
-    }),
-    Gradient: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      gradients: gradients,
-      value: gradientSelected,
-      onChange: handleOnGradientChange
-    })
-  };
-  const [currentTabSelected, setCurrentTabSelected] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Color");
-  const CurrentTab = TabPanels[currentTabSelected];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Fill, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Fill, {
       name: "RichText.ToolbarControls",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-        icon: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_assets_svgs_color_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+        icon: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_assets_svgs_color_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, {
           stroke: "currentColor",
           width: "24",
           height: "24",
@@ -143,27 +189,15 @@ function TextColorEditComponent(props) {
         onClick: () => setShowPopover(true),
         isActive: props.isActive
       })
-    }), !showPopover ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+    }), !showPopover ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
       anchor: props.contentRef.current,
       onClose: () => setShowPopover(false),
       variant: "toolbar",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
-        tabs: [{
-          name: "Color",
-          title: "Color"
-        }, {
-          name: "Gradient",
-          title: "Gradient"
-        }],
-        onSelect: tabName => {
-          if (tabName in TabPanels) {
-            setCurrentTabSelected(tabName);
-          }
-        },
-        children: () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "portfolio-editor-formats__text-color",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CurrentTab, {})
-        })
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_src_components_editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_4__.EditorColorGradientPicker, {
+        colorValue: colorSelected,
+        gradientValue: gradientSelected,
+        onColorChange: handleOnColorChange,
+        onGradientChange: handleOnGradientChange
       })
     })]
   });

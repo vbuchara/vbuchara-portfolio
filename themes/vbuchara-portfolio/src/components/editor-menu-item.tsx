@@ -17,6 +17,8 @@ import pDebounce from "p-debounce";
 import { ReactComponent as Globe } from "@assets/svgs/globe.svg";
 import { ReactComponent as TrashCan } from "@assets/svgs/trash-can.svg";
 
+import { useTextScrollAnimation } from "@hooks/useTextScrollAnimation";
+
 import { EditorSelect } from "./editor-select";
 
 export interface EditorMenuItemType {
@@ -47,29 +49,11 @@ function EditorMenuItemComponent({
     const mainDivClassName = props.className ? props.className : "editor-menu__item";
 
     const urlViewLinkRef = useRef<HTMLAnchorElement>(null);
-    const animationCancel = useRef(false);
+
     const [urlSearch, setUrlSearch] = useState("");
 
-    const [
-        _, 
-        urlViewLinkAnimationController
-    ] = useSpring(() => ({
-        scrollX: 0,
-        onChange: (result) => {
-            if(!urlViewLinkRef.current) return;
 
-            const {
-                scrollX
-            } = result.value as { scrollX: number };
-
-            urlViewLinkRef.current.scrollTo({
-                left: scrollX,
-            });
-        },
-        config: {
-            duration: 3000
-        }
-    }));
+    const { startScrollLeft, revertScroll } = useTextScrollAnimation(urlViewLinkRef);
 
     const debouncedGetLinkSuggestionsOptions = useCallback(
         pDebounce(getLinkSuggestionsOptions, 500), 
@@ -103,34 +87,6 @@ function EditorMenuItemComponent({
         if(option === null) return;
 
         setMenuItem({...menuItem, url: option.value });
-    }
-
-    function handleScrollLeftUrlViewLink(){
-        if(!urlViewLinkRef.current) return;
-        
-        urlViewLinkAnimationController.set({ scrollX: 0 });
-        animationCancel.current = false;
-
-        urlViewLinkRef.current.style.setProperty("text-overflow", "unset");
-
-        setTimeout(() => {
-            if(!urlViewLinkRef.current || animationCancel.current) return;
-
-            urlViewLinkAnimationController.start({
-                scrollX: urlViewLinkRef.current.scrollWidth
-            });
-        }, 500);
-    }
-
-    function handleRevertScrollUrlViewLink(){
-        if(!urlViewLinkRef.current) return;
-
-        urlViewLinkAnimationController.stop(true);
-        urlViewLinkRef.current.style.removeProperty("text-overflow");
-        urlViewLinkRef.current.scrollTo({
-            left: 0
-        });
-        animationCancel.current = true;
     }
 
     function handleOnClickDelete(){
@@ -171,10 +127,10 @@ function EditorMenuItemComponent({
                     href={menuItem.url}
                     target="_blank"
                     rel="noopener"
-                    onFocus={handleScrollLeftUrlViewLink}
-                    onBlur={handleRevertScrollUrlViewLink}
-                    onMouseOver={handleScrollLeftUrlViewLink}
-                    onMouseLeave={handleRevertScrollUrlViewLink}
+                    onFocus={startScrollLeft}
+                    onBlur={revertScroll}
+                    onMouseOver={startScrollLeft}
+                    onMouseLeave={revertScroll}
                 >
                     {menuItem.url}
                 </animated.a>

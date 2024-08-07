@@ -33,7 +33,7 @@
 
     justify-content: normal;
     justify-items: center;
-    align-content: normal;
+    align-content: center;
     align-items: normal;
 
     background-image: var(--background-image);
@@ -45,6 +45,7 @@
     padding-inline: var(--padding-inline);
 
     overflow-x: hidden;
+    overflow-y: hidden;
 
     &[style*="--padding-block-start"]{
         padding-block-start: var(--padding-block-start);

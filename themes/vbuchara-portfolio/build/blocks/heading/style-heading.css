@@ -5,9 +5,12 @@
   --text-align: left;
   --line-height: 1.5;
   --white-space: normal;
+  --underline-color: transparent;
+  --underline-image: none;
   text-align: var(--text-align);
   line-height: var(--line-height);
   white-space: pre-wrap;
+  position: relative;
 }
 @media (min-width: 576px) {
   .portfolio-heading {
@@ -25,6 +28,17 @@
 }
 .portfolio-heading:is(h4) {
   font-size: var(--text-md);
+}
+.portfolio-heading:is([style*="--underline-color"], [style*="--underline-image"])::after {
+  position: relative;
+  display: block;
+  content: "";
+  width: 80%;
+  height: 0.5rem;
+  margin-inline: auto;
+  border-radius: 10px;
+  background-image: var(--underline-image);
+  background-color: var(--underline-color);
 }
 
 /*# sourceMappingURL=style-heading.css.map*/

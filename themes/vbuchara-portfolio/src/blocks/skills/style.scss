@@ -1,0 +1,21 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@use "@styles/components/skill-card" with ($mixin-only: true);
+
+.portfolio-skills {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-auto-rows: 1fr;
+    column-gap: clamp(2.5rem, 5.55vw, 8rem);
+    row-gap: clamp(2.5rem, 2.8vw, 4rem);
+
+    @include media-breakpoint-md {
+        grid-template-columns: repeat(4, auto);
+    }
+
+    &__card {
+        @include skill-card.skill-card();
+    }
+}

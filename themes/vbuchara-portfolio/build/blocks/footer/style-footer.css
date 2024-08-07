@@ -4,10 +4,10 @@
 .menu-link, .site-footer__menu-item-link {
   --color: #f7f4f3;
   --focus-visible-outline-color: #92140c;
-  position: relative;
   color: var(--color);
   font-weight: 600;
   font-size: inherit;
+  position: relative;
   outline-color: var(--focus-visible-outline-color);
   outline-style: solid;
   outline-width: 0px;
@@ -182,14 +182,14 @@
   z-index: -1;
   visibility: hidden;
   background: linear-gradient(to top, #92140c 0%, #f48498 50%, #8789c0 100%);
-  animation-name: element-highlight-animation-ugg2b06;
+  animation-name: element-highlight-animation-unoa6sx;
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 3;
   animation-delay: 2s;
   border-radius: 10px;
 }
-@keyframes element-highlight-animation-ugg2b06 {
+@keyframes element-highlight-animation-unoa6sx {
   0% {
     visibility: visible;
     top: calc(100% + 2px);

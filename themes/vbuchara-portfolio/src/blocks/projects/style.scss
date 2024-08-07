@@ -1,0 +1,199 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+@use "@styles/abstract/functions" as *;
+
+.portfolio-projects {
+    $portfolio-projects-selector: &;
+
+    --color: #{$white-smoke};
+    --focus-visible-outline-color: #{$penn-red};
+    --card-width: clamp(28rem, 24.306vw, 35rem);
+    --scroll-button-column: clamp(2.5rem, 3.473vw, 5rem);
+    --column-gap: clamp(0.5rem, 1.39vw, 2rem);
+    --cards-padding-inline: 10px;
+
+    --spring-easing: linear(
+        0, 0.17867 2.9%, 1.1266 10.171%, 1.27337 12.191%, 1.33495 14.241%,
+        1.33042 15.752%, 1.28687 17.442%, 0.95171 25.153%, 0.88722 28.953%,
+        0.89789 31.773%, 1.00889 39.284%, 1.03791 43.634%, 0.98731 58.256%,
+        1.00419 72.717%, 1.00031
+    );
+    --spring-duration: 1.833s;
+
+    display: grid;
+    grid-template-columns: var(--scroll-button-column) 1fr var(--scroll-button-column);
+    grid-template-rows: 1fr;
+    grid-template-areas: "scroll-left cards scroll-right";
+    column-gap: var(--column-gap);
+
+    color: var(--color);
+
+    max-width: 90vw;
+    width: fit-content;
+
+    position: relative;
+
+    overflow-y: hidden;
+    overflow-y: visible;
+
+    &--with-scroll {
+        #{$portfolio-projects-selector}__scroll-left,
+        #{$portfolio-projects-selector}__scroll-right {
+            @include supports-linear-easing-function {
+                --translate-transition: translate var(--spring-duration) var(--spring-easing);
+            }
+            
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+
+            translate: 0 0;
+            transition: var(--translate-transition);
+        }
+    }
+
+    &__scroll-left,
+    &__scroll-right {
+        --background-color: #{$russian-violet};
+        --color: #{$white-smoke};
+        --translate-transition: translate 0.5s linear;
+        --visibility-transition: visibility 1s linear;
+        --opacity-transition: opacity 1s linear;
+
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: var(--background-color);
+        color: var(--color);
+
+        border-width: 2px;
+        border-style: solid;
+        border-color: var(--background-color);
+        border-radius: 5px;
+        
+        font-size: clamp(2.4rem, 2.5vw, 3.6rem);
+
+        outline-width: 0px;
+        outline-style: solid;
+        outline-offset: -4px;
+        outline-color: transparent;
+        z-index: 1;
+
+        transition: 
+            var(--translate-transition), 
+            var(--visibility-transition),
+            var(--opacity-transition)
+        ;
+
+        &:hover{
+            color: var(--background-color);
+            background-color: var(--color);
+        }
+
+        &:focus-visible {
+            outline-width: 2px;
+            outline-color: var(--focus-visible-outline-color);
+        }
+
+        &--disabled {
+            cursor: default;
+            filter: opacity(0.5);
+
+            &:hover {
+                color: var(--color);
+                background-color: var(--background-color);
+            }
+        }
+    }
+
+    &__scroll-left {
+        grid-row: scroll-left;
+        grid-column: scroll-left;
+
+        translate: calc(100% + var(--column-gap) + var(--cards-padding-inline)) 0;
+    }
+
+    &__scroll-right {
+        grid-row: scroll-right;
+        grid-column: scroll-right;
+
+        translate: calc(-100% - var(--column-gap) - var(--cards-padding-inline)) 0;
+    }
+
+    &__cards {
+        grid-column: cards;
+        grid-row: cards;
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: 1fr;
+        grid-auto-columns: var(--card-width);
+        column-gap: clamp(2rem, 6.25vw, 9rem);
+
+        position: relative;
+        z-index: 2;
+
+        overflow-x: hidden;
+
+        padding-inline: var(--cards-padding-inline);
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+
+    &__card {
+        --background-color: #{$russian-violet};
+        --color: inherit;
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        background-color: var(--background-color);
+        color: var(--color);
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+        &-title {  
+            --margin-inline: clamp(1rem, 1.0417vw, 1.5rem);
+            --margin-block: clamp(1rem, 1.0417vw, 1.5rem);
+            --max-width: calc(var(--card-width) - (2 * var(--margin-inline)));
+            
+            margin-inline: clamp(1rem, 1.0417vw, 1.5rem);
+            margin-block: clamp(0.9rem, 0.973vw, 1.4rem);
+            max-width: var(--max-width);
+
+            @include underline-hover-animation(
+                $direction: "left",
+                $width: 95%,
+            );
+
+            &-link {
+                display: block;
+
+                font-size: clamp(2.4rem, 2.5vw, 3.4rem);
+                font-weight: 600;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                width: 100%;
+                max-width: var(--max-width);
+    
+                overflow: hidden;
+    
+                color: var(--color);
+
+                @include with-priority {
+                    text-decoration: none;
+                };
+            }
+        }
+    }
+}

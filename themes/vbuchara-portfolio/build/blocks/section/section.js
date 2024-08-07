@@ -279,6 +279,18 @@ const {
 const {
   default: imageBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_image_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/image/block.json */ "./src/blocks/image/block.json", 19));
+const {
+  default: headingBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_heading_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/heading/block.json */ "./src/blocks/heading/block.json", 19));
+const {
+  default: buttonBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_button_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/button/block.json */ "./src/blocks/button/block.json", 19));
+const {
+  default: skillsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_skills_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/skills/block.json */ "./src/blocks/skills/block.json", 19));
+const {
+  default: projectsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/projects/block.json */ "./src/blocks/projects/block.json", 19));
 function EditComponent(props) {
   const {
     attributes,
@@ -333,7 +345,7 @@ function EditComponent(props) {
         "--min-height": styles.minHeight
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
-        allowedBlocks: [blobContainerBlock.name, imageBlock.name]
+        allowedBlocks: [blobContainerBlock.name, imageBlock.name, headingBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name]
       })
     })]
   });

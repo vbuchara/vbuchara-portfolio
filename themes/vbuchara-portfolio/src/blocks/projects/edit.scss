@@ -1,0 +1,9 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-projects {
+    &__editor-control {
+        flex: 1;
+    }
+}

@@ -27,7 +27,7 @@
        column-gap: var(--column-gap);
   justify-content: normal;
   justify-items: center;
-  align-content: normal;
+  align-content: center;
   align-items: normal;
   background-image: var(--background-image);
   background-color: var(--background-color);
@@ -35,6 +35,7 @@
   padding-block: var(--padding-block);
   padding-inline: var(--padding-inline);
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 .site-section[style*="--padding-block-start"] {
   padding-block-start: var(--padding-block-start);

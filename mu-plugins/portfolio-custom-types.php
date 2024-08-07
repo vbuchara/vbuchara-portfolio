@@ -27,8 +27,10 @@ function portfolio_register_skill_type(){
         ],
         'capability_type' => 'skill',
         'map_meta_cap' => true,
+        'has_archive' => true,
         'rewrite' => [
-            'slug' => 'skills'
+            'slug' => 'skills',
+            'with_front' => false
         ],
         'labels' => [
             'name' => 'Skills',
@@ -53,8 +55,10 @@ function portfolio_register_project_type(){
         ],
         'capability_type' => 'project',
         'map_meta_cap' => true,
+        'has_archive' => true,
         'rewrite' => [
-            'slug' => 'projects'
+            'slug' => 'projects',
+            'with_front' => false
         ],
         'labels' => [
             'name' => 'Projects',
@@ -80,7 +84,8 @@ function portfolio_register_experience_type(){
         'capability_type' => 'experience',
         'map_meta_cap' => true,
         'rewrite' => [
-            'slug' => 'experiences'
+            'slug' => 'experiences',
+            'with_front' => false
         ],
         'labels' => [
             'name' => 'Experiences',

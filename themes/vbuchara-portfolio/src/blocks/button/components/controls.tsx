@@ -91,7 +91,7 @@ export function ButtonInspectorControls({
     <>
         <InspectorControls>
             <PanelBody
-                title="Link Configuration"
+                title="Settings"
                 initialOpen={true}
             >
                 <PanelRow>

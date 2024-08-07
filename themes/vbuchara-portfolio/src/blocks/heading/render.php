@@ -11,6 +11,8 @@
     *  styles: array{
     *    lineHeight: string,
     *    whiteSpace: string,
+    *    underlineColor?: string,
+    *    underlineGradient?: string
     *  },
     * } $attributes
     * @var string $content
@@ -29,11 +31,15 @@
     * @var array{
     *    lineHeight: string,
     *    whiteSpace: string,
+    *    underlineColor: string|null,
+    *    underlineGradient: string|null
     *  }
     */
    $defaultStyles = [
       "lineHeight" => "1.5",
       "whiteSpace" => "normal",
+      "underlineColor" => null,
+      "underlineGradient" => null
    ];
    $styles = isset($attributes['styles']) ? array_merge($defaultStyles, $attributes['styles']) : $defaultStyles;
 
@@ -53,6 +59,14 @@
    $inlineStyle->setProperty("--text-align", "$textAlign");
    $inlineStyle->setProperty("--line-height", $styles['lineHeight']);
    $inlineStyle->setProperty("--white-space", $styles['whiteSpace']);
+
+   if(!empty($styles['underlineColor'])){
+      $inlineStyle->setProperty("--underline-color", $styles['underlineColor']);
+   }
+
+   if(!empty($styles['underlineGradient'])){
+      $inlineStyle->setProperty("--underline-image", $styles['underlineGradient']);
+   }
 
    $heading->setAttribute('style', $inlineStyle->getStyleString());
 ?>

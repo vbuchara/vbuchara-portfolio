@@ -46,14 +46,15 @@ const getOptionsFromPlugin = (config) => {
 /**
  * 
  * @param {import("webpack").Configuration} config 
+ * @param {"script" | "module"} configType
  */
-const getNewPlugins = (config) => [
+const getNewPlugins = (config, configType) => [
     new Dotenv(),
     new DependencyExtractionWebpackPlugin({
         ...getOptionsFromPlugin(config),
         requestToExternal(request) {
             if(request === "@wordpress/react-i18n") return undefined;
-        }
+        },
     }),
 ].filter(Boolean);
 
@@ -61,7 +62,7 @@ const getNewPlugins = (config) => [
 
 const newScriptPlugins = [
     ...(scriptConfig.plugins || []).filter(filterDependencyExtractionPlugin),
-    ...getNewPlugins(scriptConfig)
+    ...getNewPlugins(scriptConfig, "script")
 ];
 
 /** @type {import("webpack").Configuration} */
@@ -120,7 +121,7 @@ const newScriptConfig = {
 
 const newModulePlugins = [
     ...(moduleConfig?.plugins || []).filter(filterDependencyExtractionPlugin),
-   ...getNewPlugins(moduleConfig || {}),
+   ...getNewPlugins(moduleConfig || {}, "module"),
 ];
 
 /** @type {import("webpack").Configuration} */

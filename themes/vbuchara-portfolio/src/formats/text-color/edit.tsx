@@ -20,19 +20,12 @@ import {
 import { ReactComponent as Color } from "@assets/svgs/color.svg";
 
 import type { TextColorAttributes } from "./text-color";
+import { EditorColorGradientPicker } from "@src/components/editor-color-gradient-picker";
 
 export type TextColorEditComponentProps = RichTextEditComponentProps<TextColorAttributes>;
 
 export function TextColorEditComponent(props: TextColorEditComponentProps){
     const [showPopover, setShowPopover] = useState(false);
-
-    const {
-        colors,
-        gradients
-    } = useSelect((select) => {
-        return select(blockEditorStore).getSettings();
-    }, []);
-    
     
     const colorSelected = useMemo(() => {
         const dummyDiv = document.createElement("div");
@@ -95,26 +88,6 @@ export function TextColorEditComponent(props: TextColorEditComponentProps){
         props.onChange(newValue);
     }
 
-    const TabPanels = {
-        Color: () => (
-        <ColorPalette
-            colors={colors}
-            value={colorSelected}
-            onChange={handleOnColorChange}
-        />
-        ),
-        Gradient: () => (
-        <GradientPicker
-            gradients={gradients}
-            value={gradientSelected}
-            onChange={handleOnGradientChange}
-        />
-        )
-    } as const;
-
-    const [currentTabSelected, setCurrentTabSelected] = useState<keyof typeof TabPanels>("Color");
-    const CurrentTab = TabPanels[currentTabSelected];
-
     return (
     <>
         <Fill
@@ -133,29 +106,12 @@ export function TextColorEditComponent(props: TextColorEditComponentProps){
             onClose={() => setShowPopover(false)}
             variant="toolbar"
         >
-            <TabPanel
-                tabs={[
-                    {
-                        name: "Color",
-                        title: "Color",
-                    },
-                    {
-                        name: "Gradient",
-                        title: "Gradient",
-                    }
-                ]}
-                onSelect={(tabName: keyof typeof TabPanels) => {
-                    if(tabName in TabPanels){
-                        setCurrentTabSelected(tabName);
-                    }
-                }}  
-            >
-                {() => (
-                <div className="portfolio-editor-formats__text-color">
-                    <CurrentTab />
-                </div>
-                )}
-            </TabPanel>
+            <EditorColorGradientPicker
+                colorValue={colorSelected}
+                gradientValue={gradientSelected}
+                onColorChange={handleOnColorChange}
+                onGradientChange={handleOnGradientChange}
+            />
         </Popover>
         )}
     </>

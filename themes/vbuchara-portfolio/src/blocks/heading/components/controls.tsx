@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { SingleValue } from "react-select";
 import { 
     BlockControls, 
@@ -10,7 +10,9 @@ import {
     ToolbarDropdownMenu,
     ToolbarGroup,
     TextControl,
-    BaseControl
+    BaseControl,
+    ToolbarButton,
+    Popover
 } from "@wordpress/components";
 import { 
     alignCenter,
@@ -20,12 +22,14 @@ import {
     headingLevel2,
     headingLevel3,
     headingLevel4,
-    headingLevel5
+    headingLevel5,
+    formatUnderline
 } from "@wordpress/icons";
 
-import { EditorSelect } from "@components/editor-select";
-
 import { WhiteSpaceOption, WhiteSpaceSelectOptions } from "@constants/block-styles";
+
+import { EditorSelect } from "@components/editor-select";
+import { EditorColorGradientPicker } from "@components/editor-color-gradient-picker";
 
 import type { HeadingEditComponentProps } from "../edit";
 import type { HeadingAlignment, HeadingTagName } from "../heading";
@@ -112,12 +116,36 @@ export function HeadingBlockControls({
     attributes,
     setAttributes
 }: HeadingBlockControlsProps){
+    const underlineButtonRef = useRef<HTMLElement>(null);
+
+    const [showUnderlinePopover, setShowUnderlinePopover] = useState(false);
+
     const headingIcon = useMemo(() => {
         return headingIcons.get(attributes.tagName) || headingLevel1;
     }, [attributes.tagName]);
     const textAlignmentIcon = useMemo(() => {
         return textAlignmentIcons.get(attributes.textAlignment) || alignLeft;
     }, [attributes.textAlignment]);
+
+    function handleOnChangeUnderlineColor(value?: string){
+        setAttributes({
+            styles: {
+                ...attributes.styles,
+                underlineColor: value,
+                underlineGradient: undefined
+            }
+        });
+    }
+
+    function handleOnChangeUnderlineGradient(value?: string){
+        setAttributes({
+            styles: {
+                ...attributes.styles,
+                underlineColor: undefined,
+                underlineGradient: value
+            }
+        });
+    }
 
     return (
     <BlockControls>
@@ -182,7 +210,28 @@ export function HeadingBlockControls({
                     },
                 ]}
             />
+            <ToolbarButton
+                label="Underline Color"
+                icon={formatUnderline}
+                ref={underlineButtonRef}
+                isActive={Boolean(attributes.styles.underlineColor || attributes.styles.underlineGradient)}
+                onClick={() => setShowUnderlinePopover(true)}
+            />
         </ToolbarGroup>
+        {!showUnderlinePopover ? "" : (
+        <Popover
+            anchor={underlineButtonRef.current}
+            variant="toolbar"
+            onClose={() => setShowUnderlinePopover(false)}
+        >
+            <EditorColorGradientPicker
+                colorValue={attributes.styles.underlineColor}
+                gradientValue={attributes.styles.underlineGradient}
+                onColorChange={handleOnChangeUnderlineColor}
+                onGradientChange={handleOnChangeUnderlineGradient}
+            />
+        </Popover>
+        )}
     </BlockControls>
     );
 }

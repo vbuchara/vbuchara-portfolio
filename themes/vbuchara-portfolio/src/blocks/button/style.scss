@@ -8,6 +8,7 @@
     --background-color: #{$russian-violet};
     --background-image: none;
     --border-color: var(--background-color);
+    --focus-visible-outline-color: var(--color);
 
     --border-width: 2px;
     --border-style: solid;
@@ -36,6 +37,11 @@
 
     border-radius: 10px;
 
+    outline-offset: -6px;
+    outline-color: transparent;
+    outline-width: 0px;
+    outline-style: solid;
+
     cursor: pointer;
     overflow: hidden;
 
@@ -46,13 +52,20 @@
         );
 
     &:hover {
-        background-clip: text;
         -webkit-text-fill-color: transparent;
+        --focus-visible-outline-color: var(--border-color);
+
+        background-clip: text;
 
         &::before {
             background-color: var(--color);
             background-image: none;
         }
+    }
+
+    &:focus-visible {
+        outline-width: 2px;
+        outline-color: var(--focus-visible-outline-color);
     }
 
     &::before {

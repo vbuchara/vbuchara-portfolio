@@ -418,15 +418,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   EditorAnchor: () => (/* binding */ EditorAnchor)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 
-function EditorAnchor(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+
+function EditorAnchorComponent(props, ref) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+    ref: ref,
     onClick: event => event.preventDefault(),
     ...props
   });
 }
+const EditorAnchor = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(EditorAnchorComponent);
 
 /***/ }),
 
@@ -448,9 +453,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var p_debounce__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! p-debounce */ "./node_modules/p-debounce/index.js");
 /* harmony import */ var _assets_svgs_globe_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @assets/svgs/globe.svg */ "./assets/svgs/globe.svg");
 /* harmony import */ var _assets_svgs_trash_can_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @assets/svgs/trash-can.svg */ "./assets/svgs/trash-can.svg");
-/* harmony import */ var _editor_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor-select */ "./src/components/editor-select.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _hooks_useTextScrollAnimation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @hooks/useTextScrollAnimation */ "./src/hooks/useTextScrollAnimation.ts");
+/* harmony import */ var _editor_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor-select */ "./src/components/editor-select.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -469,23 +476,11 @@ function EditorMenuItemComponent({
 }, ref) {
   const mainDivClassName = props.className ? props.className : "editor-menu__item";
   const urlViewLinkRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const animationCancel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
   const [urlSearch, setUrlSearch] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
-  const [_, urlViewLinkAnimationController] = (0,_react_spring_web__WEBPACK_IMPORTED_MODULE_1__.useSpring)(() => ({
-    scrollX: 0,
-    onChange: result => {
-      if (!urlViewLinkRef.current) return;
-      const {
-        scrollX
-      } = result.value;
-      urlViewLinkRef.current.scrollTo({
-        left: scrollX
-      });
-    },
-    config: {
-      duration: 3000
-    }
-  }));
+  const {
+    startScrollLeft,
+    revertScroll
+  } = (0,_hooks_useTextScrollAnimation__WEBPACK_IMPORTED_MODULE_6__.useTextScrollAnimation)(urlViewLinkRef);
   const debouncedGetLinkSuggestionsOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((0,p_debounce__WEBPACK_IMPORTED_MODULE_3__["default"])(getLinkSuggestionsOptions, 500), []);
   async function getLinkSuggestionsOptions(inputValue) {
     if (inputValue.length < 3) return [];
@@ -511,64 +506,41 @@ function EditorMenuItemComponent({
       url: option.value
     });
   }
-  function handleScrollLeftUrlViewLink() {
-    if (!urlViewLinkRef.current) return;
-    urlViewLinkAnimationController.set({
-      scrollX: 0
-    });
-    animationCancel.current = false;
-    urlViewLinkRef.current.style.setProperty("text-overflow", "unset");
-    setTimeout(() => {
-      if (!urlViewLinkRef.current || animationCancel.current) return;
-      urlViewLinkAnimationController.start({
-        scrollX: urlViewLinkRef.current.scrollWidth
-      });
-    }, 500);
-  }
-  function handleRevertScrollUrlViewLink() {
-    if (!urlViewLinkRef.current) return;
-    urlViewLinkAnimationController.stop(true);
-    urlViewLinkRef.current.style.removeProperty("text-overflow");
-    urlViewLinkRef.current.scrollTo({
-      left: 0
-    });
-    animationCancel.current = true;
-  }
   function handleOnClickDelete() {
     removeMenuItem(menuItem);
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     className: mainDivClassName,
     id: menuItem.id,
     ...props,
     ref: ref,
-    children: [DragHandler ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(DragHandler, {}) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("label", {
+    children: [DragHandler ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(DragHandler, {}) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("label", {
       className: `${mainDivClassName}-title`,
-      children: ["Title:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
+      children: ["Title:", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("input", {
         name: `menu-item-title-${menuItem.id}`,
         type: "text",
         defaultValue: menuItem.title,
         onInput: handleOnInputTitle
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("label", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("label", {
       className: `${mainDivClassName}-url`,
-      children: ["Url:", !menuItem.url ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      children: ["Url:", !menuItem.url ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
         className: `${mainDivClassName}-url-view`,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_assets_svgs_globe_svg__WEBPACK_IMPORTED_MODULE_4__.ReactComponent, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_assets_svgs_globe_svg__WEBPACK_IMPORTED_MODULE_4__.ReactComponent, {
           className: `${mainDivClassName}-url-view-icon`
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_react_spring_web__WEBPACK_IMPORTED_MODULE_1__.animated.a, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_react_spring_web__WEBPACK_IMPORTED_MODULE_1__.animated.a, {
           ref: urlViewLinkRef,
           className: `${mainDivClassName}-url-view-link`,
           href: menuItem.url,
           target: "_blank",
           rel: "noopener",
-          onFocus: handleScrollLeftUrlViewLink,
-          onBlur: handleRevertScrollUrlViewLink,
-          onMouseOver: handleScrollLeftUrlViewLink,
-          onMouseLeave: handleRevertScrollUrlViewLink,
+          onFocus: startScrollLeft,
+          onBlur: revertScroll,
+          onMouseOver: startScrollLeft,
+          onMouseLeave: revertScroll,
           children: menuItem.url
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_6__.EditorSelect, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_7__.EditorSelect, {
         type: "async-creatable",
         name: `menu-item-url-${menuItem.id}`,
         placeholder: "Search Url",
@@ -585,11 +557,11 @@ function EditorMenuItemComponent({
           })
         }
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
       type: "button",
       className: `${mainDivClassName}-delete`,
       onClick: handleOnClickDelete,
-      children: ["Delete Item", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_assets_svgs_trash_can_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
+      children: ["Delete Item", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_assets_svgs_trash_can_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
         className: `${mainDivClassName}-delete-icon`
       })]
     })]
@@ -984,7 +956,7 @@ function useRegisterIds(props) {
     const registeredBlock = getRegisteredBlock(clientId);
     const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
     const validatedMenuItems = items.map(item => {
-      if (!isRegisteredId(item.id)) {
+      if (!isRegisteredId(item.id) && item.id) {
         blockRegisteredIds.add(item.id);
         return item;
       }
@@ -1008,6 +980,73 @@ function useRegisterIds(props) {
       removeRegisteredBlockById(clientId);
     };
   });
+}
+
+/***/ }),
+
+/***/ "./src/hooks/useTextScrollAnimation.ts":
+/*!*********************************************!*\
+  !*** ./src/hooks/useTextScrollAnimation.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useTextScrollAnimation: () => (/* binding */ useTextScrollAnimation)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_spring_web__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-spring/web */ "./node_modules/@react-spring/web/dist/react-spring_web.modern.mjs");
+
+
+function useTextScrollAnimation(ref) {
+  const animationCancel = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  const scrollRef = ref instanceof HTMLElement || !ref ? {
+    current: ref
+  } : ref;
+  const [_, scrollAnimationController] = (0,_react_spring_web__WEBPACK_IMPORTED_MODULE_1__.useSpring)(() => ({
+    scrollX: 0,
+    onChange: result => {
+      if (!scrollRef.current) return;
+      const {
+        scrollX
+      } = result.value;
+      scrollRef.current.scrollTo({
+        left: scrollX
+      });
+    },
+    config: {
+      duration: 3000
+    }
+  }), ref instanceof HTMLElement || !ref ? [ref] : undefined);
+  function startScrollLeft() {
+    if (!scrollRef.current) return;
+    scrollAnimationController.set({
+      scrollX: 0
+    });
+    animationCancel.current = false;
+    scrollRef.current.style.setProperty("text-overflow", "unset");
+    setTimeout(() => {
+      if (!scrollRef.current || animationCancel.current) return;
+      scrollAnimationController.start({
+        scrollX: scrollRef.current.scrollWidth
+      });
+    }, 500);
+  }
+  function revertScroll() {
+    if (!scrollRef.current) return;
+    scrollAnimationController.stop(true);
+    scrollRef.current.style.removeProperty("text-overflow");
+    scrollRef.current.scrollTo({
+      left: 0
+    });
+    animationCancel.current = true;
+  }
+  return {
+    startScrollLeft,
+    revertScroll,
+    scrollAnimationController
+  };
 }
 
 /***/ }),

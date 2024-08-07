@@ -155,6 +155,8 @@ declare module "wordpress-types" {
         full:                  ImageInfo;
         "skill-icon":          ImageInfo;
         "project-image":       ImageInfo;
+        "1536x1536":           ImageInfo;  
+        "2048x2048":           ImageInfo;
     }
     
     export interface ImageInfo {
@@ -209,5 +211,50 @@ declare module "wordpress-types" {
         name:      string;
         href:      string;
         templated: boolean;
+    }
+
+    export namespace ACF {
+
+        export interface ImageSizeUrls extends Record<keyof ImageSizes, string>{
+            source: string;
+        }
+
+        export interface ImageValue {
+            id: number;
+            alt: string;
+            size_urls: ImageSizeUrls;
+        }
+    }
+
+    export * from "wordpress-types/skill";
+    export * from "wordpress-types/project";
+}
+
+declare module "wordpress-types/skill" {
+    import { WP_Post } from "wordpress-types";
+
+    export interface SkillPost extends WP_Post{
+        acf: SkillPostCustomFields
+    }
+
+    export interface SkillPostCustomFields {
+        skill_icon: string,
+        skill_level: "3_advanced" | "2_intermediary" | "1_beginner"
+    }
+}
+
+declare module "wordpress-types/project" {
+    import { WP_Post, ACF } from "wordpress-types";
+
+    export interface ProjectPost extends WP_Post {
+        acf: ProjectPostCustomFields
+    }
+
+    export interface ProjectPostCustomFields {
+        description: string;
+        project_image?: ACF.ImageValue,
+        developed_skills: number[],
+        project_github_link: string,
+        project_site_link: string
     }
 }

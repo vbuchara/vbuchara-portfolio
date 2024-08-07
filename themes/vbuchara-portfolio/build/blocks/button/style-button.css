@@ -6,6 +6,7 @@
   --background-color: #14003f;
   --background-image: none;
   --border-color: var(--background-color);
+  --focus-visible-outline-color: var(--color);
   --border-width: 2px;
   --border-style: solid;
   display: flex;
@@ -25,18 +26,27 @@
   padding-block: clamp(1.5rem, 1.25vw + 0.2rem, 2rem);
   padding-inline: clamp(4rem, 5.07vw + 0.2rem, 7.5rem);
   border-radius: 10px;
+  outline-offset: -6px;
+  outline-color: transparent;
+  outline-width: 0px;
+  outline-style: solid;
   cursor: pointer;
   overflow: hidden;
   transition: -webkit-text-fill-color 0.3s ease-in-out 0s, background-clip 0.3s ease-in-out 0s;
 }
 .portfolio-button:hover {
+  -webkit-text-fill-color: transparent;
+  --focus-visible-outline-color: var(--border-color);
   -webkit-background-clip: text;
           background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 .portfolio-button:hover::before {
   background-color: var(--color);
   background-image: none;
+}
+.portfolio-button:focus-visible {
+  outline-width: 2px;
+  outline-color: var(--focus-visible-outline-color);
 }
 .portfolio-button::before {
   content: "";

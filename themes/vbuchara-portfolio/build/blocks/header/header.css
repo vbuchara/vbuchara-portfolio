@@ -205,4 +205,8 @@
   flex: 1;
 }
 
+.wp-block-vbuchara-portfolio-header:is(*, #priority1)::after {
+  outline-offset: 0px;
+}
+
 /*# sourceMappingURL=header.css.map*/

@@ -19,13 +19,14 @@
      * @var WP_Block $block
      */
 
-    $textContent = isset($attributes['textContent']) ? $attributes['textContent'] : "";
+    $textContent = isset($attributes['textContent']) ? $attributes['textContent'] : "Button Text";
     $extraClasses = isset($attributes['extraClasses']) 
       ? array_reduce($attributes["extraClasses"], fn(string $result, string $className) => "$result $className", "") 
       : "";
 
     $defaultStyles = [
-        "color" => "#f7f4f3ff",   
+        "color" => "#f7f4f3ff",
+        "borderWidth" => "2px"   
     ];
 
     /**

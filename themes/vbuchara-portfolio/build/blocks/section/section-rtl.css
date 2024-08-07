@@ -28,8 +28,9 @@
        column-gap: var(--column-gap);
   justify-content: normal;
   justify-items: center;
-  align-content: normal;
+  align-content: center;
   align-items: normal;
+  height: 100%;
 }
 @media (min-width: 768px) {
   .site-section--editor .block-editor-block-list__layout {

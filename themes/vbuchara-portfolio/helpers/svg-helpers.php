@@ -21,14 +21,14 @@ class SvgHelpers {
         return "";
     }
 
-    public static function get_svg_element(string $file){
+    public static function get_svg_element(string $file, array $options = []){
         $svgContent = self::load_svg($file);
 
         $html5 = new HTML5();
-        $dom = $html5->loadHTML($svgContent);
+        $dom = $html5->loadHTML($svgContent, $options);
 
         $svgNode = $dom->getElementsByTagName("svg")->item(0);
-        $svgElement = $svgNode instanceof DOMElement ? $svgNode : new DOMElement("svg", $svgContent);
+        $svgElement = $svgNode instanceof DOMElement ? $svgNode : $dom->createElement("svg", $svgContent);
 
         return $svgElement;
     }
@@ -37,5 +37,20 @@ class SvgHelpers {
         $svgContent = self::load_svg($file);
 
         return 'data:image/svg+xml;base64,' . base64_encode($svgContent);
+    }
+
+    
+    public static function get_svg_element_from_media(
+        string | int $attachment_id
+    ){
+        $iconSource = get_attached_file((int) $attachment_id);
+        if(empty($iconSource)) return null;
+        
+        $iconHtml = file_get_contents($iconSource);
+        if(empty($iconHtml)) return null;
+
+        $iconSvg = DomHelpers::get_element_from_string($iconHtml, "svg");
+
+        return $iconSvg;
     }
 }

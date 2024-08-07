@@ -7,9 +7,14 @@
     --line-height: 1.5;
     --white-space: normal;
 
+    --underline-color: transparent;
+    --underline-image: none;
+
     text-align: var(--text-align);
     line-height: var(--line-height);
     white-space: pre-wrap;
+
+    position: relative;
 
     @include media-breakpoint-sm {
         white-space: var(--white-space);
@@ -29,5 +34,20 @@
 
     &:is(h4) {
         font-size: var(--text-md);
+    }
+
+    &:is([style*="--underline-color"],[style*="--underline-image"])::after {
+        position: relative;
+        display: block;
+        content: '';
+        width: 80%;
+        height: 0.5rem;
+
+        margin-inline: auto;
+
+        border-radius: 10px;
+
+        background-image: var(--underline-image);
+        background-color: var(--underline-color);
     }
 }
