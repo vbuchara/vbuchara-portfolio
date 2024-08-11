@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vbuchara-portfolio/container",
+  "title": "Container",
+  "category": "vbuchara-portfolio",
+  "editorScript": [
+    "file:./container.js",
+    "vbuchara-portfolio-blocks-vendor"
+  ],
+  "editorStyle": "file:./container.css",
+  "style": "file:./style-container.css",
+  "render": "file:./render.php"
+}

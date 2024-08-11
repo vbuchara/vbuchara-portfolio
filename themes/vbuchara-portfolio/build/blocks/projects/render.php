@@ -61,6 +61,7 @@
         type="button"
         class="portfolio-projects__scroll-left"
         data-wp-class--portfolio-projects__scroll-left--disabled="!context.activeScrollLeft"
+        data-wp-bind--disabled="!context.activeScrollLeft"
         data-wp-on--click="actions.handleScrollLeft"
     ><?= "<" ?></button>
     <div 
@@ -115,6 +116,7 @@
         type="button"
         class="portfolio-projects__scroll-right"
         data-wp-class--portfolio-projects__scroll-right--disabled="!context.activeScrollRight"
+        data-wp-bind--disabled="!context.activeScrollRight"
         data-wp-on--click="actions.handleScrollRight"
     ><?= ">" ?></button>
 </div>

@@ -2,8 +2,14 @@
 @use "@styles/abstract/mixins" as *;
 @use "@styles/abstract/breakpoints" as *;
 
+@use "@styles/components/editor-metrics-settings" as *;
+@use "@styles/components/editor-position-settings" as *;
+
 .portfolio-image {
     max-width: 100%;
+
+    @include editor-metrics-settings-variables;
+    @include editor-position-settings-variables;
 
     &[data-hide-on-xxs]{
         @include media-exclusive-breakpoint-at("xxs", "xs") {

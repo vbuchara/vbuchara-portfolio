@@ -1,1 +1,7 @@
 @use "components/editor-formats";
+
+.portfolio-editor {
+    &__control {
+        flex: 1;
+    }
+} 

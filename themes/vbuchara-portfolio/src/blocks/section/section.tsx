@@ -4,32 +4,13 @@ import "./edit.scss";
 import { registerBlockType } from "@wordpress/blocks";
 import { columns } from "@wordpress/icons";
 
-import type { 
-    AlignContentValue,
-    AlignItemsValue,
-    GridAutoFlowValue, 
-    JustifyContentValue, 
-    JustifyItemsValue
-} from "@constants/block-styles";
+import { type GridStyles, defaultGridSettingsVariables } from "@components/editor-grid-settings";
+import type { BackgroundImageStyles } from "@components/editor-background-image-settings";
 
 import { EditComponent } from "./edit";
 import { SaveComponent } from "./save";
 
 const { default: block } = await import("./block.json") as BlockJsonDefault<SectionAttributesType>;
-
-export interface SectionGridStyles {
-    gridTemplateColumns: string,
-    gridTemplateRows: string,
-    gridAutoFlow: GridAutoFlowValue,
-    gridAutoColumns: string,
-    gridAutoRows: string,
-    rowGap: string,
-    columnGap: string,
-    justifyContent: JustifyContentValue,
-    alignContent: AlignContentValue,
-    justifyItems: JustifyItemsValue,
-    alignItems: AlignItemsValue,
-}
 
 export interface SectionPaddingStyles {
     paddingBlock?: string,
@@ -41,13 +22,16 @@ export interface SectionPaddingStyles {
 }
 
 export interface SectionStyles {
-    grid: SectionGridStyles,
+    grid: GridStyles,
     padding: SectionPaddingStyles,
-    minHeight: string
+    minHeight: string,
+    backgroundColor?: string,
+    backgroundGradient?: string,
 }
 
 export interface SectionAttributesType {
-    styles: SectionStyles
+    styles: SectionStyles,
+    backgroundImage: BackgroundImageStyles,
 };
 
 registerBlockType<SectionAttributesType>(block.name, {
@@ -56,23 +40,15 @@ registerBlockType<SectionAttributesType>(block.name, {
         styles: {
             type: "object",
             default: {
-                grid: {
-                    gridTemplateColumns: "1fr",
-                    gridTemplateRows: "auto",
-                    gridAutoFlow: "row",
-                    gridAutoColumns: "1fr",
-                    gridAutoRows: "auto",
-                    rowGap: "0px",
-                    columnGap: "0px",
-                    justifyContent: "normal",
-                    alignContent: "normal",
-                    justifyItems: "normal",
-                    alignItems: "normal",
-                },
+                grid: defaultGridSettingsVariables,
                 padding: {},
                 minHeight: "900px",
             } satisfies SectionStyles,
         },
+        backgroundImage: {
+            type: "object",
+            default: {} satisfies BackgroundImageStyles,
+        }
     },
     icon: columns,
     edit: EditComponent,

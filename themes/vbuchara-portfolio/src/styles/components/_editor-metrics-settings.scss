@@ -1,0 +1,28 @@
+@use "@styles/abstract/mixins" as *;
+
+@mixin editor-metrics-settings-variables {
+    @include if-inline-style-has("--max-width"){
+        max-width: var(--max-width);
+    }
+
+    @include if-inline-style-has("--width"){
+        width: var(--width);
+    }
+
+    @include if-inline-style-has("--min-width"){
+        min-width: var(--min-width);
+    }
+
+    @include if-inline-style-has("--max-height"){
+        max-height: var(--max-height);
+    }
+
+    @include if-inline-style-has("--height"){
+        height: var(--height);
+    }
+
+    @include if-inline-style-has("--min-height"){
+        min-height: var(--min-height);
+    }
+}
+

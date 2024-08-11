@@ -24,6 +24,8 @@ import {
     type EditorMediaPickerAttributes,
 } from "@components/editor-media-picker";
 import { EditorSelect } from "@components/editor-select";
+import { EditorMetricsSettings, MetricsStyles } from "@components/editor-metrics-settings";
+import { EditorPositionSettings, PositionStyles } from "@components/editor-position-settings";
 
 import { getArrayDependency } from "@utils/getArrayDependency";
 
@@ -69,54 +71,96 @@ export function ImageInspectorControls({
         });
     }
 
+    function handleOnChangeMetrics(metricStyles: MetricsStyles){
+        setAttributes({
+            styles: {
+                ...attributes.styles,
+                metrics: {
+                   ...attributes.styles.metrics,
+                   ...metricStyles
+                },
+            }
+        });
+    }
+
+    function handleOnChangePosition(positionStyles: PositionStyles){
+        setAttributes({
+            styles: {
+                ...attributes.styles,
+                position: {
+                    ...attributes.styles.position,
+                   ...positionStyles
+                },
+            }
+        });
+    }
+
     return (
-    <InspectorControls
-        group="settings"
-    >
-        <PanelBody
-            title="Settings"
-            initialOpen={true}
+    <>
+        <InspectorControls
+            group="settings"
         >
-            <PanelRow>
+            <PanelBody
+                title="Settings"
+                initialOpen={true}
+            >
+                <PanelRow>
+                    <BaseControl
+                        className="portfolio-image__editor-control"
+                        label="Image Source"
+                    >
+                        <EditorMediaPicker
+                            attributes={mediaAttributes}
+                            setAttributes={setMediaAttributes}
+                            defaultImage={FrontImageSrc}
+                        />
+                    </BaseControl>
+                </PanelRow>
+                <PanelRow>
+                    <TextControl
+                        label="Alt Text"
+                        value={attributes.imageAlt}
+                        onChange={(value) => setAttributes({ imageAlt: value })}
+                    />
+                </PanelRow>
+            </PanelBody>
+            <PanelBody
+                title="Exhibition"
+                initialOpen={false}
+            >
+                <PanelRow>
                 <BaseControl
                     className="portfolio-image__editor-control"
-                    label="Image Source"
+                    label="Hide Image At"
                 >
-                    <EditorMediaPicker
-                        attributes={mediaAttributes}
-                        setAttributes={setMediaAttributes}
-                        defaultImage={FrontImageSrc}
+                    <EditorSelect                   
+                        type="select" 
+                        isMulti={true}
+                        options={BreakpointsOptions}
+                        value={hideImageAtBreakpointsSelected}
+                        onChange={handleOnChangeHideImageAt}
                     />
                 </BaseControl>
-            </PanelRow>
-            <PanelRow>
-                <TextControl
-                    label="Alt Text"
-                    value={attributes.imageAlt}
-                    onChange={(value) => setAttributes({ imageAlt: value })}
-                />
-            </PanelRow>
-        </PanelBody>
-        <PanelBody
-            title="Exhibition"
-            initialOpen={false}
+                </PanelRow>
+            </PanelBody>
+        </InspectorControls>
+        <InspectorControls
+            group="styles"
         >
-            <PanelRow>
-            <BaseControl
-                className="portfolio-image__editor-control"
-                label="Hide Image At"
-            >
-                <EditorSelect                   
-                    type="select" 
-                    isMulti={true}
-                    options={BreakpointsOptions}
-                    value={hideImageAtBreakpointsSelected}
-                    onChange={handleOnChangeHideImageAt}
-                />
-            </BaseControl>
-            </PanelRow>
-        </PanelBody>
-    </InspectorControls>
+            <EditorMetricsSettings
+                metrics={attributes.styles.metrics}
+                setMetrics={handleOnChangeMetrics}
+                title="Dimensions"
+                initialOpen={false}
+            />
+            <EditorPositionSettings
+                position={attributes.styles.position}
+                setPosition={handleOnChangePosition}
+                title="Position"
+                initialOpen={false}
+            />
+        </InspectorControls>
+    </>
     );
 }
 

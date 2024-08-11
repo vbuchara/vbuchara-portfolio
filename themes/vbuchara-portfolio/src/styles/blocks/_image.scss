@@ -1,0 +1,26 @@
+
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-image{
+    &--about, &--about > .portfolio-image{
+        @include with-priority(2) {
+            right: 0;
+            bottom: 2.3rem;
+            z-index: 3;
+
+            width: min(100vw + 4rem, 44rem);
+            max-width: none;
+
+            @include media-breakpoint-md {
+                right: var(--right);
+                bottom: var(--bottom);
+                z-index: var(--z-index);
+
+                width: var(--width);
+                max-width: 100%;
+            }
+        }
+    }
+}

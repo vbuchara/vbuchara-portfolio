@@ -12,8 +12,8 @@ import type {
 } from "wordpress-types";
 
 export interface EditorMediaPickerAttributes {
-    imageId: number,
-    imageUrl: string,
+    imageId?: number,
+    imageUrl?: string,
     imageAlt?: string,
 }
 
@@ -21,14 +21,18 @@ export interface EditorMediaPickerProps {
     attributes: EditorMediaPickerAttributes,
     setAttributes: (attributes: Partial<EditorMediaPickerAttributes>) => void,
     sizePriority?: (keyof ImageSizes)[],
-    defaultImage?: string
+    defaultToClear?: boolean,
+    defaultImage?: string,
+    defaultImageAlt?: string
 }
 
 export function EditorMediaPicker({
     attributes,
     setAttributes,
+    defaultToClear: defaultToNone,
     defaultImage,
-    sizePriority
+    defaultImageAlt,
+    sizePriority,
 }: EditorMediaPickerProps){
     function getImageSizeFromMediaDetails(mediaDetails: MediaDetails): ImageInfo | undefined{
         return sizePriority?.reduce<ImageInfo | undefined>((imageSize, imageSizeName) => {
@@ -61,12 +65,21 @@ export function EditorMediaPicker({
     }
 
     function onClickSetToDefault(){
+        if(defaultToNone){
+            setAttributes({
+                imageId: undefined,
+                imageUrl: undefined,
+                imageAlt: undefined
+            });
+            return;
+        }
+
         if(!defaultImage) return;
 
         setAttributes({
-            imageId: 0,
+            imageId: undefined,
             imageUrl: defaultImage,
-            imageAlt: "Image of a guy sitting on a chair, in front of a computer coding"
+            imageAlt: defaultImageAlt || "Image of a guy sitting on a chair, in front of a computer coding"
         });
     }
     
@@ -81,7 +94,7 @@ export function EditorMediaPicker({
                     <Button variant='primary' onClick={open}>
                         Choose Image
                     </Button>
-                    {(!defaultImage) ? null : (
+                    {(!defaultImage && !defaultToNone) ? null : (
                     <Button variant='secondary' onClick={onClickSetToDefault}>
                         Set to Default
                     </Button>

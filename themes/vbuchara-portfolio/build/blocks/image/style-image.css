@@ -4,6 +4,42 @@
 .portfolio-image {
   max-width: 100%;
 }
+.portfolio-image[style*="--max-width"] {
+  max-width: var(--max-width);
+}
+.portfolio-image[style*="--width"] {
+  width: var(--width);
+}
+.portfolio-image[style*="--min-width"] {
+  min-width: var(--min-width);
+}
+.portfolio-image[style*="--max-height"] {
+  max-height: var(--max-height);
+}
+.portfolio-image[style*="--height"] {
+  height: var(--height);
+}
+.portfolio-image[style*="--min-height"] {
+  min-height: var(--min-height);
+}
+.portfolio-image[style*="--position"] {
+  position: var(--position);
+}
+.portfolio-image[style*="--top"] {
+  top: var(--top);
+}
+.portfolio-image[style*="--right"] {
+  right: var(--right);
+}
+.portfolio-image[style*="--bottom"] {
+  bottom: var(--bottom);
+}
+.portfolio-image[style*="--left"] {
+  left: var(--left);
+}
+.portfolio-image[style*="--z-index"] {
+  z-index: var(--z-index);
+}
 @media (0 <= width < 360px) {
   .portfolio-image[data-hide-on-xxs] {
     display: none;

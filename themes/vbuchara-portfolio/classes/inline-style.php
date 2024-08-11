@@ -32,7 +32,9 @@ class InlineStyle {
         }
     }
 
-    public function setProperty(string $key, string $value){
+    public function setProperty(string $key, string|null $value){
+        if(empty($value)) return;
+
         $this->propertiesMap->put($key, $value);
     }
 

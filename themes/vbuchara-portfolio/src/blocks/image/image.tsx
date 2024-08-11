@@ -9,16 +9,24 @@ import { image } from "@wordpress/icons";
 import FrontImageSrc from "@assets/images/front-image.png";
 
 import type { BreakpointsValue } from "@constants/block-breakpoints";
+import type { MetricsStyles } from "@components/editor-metrics-settings";
+import type { PositionStyles } from "@components/editor-position-settings";
 
 import { EditComponent } from "./edit";
 
 const { default: block } = await import("./block.json") as BlockJsonDefault<ImageAttributesType>;
 
+export interface ImageStyles {
+    metrics: MetricsStyles
+    position: PositionStyles
+}
+
 export type ImageAttributesType = {
     imageId: number,
     imageUrl: string,
     imageAlt: string,
-    hideImageAtBreakpoints: BreakpointsValue[]
+    hideImageAtBreakpoints: BreakpointsValue[],
+    styles: ImageStyles,
 };
 
 registerBlockType<ImageAttributesType>(block.name, {
@@ -39,6 +47,13 @@ registerBlockType<ImageAttributesType>(block.name, {
         hideImageAtBreakpoints: {
             type: "array",
             default: []
+        },
+        styles: {
+            type: "object",
+            default: {
+                metrics: {},
+                position: {},
+            } satisfies ImageStyles,
         }
     },
     icon: image,

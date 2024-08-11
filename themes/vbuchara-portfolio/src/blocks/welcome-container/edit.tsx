@@ -13,15 +13,15 @@ const { default: headingBlock } = await import("@blocks/heading/block.json") as 
 const { default: paragraphBlock } = await import("@blocks/paragraph/block.json") as BlockJsonDefault;
 const { default: buttonBlock } = await import("@blocks/button/block.json") as BlockJsonDefault;
 
-export type BlobContainerEditComponentProps = BlockEditProps<{}>;
+export type WelcomeContainerEditComponentProps = BlockEditProps<{}>;
 
-export function EditComponent(props: BlobContainerEditComponentProps){
+export function EditComponent(props: WelcomeContainerEditComponentProps){
     const { attributes, setAttributes } = props;
 
     return (
     <EditorWrapper>
-        <div className="blob-container">
-            <div className="blob-container__background">
+        <div className="welcome-container">
+            <div className="welcome-container__background">
                 <Blob1/>
             </div>
             <InnerBlocks
@@ -35,21 +35,21 @@ export function EditComponent(props: BlobContainerEditComponentProps){
                         textContent: "Welcome Headline",
                         tagName: "h1",
                         textAlignment: "center",
-                        extraClasses: ["blob-container__heading-1"],
+                        extraClasses: ["welcome-container__heading-1"],
                     } as HeadingAttributesType],
                     [headingBlock.name, {
                         textContent: "Welcome Subtitle",
                         tagName: "h3",
                         textAlignment: "center",
-                        extraClasses: ["blob-container__heading-2"],
+                        extraClasses: ["welcome-container__heading-2"],
                     } as HeadingAttributesType],
                     [paragraphBlock.name, {
                         textContent: "Welcome Paragraph",
-                        extraClasses: ["blob-container__paragraph"],
+                        extraClasses: ["welcome-container__paragraph"],
                     } as ParagraphAttributesType],
                     [buttonBlock.name, {
                         textContent: "Click Me",
-                        extraClasses: ["blob-container__button"],
+                        extraClasses: ["welcome-container__button"],
                     } as ButtonAttributesType]
                 ]}
                 templateLock="all"

@@ -4,6 +4,9 @@ import merge from "lodash/merge";
 import isEqual from "lodash/isEqual";
 
 import { EditorWrapper } from "@components/editor-wrapper";
+import { getGridSettingsVariables } from "@components/editor-grid-settings";
+import { getBackgroundImageSettingVariables } from "@components/editor-background-image-settings";
+import { getPaddingSettingsVariables } from "@components/editor-padding-settings";
 
 import { useBlockDefaultAttributes } from "@hooks/useBlockDefaultAttributes";
 
@@ -12,9 +15,11 @@ import { SectionInspectorControls } from "./components/controls";
 import type { SectionAttributesType } from "./section";
 
 const { default: sectionBlock } = await import("./block.json") as BlockJsonDefault<SectionAttributesType>;
-const { default: blobContainerBlock } = await import("@blocks/blob-container/block.json") as BlockJsonDefault;
+const { default: welcomeContainerBlock } = await import("@blocks/welcome-container/block.json") as BlockJsonDefault;
+const { default: containerBlock } = await import("@blocks/container/block.json") as BlockJsonDefault;
 const { default: imageBlock } = await import("@blocks/image/block.json") as BlockJsonDefault;
 const { default: headingBlock } = await import("@blocks/heading/block.json") as BlockJsonDefault;
+const { default: paragraphBlock } = await import("@blocks/paragraph/block.json") as BlockJsonDefault;
 const { default: buttonBlock } = await import("@blocks/button/block.json") as BlockJsonDefault;
 const { default: skillsBlock } = await import("@blocks/skills/block.json") as BlockJsonDefault;
 const { default: projectsBlock } = await import("@blocks/projects/block.json") as BlockJsonDefault;
@@ -33,6 +38,10 @@ export function EditComponent(props: SectionEditComponentProps){
         setAttributes(merge(defaultAttributes, props.attributes));
         return null;
     };
+    
+    const gridStyles = getGridSettingsVariables(styles.grid);
+    const paddingStyles = getPaddingSettingsVariables(styles.padding);
+    const backgroundImageStyles = getBackgroundImageSettingVariables(attributes.backgroundImage);
 
     return (
     <EditorWrapper>
@@ -43,31 +52,21 @@ export function EditComponent(props: SectionEditComponentProps){
         <div 
             className="site-section site-section--editor"
             style={{
-                "--grid-template-columns": styles.grid.gridTemplateColumns,
-                "--grid-template-rows": styles.grid.gridTemplateRows,
-                "--grid-auto-flow": styles.grid.gridAutoFlow,
-                "--grid-auto-columns": styles.grid.gridAutoColumns,
-                "--grid-auto-rows": styles.grid.gridAutoRows,
-                "--row-gap": styles.grid.rowGap,
-                "--column-gap": styles.grid.columnGap,
-                "--justify-content": styles.grid.justifyContent,
-                "--justify-items": styles.grid.justifyItems,
-                "--align-content": styles.grid.alignContent,
-                "--align-items": styles.grid.alignItems,
-                ...(styles.padding.paddingBlock && { "--padding-block": styles.padding.paddingBlock } ),
-                ...(styles.padding.paddingInline && { "--padding-inline": styles.padding.paddingInline } ),
-                ...(styles.padding.paddingBlockStart && { "--padding-block-start": styles.padding.paddingBlockStart }),
-                ...(styles.padding.paddingBlockEnd && { "--padding-block-start": styles.padding.paddingBlockEnd }),
-                ...(styles.padding.paddingInlineStart && { "--padding-inline-start": styles.padding.paddingInlineStart }),
-                ...(styles.padding.paddingInlineEnd && { "--padding-inline-end": styles.padding.paddingInlineEnd }),
+                ...gridStyles,
+                ...paddingStyles,
+                ...backgroundImageStyles,
                 "--min-height": styles.minHeight,
+                "--background-color": styles.backgroundColor, 
+                ...(!attributes.backgroundImage.backgroundImage && { "--background-image": styles.backgroundGradient }),
             }}
         >
             <InnerBlocks
                 allowedBlocks={[
-                    blobContainerBlock.name,
+                    welcomeContainerBlock.name,
+                    containerBlock.name,
                     imageBlock.name,
                     headingBlock.name,
+                    paragraphBlock.name,
                     buttonBlock.name,
                     skillsBlock.name,
                     projectsBlock.name

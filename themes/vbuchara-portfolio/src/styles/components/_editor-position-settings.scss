@@ -1,0 +1,27 @@
+@use "@styles/abstract/mixins" as *;
+
+@mixin editor-position-settings-variables(){
+    @include if-inline-style-has("--position"){
+        position: var(--position);
+    }
+
+    @include if-inline-style-has("--top"){
+        top: var(--top);
+    }
+
+    @include if-inline-style-has("--right"){
+        right: var(--right);
+    }
+
+    @include if-inline-style-has("--bottom"){
+        bottom: var(--bottom);
+    }
+
+    @include if-inline-style-has("--left"){
+        left: var(--left);
+    }
+
+    @include if-inline-style-has("--z-index"){
+        z-index: var(--z-index);
+    }
+}

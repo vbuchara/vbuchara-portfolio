@@ -516,14 +516,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AlignContentOptions: () => (/* binding */ AlignContentOptions),
 /* harmony export */   AlignItemsOptions: () => (/* binding */ AlignItemsOptions),
+/* harmony export */   BackgroundAttachmentOptions: () => (/* binding */ BackgroundAttachmentOptions),
+/* harmony export */   BackgroundBoxCommonOptions: () => (/* binding */ BackgroundBoxCommonOptions),
+/* harmony export */   BackgroundClipOptions: () => (/* binding */ BackgroundClipOptions),
+/* harmony export */   BackgroundOriginOptions: () => (/* binding */ BackgroundOriginOptions),
 /* harmony export */   BoxContentAlignmentCommonOptions: () => (/* binding */ BoxContentAlignmentCommonOptions),
 /* harmony export */   BoxItemsAlignmentCommonOptions: () => (/* binding */ BoxItemsAlignmentCommonOptions),
 /* harmony export */   GridAutoFlowOptions: () => (/* binding */ GridAutoFlowOptions),
 /* harmony export */   JustifyContentOptions: () => (/* binding */ JustifyContentOptions),
 /* harmony export */   JustifyItemsOptions: () => (/* binding */ JustifyItemsOptions),
+/* harmony export */   PositionOptions: () => (/* binding */ PositionOptions),
 /* harmony export */   StyleGlobalOptions: () => (/* binding */ StyleGlobalOptions),
 /* harmony export */   WhiteSpaceSelectOptions: () => (/* binding */ WhiteSpaceSelectOptions)
 /* harmony export */ });
+// Global Styles Options
 const StyleGlobalOptions = [{
   label: "Inherit",
   value: "inherit"
@@ -540,6 +546,8 @@ const StyleGlobalOptions = [{
   label: "Revert Layer",
   value: "revert-layer"
 }];
+
+// White Space Options 
 const WhiteSpaceSelectOptions = [{
   label: "Normal",
   value: "normal"
@@ -559,6 +567,7 @@ const WhiteSpaceSelectOptions = [{
   label: "Break Words",
   value: "break-word"
 }, ...StyleGlobalOptions];
+// Grid Options
 const GridAutoFlowOptions = [{
   label: "Row",
   value: "row"
@@ -680,6 +689,49 @@ const JustifyItemsOptions = [...BoxItemsAlignmentCommonOptions, {
   value: "legacy center"
 }, ...StyleGlobalOptions];
 const AlignItemsOptions = [...BoxItemsAlignmentCommonOptions, ...StyleGlobalOptions];
+// Background Options
+const BackgroundAttachmentOptions = [{
+  label: "Scroll",
+  value: "scroll"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Local",
+  value: "local"
+}, ...StyleGlobalOptions];
+const BackgroundBoxCommonOptions = [{
+  label: "Border Box",
+  value: "border-box"
+}, {
+  label: "Padding Box",
+  value: "padding-box"
+}, {
+  label: "Content Box",
+  value: "content-box"
+}];
+const BackgroundClipOptions = [...BackgroundBoxCommonOptions, {
+  label: "Text",
+  value: "text"
+}, ...StyleGlobalOptions];
+const BackgroundOriginOptions = [...BackgroundBoxCommonOptions, ...StyleGlobalOptions];
+// Position Options
+const PositionOptions = [{
+  label: "Static",
+  value: "static"
+}, {
+  label: "Relative",
+  value: "relative"
+}, {
+  label: "Absolute",
+  value: "absolute"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Sticky",
+  value: "sticky"
+}, ...StyleGlobalOptions];
 
 /***/ }),
 

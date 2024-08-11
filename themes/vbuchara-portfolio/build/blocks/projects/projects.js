@@ -275,16 +275,22 @@ function EditComponent(props) {
   const [mainDivMeasureRef, mainDivMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_11__["default"])();
   const [portfolioCardsMeasureRef, portfolioCardsMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_11__["default"])();
   const [cardsScrollLeft, setCardsScrollLeft] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const activeScroll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    const cardsDivElement = portfolioCardsRef.current;
+    if (!cardsDivElement) return false;
+    const divPadding = 10;
+    return cardsDivElement.scrollWidth - divPadding > cardsDivElement.clientWidth;
+  }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
   const activeScrollLeft = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     const cardsDivElement = portfolioCardsRef.current;
     if (!cardsDivElement) return false;
-    return cardsDivElement.scrollWidth > cardsDivElement.clientWidth && cardsDivElement.scrollLeft > 0;
-  }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
+    return activeScroll && cardsDivElement.scrollLeft > 0;
+  }, [activeScroll, mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
   const activeScrollRight = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     const cardsDivElement = portfolioCardsRef.current;
     if (!cardsDivElement) return false;
-    return cardsDivElement.scrollWidth > cardsDivElement.clientWidth && !(0,_utils_hasElementTotallyScrolled__WEBPACK_IMPORTED_MODULE_7__.hasElementTotallyScrolled)(cardsDivElement, "horizontal");
-  }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
+    return activeScroll && !(0,_utils_hasElementTotallyScrolled__WEBPACK_IMPORTED_MODULE_7__.hasElementTotallyScrolled)(cardsDivElement, "horizontal");
+  }, [activeScroll, mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
   const portfolioProjectsClasses = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     return (0,clsx__WEBPACK_IMPORTED_MODULE_4__["default"])({
       "portfolio-projects": true,
@@ -375,6 +381,7 @@ function EditComponent(props) {
         type: "button",
         className: scrollLeftClasses,
         onClick: handleScrollLeft,
+        disabled: !activeScrollLeft,
         children: "<"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "portfolio-projects__cards",
@@ -394,6 +401,7 @@ function EditComponent(props) {
         type: "button",
         className: scrollRightClasses,
         onClick: handleScrollRight,
+        disabled: !activeScrollRight,
         children: ">"
       })]
     })]

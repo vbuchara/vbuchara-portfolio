@@ -2301,7 +2301,8 @@ const {
           ref: cardsDivElement
         } = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getElement)();
         if (!cardsDivElement) return;
-        const isOverflowing = cardsDivElement.scrollWidth > cardsDivElement.clientWidth;
+        const divPadding = 10;
+        const isOverflowing = cardsDivElement.scrollWidth - divPadding > cardsDivElement.clientWidth;
         context.activeScrollLeft = isOverflowing && cardsDivElement.scrollLeft > 0;
         context.activeScrollRight = isOverflowing && !(0,_utils_hasElementTotallyScrolled__WEBPACK_IMPORTED_MODULE_4__.hasElementTotallyScrolled)(cardsDivElement, "horizontal");
       }, [context.cardsDivMeasure?.width, context.mainDivMeasure?.width, context.cardsDivScrollLeft]);

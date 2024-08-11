@@ -1,0 +1,124 @@
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/container/style.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.portfolio-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "content";
+  position: relative;
+  min-width: min(36rem, 98vw);
+}
+.portfolio-container[style*="--max-width"] {
+  max-width: var(--max-width);
+}
+.portfolio-container[style*="--width"] {
+  width: var(--width);
+}
+.portfolio-container[style*="--min-width"] {
+  min-width: var(--min-width);
+}
+.portfolio-container[style*="--max-height"] {
+  max-height: var(--max-height);
+}
+.portfolio-container[style*="--height"] {
+  height: var(--height);
+}
+.portfolio-container[style*="--min-height"] {
+  min-height: var(--min-height);
+}
+.portfolio-container[style*="--position"] {
+  position: var(--position);
+}
+.portfolio-container[style*="--top"] {
+  top: var(--top);
+}
+.portfolio-container[style*="--right"] {
+  right: var(--right);
+}
+.portfolio-container[style*="--bottom"] {
+  bottom: var(--bottom);
+}
+.portfolio-container[style*="--left"] {
+  left: var(--left);
+}
+.portfolio-container[style*="--z-index"] {
+  z-index: var(--z-index);
+}
+.portfolio-container__background {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: content;
+  z-index: 0;
+}
+.portfolio-container__background > svg {
+  height: 100%;
+}
+.portfolio-container__content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: content;
+  z-index: 1;
+  display: grid;
+  --grid-template-columns: 1fr;
+  --grid-template-rows: auto;
+  --grid-auto-flow: row;
+  --grid-auto-columns: 1fr;
+  --grid-auto-rows: auto;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --justify-content: normal;
+  --justify-items: normal;
+  --align-content: normal;
+  --align-items: normal;
+  grid-template-columns: var(--grid-template-columns);
+  grid-template-rows: var(--grid-template-rows);
+  grid-auto-flow: var(--grid-auto-flow);
+  grid-auto-columns: var(--grid-auto-columns);
+  grid-auto-rows: var(--grid-auto-rows);
+  row-gap: var(--row-gap);
+  -moz-column-gap: var(--column-gap);
+       column-gap: var(--column-gap);
+  justify-content: var(--justify-content);
+  justify-items: var(--justify-items);
+  align-content: var(--align-content);
+  align-items: var(--align-items);
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-flow: row;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+}
+.portfolio-container__content[style*="--padding-inline"] {
+  padding-inline: var(--padding-inline);
+}
+.portfolio-container__content[style*="--padding-block"] {
+  padding-block: var(--padding-block);
+}
+.portfolio-container__content[style*="--padding-block-start"] {
+  padding-block-start: var(--padding-block-start);
+}
+.portfolio-container__content[style*="--padding-block-end"] {
+  padding-block-end: var(--padding-block-end);
+}
+.portfolio-container__content[style*="--padding-inline-start"] {
+  padding-inline-start: var(--padding-inline-start);
+}
+.portfolio-container__content[style*="--padding-inline-end"] {
+  padding-inline-end: var(--padding-inline-end);
+}
+@media (min-width: 768px) {
+  .portfolio-container__content {
+    grid-template-columns: var(--grid-template-columns);
+    grid-template-rows: var(--grid-template-rows);
+    grid-auto-flow: var(--grid-auto-flow);
+    justify-content: var(--justify-content);
+    justify-items: var(--justify-items);
+    align-content: var(--align-content);
+    align-items: var(--align-items);
+  }
+}
+
+/*# sourceMappingURL=style-container.css.map*/

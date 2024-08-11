@@ -1,9 +1,10 @@
 <?php 
     use VBucharaPortfolio\Classes\InlineStyle;
+    use VBucharaPortfolio\Helpers\BlockHelpers;
 
     /**
      * @var array{
-     *  styles: array{
+     *  styles?: array{
      *      grid: array{
      *          gridTemplateColumns: string,
      *          gridTemplateRows: string,
@@ -26,33 +27,50 @@
      *          paddingBlockEnd: string,
      *      },
      *      minHeight: string,
+     *      backgroundColor?: string,
+     *      backgroundGradient?: string
+     *  },
+     *  backgroundImage?: array{
+     *      backgroundImage?: string,
+     *      backgroundAttachment?: string,
+     *      backgroundClip?: string,
+     *      backgroundOrigin?: string,
+     *      backgroundPosition?: string,
+     *      backgroundPositionX?: string,
+     *      backgroundPositionY?: string,
+     *      backgroundRepeat?: string,
+     *      backgroundSize?: string,
      *  },
      * } $attributes
      * @var string $content
      * @var WP_Block $block
      */
 
-    $defaultStyles = [
-        "grid" => [
-            "gridTemplateColumns" => "1fr",
-            "gridTemplateRows" => "auto",
-            "gridAutoFlow" => "row",
-            "gridAutoColumns" => "1fr",
-            "gridAutoRows" => "auto",
-            "rowGap" => "0px",
-            "columnGap" => "0px",
-            "justifyContent" => "normal",
-            "alignContent" => "normal",
-            "justifyItems" => "normal",
-            "alignItems" => "normal",
+    $defaultAttributes = [
+        "styles" => [
+            "grid" => BlockHelpers::get_default_grid_style(),
+            "padding" => BlockHelpers::get_default_padding_style(),
+            "minHeight" => "900px",
+            "backgroundColor" => null,
+            "backgroundGradient" => null,
         ],
-        "padding" => [],
-        "minHeight" => "900px",
+        "backgroundImage" => [
+            "backgroundImage" => null,
+            "backgroundAttachment" => null,
+            "backgroundClip" => null,
+            "backgroundOrigin" => null,
+            "backgroundPosition" => null,
+            "backgroundPositionX" => null,
+            "backgroundPositionY" => null,
+            "backgroundRepeat" => null,
+            "backgroundSize" => null,
+        ],
     ];
     
     /**
     * @var array{
-    *      grid: array{
+    *   styles: array{
+    *       grid: array{
     *          gridTemplateColumns: string,
     *          gridTemplateRows: string,
     *          gridAutoFlow: string,
@@ -66,57 +84,56 @@
     *          alignItems: string,
     *      },
     *      padding: array{
-    *          paddingBlock: string,
-    *          paddingInline: string,
-    *          paddingInlineStart: string,
-    *          paddingInlineEnd: string,
-    *          paddingBlockStart: string,
-    *          paddingBlockEnd: string,
+    *          paddingBlock: string | null,
+    *          paddingInline: string | null,
+    *          paddingInlineStart: string | null,
+    *          paddingInlineEnd: string | null,
+    *          paddingBlockStart: string | null,
+    *          paddingBlockEnd: string | null,
     *      },
     *      minHeight: string,
-    *  }
+    *      backgroundColor: string | null,
+    *      backgroundGradient: string | null
+    *   },
+    *   backgroundImage: array{
+    *      backgroundImage: string | null,
+    *      backgroundAttachment: string | null,
+    *      backgroundClip: string | null,
+    *      backgroundOrigin: string | null,
+    *      backgroundPosition: string | null,
+    *      backgroundPositionX: string | null,
+    *      backgroundPositionY: string | null,
+    *      backgroundRepeat: string | null,
+    *      backgroundSize: string | null,
+    *   }
+    * }
     */
-    $styles = isset($attributes['styles']) 
-        ? array_replace_recursive($defaultStyles, $attributes['styles']) 
-        : $defaultStyles;
+    $attributesWithDefaults = array_replace_recursive($defaultAttributes, $attributes) ;
 
     $sectionStyle = new InlineStyle();
 
-    // Grid Styles
-    $sectionStyle->setProperty("--grid-template-columns", $styles['grid']["gridTemplateColumns"]);
-    $sectionStyle->setProperty("--grid-template-rows", $styles['grid']["gridTemplateRows"]);
-    $sectionStyle->setProperty("--grid-auto-flow", $styles['grid']["gridAutoFlow"]);
-    $sectionStyle->setProperty("--grid-auto-columns", $styles['grid']["gridAutoColumns"]);
-    $sectionStyle->setProperty("--grid-auto-rows", $styles['grid']["gridAutoRows"]);
-    $sectionStyle->setProperty("--row-gap", $styles['grid']["rowGap"]);
-    $sectionStyle->setProperty("--column-gap", $styles['grid']["columnGap"]);
-    $sectionStyle->setProperty("--justify-content", $styles['grid']["justifyContent"]);
-    $sectionStyle->setProperty("--justify-items", $styles['grid']["justifyItems"]);
-    $sectionStyle->setProperty("--align-content", $styles['grid']["alignContent"]);
-    $sectionStyle->setProperty("--align-items", $styles['grid']["alignItems"]);
+    $styles = $attributesWithDefaults["styles"];
 
-    // Padding Styles
-    if(isset($styles['padding']["paddingBlock"]) && $styles['padding']["paddingBlock"]){
-        $sectionStyle->setProperty("--padding-block", $styles['padding']["paddingBlock"]);
-    }
-    if(isset($styles['padding']["paddingInline"]) && $styles['padding']["paddingInline"]){
-        $sectionStyle->setProperty("--padding-inline", $styles['padding']["paddingInline"]);
-    }
-    if(isset($styles['padding']["paddingBlockStart"]) && $styles['padding']["paddingBlockStart"]){
-        $sectionStyle->setProperty("--padding-block-start", $styles['padding']["paddingBlockStart"]);
-    }
-    if(isset($styles['padding']["paddingBlockEnd"]) && $styles['padding']["paddingBlockEnd"]){
-        $sectionStyle->setProperty("--padding-block-end", $styles['padding']["paddingBlockEnd"]);
-    }
-    if(isset($styles['padding']["paddingInlineStart"]) && $styles['padding']["paddingInlineStart"]){
-        $sectionStyle->setProperty("--padding-inline-start", $styles['padding']["paddingInlineStart"]);
-    }
-    if(isset($styles['padding']["paddingInlineEnd"]) && $styles['padding']["paddingInlineEnd"]){
-        $sectionStyle->setProperty("--padding-inline-end", $styles['padding']["paddingInlineEnd"]);
-    }
+    BlockHelpers::set_grid_style_variables($sectionStyle, $styles["grid"]);
+    BlockHelpers::set_padding_style_variables($sectionStyle, $styles["padding"]);
 
     // Other Styles
     $sectionStyle->setProperty("--min-height", $styles['minHeight']);
+    $sectionStyle->setProperty("--background-color", $styles['backgroundColor']);
+    $sectionStyle->setProperty("--background-image", $styles['backgroundGradient']);
+
+    // Background Image
+    $backgroundImage = $attributesWithDefaults["backgroundImage"];
+
+    $sectionStyle->setProperty("--background-image", $backgroundImage["backgroundImage"]);
+    $sectionStyle->setProperty("--background-attachment", $backgroundImage["backgroundAttachment"]);
+    $sectionStyle->setProperty("--background-clip", $backgroundImage["backgroundClip"]);
+    $sectionStyle->setProperty("--background-origin", $backgroundImage["backgroundOrigin"]);
+    $sectionStyle->setProperty("--background-position", $backgroundImage["backgroundPosition"]);
+    $sectionStyle->setProperty("--background-position-x", $backgroundImage["backgroundPositionX"]);
+    $sectionStyle->setProperty("--background-position-y", $backgroundImage["backgroundPositionY"]);
+    $sectionStyle->setProperty("--background-repeat", $backgroundImage["backgroundRepeat"]);
+    $sectionStyle->setProperty("--background-size", $backgroundImage["backgroundSize"]);
 ?>
 <div 
     class="site-section"

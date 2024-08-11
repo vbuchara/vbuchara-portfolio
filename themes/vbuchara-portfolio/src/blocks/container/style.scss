@@ -1,0 +1,61 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@use "@styles/components/editor-metrics-settings" as *;
+@use "@styles/components/editor-position-settings" as *;
+@use "@styles/components/editor-grid-settings" as *;
+@use "@styles/components/editor-padding-settings" as *;
+
+.portfolio-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "content";
+
+    position: relative;
+
+    min-width: min(36rem, 98vw);
+
+    @include editor-metrics-settings-variables;
+    @include editor-position-settings-variables;
+
+    &__background {
+        grid-area: content;
+        z-index: 0;
+
+        > svg {
+            height: 100%;
+        }
+    }
+
+    &__content {
+        grid-area: content;
+        z-index: 1;
+
+        display: grid;
+        @include editor-grid-settings-variables;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-auto-flow: row;
+
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+
+        @include editor-padding-settings-variables;
+
+        @include media-breakpoint-md {
+            grid-template-columns: var(--grid-template-columns);
+            grid-template-rows: var(--grid-template-rows);
+            grid-auto-flow: var(--grid-auto-flow);
+    
+            justify-content: var(--justify-content);
+            justify-items: var(--justify-items);
+            align-content: var(--align-content);
+            align-items: var(--align-items);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "vbuchara-portfolio/welcome-container",
+    "title": "Welcome Container",
+    "category": "vbuchara-portfolio",
+    "editorScript": ["file:./welcome-container.tsx", "vbuchara-portfolio-blocks-vendor"],
+    "editorStyle": "file:./welcome-container.css",
+    "style": "file:./style-welcome-container.css",
+    "render": "file:./render.php"
+}   

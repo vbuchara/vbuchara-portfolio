@@ -213,7 +213,8 @@ const { callbacks } = store("vbuchara-portfolio/projects", {
                 const { ref: cardsDivElement } = getElement();
                 if(!cardsDivElement) return;
 
-                const isOverflowing = cardsDivElement.scrollWidth > cardsDivElement.clientWidth;
+                const divPadding = 10;
+                const isOverflowing = cardsDivElement.scrollWidth - divPadding > cardsDivElement.clientWidth;
 
                 context.activeScrollLeft = isOverflowing && cardsDivElement.scrollLeft > 0;
                 context.activeScrollRight = isOverflowing && !hasElementTotallyScrolled(cardsDivElement, "horizontal");

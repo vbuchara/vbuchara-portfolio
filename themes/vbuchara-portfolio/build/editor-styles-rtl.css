@@ -4,3 +4,7 @@
 .portfolio-editor-formats__text-color {
   padding: 1rem;
 }
+
+.portfolio-editor__control {
+  flex: 1;
+}

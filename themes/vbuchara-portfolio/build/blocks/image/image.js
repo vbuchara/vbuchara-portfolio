@@ -23,9 +23,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_block_breakpoints__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @constants/block-breakpoints */ "./src/constants/block-breakpoints.ts");
 /* harmony import */ var _components_editor_media_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-media-picker */ "./src/components/editor-media-picker.tsx");
 /* harmony import */ var _components_editor_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/editor-select */ "./src/components/editor-select.tsx");
-/* harmony import */ var _utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @utils/getArrayDependency */ "./src/utils/getArrayDependency.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_editor_metrics_settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @components/editor-metrics-settings */ "./src/components/editor-metrics-settings.tsx");
+/* harmony import */ var _components_editor_position_settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @components/editor-position-settings */ "./src/components/editor-position-settings.tsx");
+/* harmony import */ var _utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @utils/getArrayDependency */ "./src/utils/getArrayDependency.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+
+
 
 
 
@@ -40,7 +44,7 @@ function ImageInspectorControls({
   attributes,
   setAttributes
 }) {
-  const hideImageAtBreakpointsDependency = (0,_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_7__.getArrayDependency)(attributes.hideImageAtBreakpoints);
+  const hideImageAtBreakpointsDependency = (0,_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_9__.getArrayDependency)(attributes.hideImageAtBreakpoints);
   const hideImageAtBreakpointsSelected = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     return _constants_block_breakpoints__WEBPACK_IMPORTED_MODULE_4__.BreakpointsOptions.filter(option => {
       return attributes.hideImageAtBreakpoints.includes(option.value);
@@ -63,46 +67,83 @@ function ImageInspectorControls({
       hideImageAtBreakpoints: values.map(value => value.value)
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-    group: "settings",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "Settings",
-      initialOpen: true,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          className: "portfolio-image__editor-control",
-          label: "Image Source",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_editor_media_picker__WEBPACK_IMPORTED_MODULE_5__.EditorMediaPicker, {
-            attributes: mediaAttributes,
-            setAttributes: setMediaAttributes,
-            defaultImage: _assets_images_front_image_png__WEBPACK_IMPORTED_MODULE_3__
+  function handleOnChangeMetrics(metricStyles) {
+    setAttributes({
+      styles: {
+        ...attributes.styles,
+        metrics: {
+          ...attributes.styles.metrics,
+          ...metricStyles
+        }
+      }
+    });
+  }
+  function handleOnChangePosition(positionStyles) {
+    setAttributes({
+      styles: {
+        ...attributes.styles,
+        position: {
+          ...attributes.styles.position,
+          ...positionStyles
+        }
+      }
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      group: "settings",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: "Settings",
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+            className: "portfolio-image__editor-control",
+            label: "Image Source",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_media_picker__WEBPACK_IMPORTED_MODULE_5__.EditorMediaPicker, {
+              attributes: mediaAttributes,
+              setAttributes: setMediaAttributes,
+              defaultImage: _assets_images_front_image_png__WEBPACK_IMPORTED_MODULE_3__
+            })
           })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-          label: "Alt Text",
-          value: attributes.imageAlt,
-          onChange: value => setAttributes({
-            imageAlt: value
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Alt Text",
+            value: attributes.imageAlt,
+            onChange: value => setAttributes({
+              imageAlt: value
+            })
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: "Exhibition",
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+            className: "portfolio-image__editor-control",
+            label: "Hide Image At",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_6__.EditorSelect, {
+              type: "select",
+              isMulti: true,
+              options: _constants_block_breakpoints__WEBPACK_IMPORTED_MODULE_4__.BreakpointsOptions,
+              value: hideImageAtBreakpointsSelected,
+              onChange: handleOnChangeHideImageAt
+            })
           })
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "Exhibition",
-      initialOpen: false,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          className: "portfolio-image__editor-control",
-          label: "Hide Image At",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_6__.EditorSelect, {
-            type: "select",
-            isMulti: true,
-            options: _constants_block_breakpoints__WEBPACK_IMPORTED_MODULE_4__.BreakpointsOptions,
-            value: hideImageAtBreakpointsSelected,
-            onChange: handleOnChangeHideImageAt
-          })
-        })
-      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      group: "styles",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_metrics_settings__WEBPACK_IMPORTED_MODULE_7__.EditorMetricsSettings, {
+        metrics: attributes.styles.metrics,
+        setMetrics: handleOnChangeMetrics,
+        title: "Dimensions",
+        initialOpen: false
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_editor_position_settings__WEBPACK_IMPORTED_MODULE_8__.EditorPositionSettings, {
+        position: attributes.styles.position,
+        setPosition: handleOnChangePosition,
+        title: "Position",
+        initialOpen: false
+      })]
     })]
   });
 }
@@ -111,8 +152,8 @@ function ImageBlockControls({
   attributes,
   setAttributes
 }) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
       children: "Configuration here"
     })
   });
@@ -131,9 +172,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   EditComponent: () => (/* binding */ EditComponent)
 /* harmony export */ });
 /* harmony import */ var _components_editor_wrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @components/editor-wrapper */ "./src/components/editor-wrapper.tsx");
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/image/components/controls.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_editor_position_settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @components/editor-position-settings */ "./src/components/editor-position-settings.tsx");
+/* harmony import */ var _components_editor_metrics_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/editor-metrics-settings */ "./src/components/editor-metrics-settings.tsx");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/image/components/controls.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
 
 
 
@@ -142,15 +187,23 @@ function EditComponent(props) {
     attributes,
     setAttributes
   } = props;
+  const {
+    styles
+  } = attributes;
   function isHideImageBreakpointActive(breakpoint) {
     return attributes.hideImageAtBreakpoints.includes(breakpoint) ? true : undefined;
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_0__.EditorWrapper, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_1__.ImageInspectorControls, {
+  const metricsStyles = (0,_components_editor_metrics_settings__WEBPACK_IMPORTED_MODULE_2__.getMetricSettingsVariables)(styles.metrics);
+  const positionStyles = (0,_components_editor_position_settings__WEBPACK_IMPORTED_MODULE_1__.getPositionSettingsVariables)(styles.position);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_0__.EditorWrapper, {
+    style: {
+      ...positionStyles
+    },
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_3__.ImageInspectorControls, {
       attributes: attributes,
       setAttributes: setAttributes
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-      className: "portfolio-image",
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      className: "portfolio-image portfolio-image--editor",
       src: attributes.imageUrl,
       alt: attributes.imageAlt,
       "data-hide-on-xxs": isHideImageBreakpointActive("xxs"),
@@ -159,7 +212,11 @@ function EditComponent(props) {
       "data-hide-on-md": isHideImageBreakpointActive("md"),
       "data-hide-on-lg": isHideImageBreakpointActive("lg"),
       "data-hide-on-xl": isHideImageBreakpointActive("xl"),
-      "data-hide-on-xxl": isHideImageBreakpointActive("xxl")
+      "data-hide-on-xxl": isHideImageBreakpointActive("xxl"),
+      style: {
+        ...metricsStyles,
+        ...positionStyles
+      }
     })]
   });
 }
@@ -208,6 +265,13 @@ const {
     hideImageAtBreakpoints: {
       type: "array",
       default: []
+    },
+    styles: {
+      type: "object",
+      default: {
+        metrics: {},
+        position: {}
+      }
     }
   },
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -243,7 +307,9 @@ __webpack_require__.r(__webpack_exports__);
 function EditorMediaPicker({
   attributes,
   setAttributes,
+  defaultToClear: defaultToNone,
   defaultImage,
+  defaultImageAlt,
   sizePriority
 }) {
   function getImageSizeFromMediaDetails(mediaDetails) {
@@ -275,11 +341,19 @@ function EditorMediaPicker({
     }
   }
   function onClickSetToDefault() {
+    if (defaultToNone) {
+      setAttributes({
+        imageId: undefined,
+        imageUrl: undefined,
+        imageAlt: undefined
+      });
+      return;
+    }
     if (!defaultImage) return;
     setAttributes({
-      imageId: 0,
+      imageId: undefined,
       imageUrl: defaultImage,
-      imageAlt: "Image of a guy sitting on a chair, in front of a computer coding"
+      imageAlt: defaultImageAlt || "Image of a guy sitting on a chair, in front of a computer coding"
     });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, {
@@ -295,7 +369,7 @@ function EditorMediaPicker({
             variant: "primary",
             onClick: open,
             children: "Choose Image"
-          }), !defaultImage ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          }), !defaultImage && !defaultToNone ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             variant: "secondary",
             onClick: onClickSetToDefault,
             children: "Set to Default"
@@ -306,6 +380,214 @@ function EditorMediaPicker({
   });
 }
 ;
+
+/***/ }),
+
+/***/ "./src/components/editor-metrics-settings.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/editor-metrics-settings.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorMetricsSettings: () => (/* binding */ EditorMetricsSettings),
+/* harmony export */   getMetricSettingsVariables: () => (/* binding */ getMetricSettingsVariables)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function EditorMetricsSettings(props) {
+  const {
+    metrics,
+    setMetrics,
+    title,
+    initialOpen
+  } = props;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+    title: title,
+    initialOpen: initialOpen,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Min Width",
+        className: "portfolio-editor__control",
+        value: metrics.minWidth || "",
+        onChange: value => setMetrics({
+          minWidth: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Width",
+        className: "portfolio-editor__control",
+        value: metrics.width || "",
+        onChange: value => setMetrics({
+          width: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Max Width",
+        className: "portfolio-editor__control",
+        value: metrics.maxWidth || "",
+        onChange: value => setMetrics({
+          maxWidth: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Min Height",
+        className: "portfolio-editor__control",
+        value: metrics.minHeight || "",
+        onChange: value => setMetrics({
+          minHeight: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Height",
+        className: "portfolio-editor__control",
+        value: metrics.height || "",
+        onChange: value => setMetrics({
+          height: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Max Height",
+        className: "portfolio-editor__control",
+        value: metrics.maxHeight || "",
+        onChange: value => setMetrics({
+          maxHeight: value
+        })
+      })
+    })]
+  });
+}
+function getMetricSettingsVariables(metrics) {
+  return {
+    "--min-width": metrics.minWidth,
+    "--width": metrics.width,
+    "--max-width": metrics.maxWidth,
+    "--min-height": metrics.minHeight,
+    "--height": metrics.height,
+    "--max-height": metrics.maxHeight
+  };
+}
+
+/***/ }),
+
+/***/ "./src/components/editor-position-settings.tsx":
+/*!*****************************************************!*\
+  !*** ./src/components/editor-position-settings.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorPositionSettings: () => (/* binding */ EditorPositionSettings),
+/* harmony export */   getPositionSettingsVariables: () => (/* binding */ getPositionSettingsVariables)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @constants/block-styles */ "./src/constants/block-styles.ts");
+/* harmony import */ var _editor_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor-select */ "./src/components/editor-select.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function EditorPositionSettings(props) {
+  const {
+    position,
+    setPosition,
+    title,
+    initialOpen
+  } = props;
+  const positionOptionSelected = _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.PositionOptions.find(option => {
+    return option.value === position.position;
+  });
+  function handleOnChangePosition(newPosition) {
+    setPosition({
+      position: newPosition?.value
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+    title: title,
+    initialOpen: initialOpen,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Position",
+        className: "portfolio-editor__control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: positionOptionSelected,
+          onChange: handleOnChangePosition,
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.PositionOptions
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Top",
+        className: "portfolio-editor__control",
+        value: position.top || "",
+        onChange: value => setPosition({
+          top: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Bottom",
+        className: "portfolio-editor__control",
+        value: position.bottom || "",
+        onChange: value => setPosition({
+          bottom: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Left",
+        className: "portfolio-editor__control",
+        value: position.left || "",
+        onChange: value => setPosition({
+          left: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Right",
+        className: "portfolio-editor__control",
+        value: position.right || "",
+        onChange: value => setPosition({
+          right: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.__experimentalNumberControl, {
+        label: "Z Index",
+        className: "portfolio-editor__control",
+        value: position.zIndex || "",
+        onChange: value => setPosition({
+          zIndex: Number(value)
+        }),
+        step: 1
+      })
+    })]
+  });
+}
+function getPositionSettingsVariables(position) {
+  return {
+    "--position": position.position,
+    "--top": position.top,
+    "--left": position.left,
+    "--right": position.right,
+    "--bottom": position.bottom,
+    "--z-index": position.zIndex
+  };
+}
 
 /***/ }),
 
@@ -451,6 +733,235 @@ const BreakpointsOptions = [{
   label: "Extra Extra Large (Greater than 1400px)",
   value: "xxl"
 }];
+
+/***/ }),
+
+/***/ "./src/constants/block-styles.ts":
+/*!***************************************!*\
+  !*** ./src/constants/block-styles.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AlignContentOptions: () => (/* binding */ AlignContentOptions),
+/* harmony export */   AlignItemsOptions: () => (/* binding */ AlignItemsOptions),
+/* harmony export */   BackgroundAttachmentOptions: () => (/* binding */ BackgroundAttachmentOptions),
+/* harmony export */   BackgroundBoxCommonOptions: () => (/* binding */ BackgroundBoxCommonOptions),
+/* harmony export */   BackgroundClipOptions: () => (/* binding */ BackgroundClipOptions),
+/* harmony export */   BackgroundOriginOptions: () => (/* binding */ BackgroundOriginOptions),
+/* harmony export */   BoxContentAlignmentCommonOptions: () => (/* binding */ BoxContentAlignmentCommonOptions),
+/* harmony export */   BoxItemsAlignmentCommonOptions: () => (/* binding */ BoxItemsAlignmentCommonOptions),
+/* harmony export */   GridAutoFlowOptions: () => (/* binding */ GridAutoFlowOptions),
+/* harmony export */   JustifyContentOptions: () => (/* binding */ JustifyContentOptions),
+/* harmony export */   JustifyItemsOptions: () => (/* binding */ JustifyItemsOptions),
+/* harmony export */   PositionOptions: () => (/* binding */ PositionOptions),
+/* harmony export */   StyleGlobalOptions: () => (/* binding */ StyleGlobalOptions),
+/* harmony export */   WhiteSpaceSelectOptions: () => (/* binding */ WhiteSpaceSelectOptions)
+/* harmony export */ });
+// Global Styles Options
+const StyleGlobalOptions = [{
+  label: "Inherit",
+  value: "inherit"
+}, {
+  label: "Initial",
+  value: "initial"
+}, {
+  label: "Unset",
+  value: "unset"
+}, {
+  label: "Revert",
+  value: "revert"
+}, {
+  label: "Revert Layer",
+  value: "revert-layer"
+}];
+
+// White Space Options 
+const WhiteSpaceSelectOptions = [{
+  label: "Normal",
+  value: "normal"
+}, {
+  label: "No Wrap",
+  value: "nowrap"
+}, {
+  label: "Pre",
+  value: "pre"
+}, {
+  label: "Pre Wrap",
+  value: "pre-wrap"
+}, {
+  label: "Pre Line",
+  value: "pre-line"
+}, {
+  label: "Break Words",
+  value: "break-word"
+}, ...StyleGlobalOptions];
+// Grid Options
+const GridAutoFlowOptions = [{
+  label: "Row",
+  value: "row"
+}, {
+  label: "Column",
+  value: "column"
+}, {
+  label: "Dense",
+  value: "dense"
+}, {
+  label: "Row Dense",
+  value: "row dense"
+}, {
+  label: "Column Dense",
+  value: "column dense"
+}, ...StyleGlobalOptions];
+const BoxContentAlignmentCommonOptions = [{
+  label: "Start",
+  value: "start"
+}, {
+  label: "Center",
+  value: "center"
+}, {
+  label: "End",
+  value: "end"
+}, {
+  label: "Left",
+  value: "left"
+}, {
+  label: "Right",
+  value: "right"
+}, {
+  label: "Normal",
+  value: "normal"
+}, {
+  label: "Space Between",
+  value: "space-between"
+}, {
+  label: "Space Around",
+  value: "space-around"
+}, {
+  label: "Space Evenly",
+  value: "space-evenly"
+}, {
+  label: "Stretch",
+  value: "stretch"
+}, {
+  label: "Safe Center",
+  value: "safe center"
+}, {
+  label: "Unsafe Center",
+  value: "unsafe center"
+}];
+const JustifyContentOptions = [...BoxContentAlignmentCommonOptions, ...StyleGlobalOptions];
+const AlignContentOptions = [...BoxContentAlignmentCommonOptions, {
+  label: "Baseline",
+  value: "baseline"
+}, {
+  label: "First Baseline",
+  value: "first baseline"
+}, {
+  label: "Last Baseline",
+  value: "last baseline"
+}, ...StyleGlobalOptions];
+const BoxItemsAlignmentCommonOptions = [{
+  label: "Normal",
+  value: "normal"
+}, {
+  label: "Stretch",
+  value: "stretch"
+}, {
+  label: "Start",
+  value: "start"
+}, {
+  label: "Center",
+  value: "center"
+}, {
+  label: "End",
+  value: "end"
+}, {
+  label: "Self Start",
+  value: "self-start"
+}, {
+  label: "Self End",
+  value: "self-end"
+}, {
+  label: "Left",
+  value: "left"
+}, {
+  label: "Right",
+  value: "right"
+}, {
+  label: "Anchor Center",
+  value: "anchor-center"
+}, {
+  label: "Baseline",
+  value: "baseline"
+}, {
+  label: "First Baseline",
+  value: "first baseline"
+}, {
+  label: "Last Baseline",
+  value: "last baseline"
+}, {
+  label: "Safe Center",
+  value: "safe center"
+}, {
+  label: "Unsafe Center",
+  value: "unsafe center"
+}];
+const JustifyItemsOptions = [...BoxItemsAlignmentCommonOptions, {
+  label: "Legacy Right",
+  value: "legacy right"
+}, {
+  label: "Legacy Left",
+  value: "legacy left"
+}, {
+  label: "Legacy Center",
+  value: "legacy center"
+}, ...StyleGlobalOptions];
+const AlignItemsOptions = [...BoxItemsAlignmentCommonOptions, ...StyleGlobalOptions];
+// Background Options
+const BackgroundAttachmentOptions = [{
+  label: "Scroll",
+  value: "scroll"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Local",
+  value: "local"
+}, ...StyleGlobalOptions];
+const BackgroundBoxCommonOptions = [{
+  label: "Border Box",
+  value: "border-box"
+}, {
+  label: "Padding Box",
+  value: "padding-box"
+}, {
+  label: "Content Box",
+  value: "content-box"
+}];
+const BackgroundClipOptions = [...BackgroundBoxCommonOptions, {
+  label: "Text",
+  value: "text"
+}, ...StyleGlobalOptions];
+const BackgroundOriginOptions = [...BackgroundBoxCommonOptions, ...StyleGlobalOptions];
+// Position Options
+const PositionOptions = [{
+  label: "Static",
+  value: "static"
+}, {
+  label: "Relative",
+  value: "relative"
+}, {
+  label: "Absolute",
+  value: "absolute"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Sticky",
+  value: "sticky"
+}, ...StyleGlobalOptions];
 
 /***/ }),
 

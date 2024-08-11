@@ -13,14 +13,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SectionBlockControls: () => (/* binding */ SectionBlockControls),
 /* harmony export */   SectionInspectorControls: () => (/* binding */ SectionInspectorControls)
 /* harmony export */ });
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @constants/block-styles */ "./src/constants/block-styles.ts");
-/* harmony import */ var _components_editor_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/editor-select */ "./src/components/editor-select.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_editor_background_image_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/editor-background-image-settings */ "./src/components/editor-background-image-settings.tsx");
+/* harmony import */ var _components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/editor-grid-settings */ "./src/components/editor-grid-settings.tsx");
+/* harmony import */ var _src_utils_isEmptyString__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @src/utils/isEmptyString */ "./src/utils/isEmptyString.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -31,37 +36,17 @@ function SectionInspectorControls({
   attributes,
   setAttributes
 }) {
-  function getGridStylePropertySelected(options, property) {
-    return options.find(option => {
-      return option.value === attributes.styles.grid[property];
+  const isChangingBackgroundColor = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  function handleSetSectionGrid(grid) {
+    setAttributes({
+      styles: {
+        ...attributes.styles,
+        grid: {
+          ...attributes.styles.grid,
+          ...grid
+        }
+      }
     });
-  }
-  function getHandleOnChangeSelectGridStyle(property) {
-    return option => {
-      if (!option) return;
-      setAttributes({
-        styles: {
-          ...attributes.styles,
-          grid: {
-            ...attributes.styles.grid,
-            [property]: option.value
-          }
-        }
-      });
-    };
-  }
-  function getHandleOnChangeTextGridStyle(property) {
-    return value => {
-      setAttributes({
-        styles: {
-          ...attributes.styles,
-          grid: {
-            ...attributes.styles.grid,
-            [property]: value
-          }
-        }
-      });
-    };
   }
   function getHandleOnChangeTextPaddingStyle(property) {
     return value => {
@@ -76,153 +61,136 @@ function SectionInspectorControls({
       });
     };
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
-    group: "styles",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: "Dimensions",
-      initialOpen: true,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Min Height",
-          value: attributes.styles.minHeight,
-          onChange: value => setAttributes({
-            ...attributes.styles,
-            styles: {
-              ...attributes.styles,
-              minHeight: value
-            }
-          })
+  function handleSetBackgroundImageStyles(newBackgroundImageStyles) {
+    const {
+      backgroundImage,
+      ...otherProperties
+    } = newBackgroundImageStyles;
+    setAttributes({
+      backgroundImage: {
+        ...attributes.backgroundImage,
+        ...otherProperties,
+        backgroundImage: (0,_src_utils_isEmptyString__WEBPACK_IMPORTED_MODULE_5__.isEmptyString)(backgroundImage) ? undefined : attributes.backgroundImage.backgroundImage,
+        ...(backgroundImage && {
+          backgroundImage: `url(${backgroundImage})`
         })
+      }
+    });
+  }
+  function handleOnChangeBackgroundColor(color) {
+    if (!color && isChangingBackgroundColor.current) {
+      isChangingBackgroundColor.current = false;
+      return;
+    }
+    setAttributes({
+      styles: {
+        ...attributes.styles,
+        backgroundColor: color,
+        backgroundGradient: undefined
+      }
+    });
+    isChangingBackgroundColor.current = true;
+  }
+  function handleOnChangeBackgroundGradient(gradient) {
+    if (!gradient && isChangingBackgroundColor.current) {
+      isChangingBackgroundColor.current = false;
+      return;
+    }
+    setAttributes({
+      styles: {
+        ...attributes.styles,
+        backgroundColor: undefined,
+        backgroundGradient: gradient
+      }
+    });
+    isChangingBackgroundColor.current = true;
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      group: "settings",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_editor_background_image_settings__WEBPACK_IMPORTED_MODULE_3__.EditorBackgroundImageSettings, {
+        backgroundImageStyles: attributes.backgroundImage,
+        setBackgroundImageStyles: handleSetBackgroundImageStyles,
+        title: "Background Image",
+        initialOpen: true,
+        mediaPickerProps: {
+          defaultToClear: true,
+          sizePriority: ["full"]
+        }
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: "Padding",
-      initialOpen: false,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Block (Top and Bottom)",
-          value: attributes.styles.padding.paddingBlock || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingBlock")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Inline (Left and Right)",
-          value: attributes.styles.padding.paddingInline || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingInline")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Block Start (Top)",
-          value: attributes.styles.padding.paddingBlockStart || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingBlockStart")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Block End (Bottom)",
-          value: attributes.styles.padding.paddingBlockEnd || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingBlockEnd")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Inline Start (Left)",
-          value: attributes.styles.padding.paddingInlineStart || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingInlineStart")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Inline End (Right)",
-          value: attributes.styles.padding.paddingInlineEnd || "",
-          onChange: getHandleOnChangeTextPaddingStyle("paddingInlineEnd")
-        })
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: "Grid",
-      initialOpen: false,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Grid Template Columns",
-          value: attributes.styles.grid.gridTemplateColumns,
-          onChange: getHandleOnChangeTextGridStyle("gridTemplateColumns")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Grid Template Rows",
-          value: attributes.styles.grid.gridTemplateRows,
-          onChange: getHandleOnChangeTextGridStyle("gridTemplateRows")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-          label: "Grid Auto Flow",
-          className: "site-section__editor-control",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
-            value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.GridAutoFlowOptions, "gridAutoFlow"),
-            options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.GridAutoFlowOptions,
-            onChange: getHandleOnChangeSelectGridStyle("gridAutoFlow")
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      group: "styles",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.__experimentalPanelColorGradientSettings, {
+        title: "Colors",
+        initialOpen: true,
+        settings: [{
+          label: "Background Color",
+          colorValue: attributes.styles.backgroundColor,
+          gradientValue: attributes.styles.backgroundGradient,
+          onColorChange: handleOnChangeBackgroundColor,
+          onGradientChange: handleOnChangeBackgroundGradient
+        }],
+        __experimentalIsRenderedInSidebar: true
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: "Dimensions",
+        initialOpen: true,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Min Height",
+            value: attributes.styles.minHeight,
+            onChange: value => setAttributes({
+              ...attributes.styles,
+              styles: {
+                ...attributes.styles,
+                minHeight: value
+              }
+            })
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Grid Auto Columns",
-          value: attributes.styles.grid.gridAutoColumns,
-          onChange: getHandleOnChangeTextGridStyle("gridAutoColumns")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Grid Auto Rows",
-          value: attributes.styles.grid.gridAutoRows,
-          onChange: getHandleOnChangeTextGridStyle("gridAutoRows")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Column Gap",
-          value: attributes.styles.grid.columnGap,
-          onChange: getHandleOnChangeTextGridStyle("columnGap")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-          label: "Row Gap",
-          value: attributes.styles.grid.rowGap,
-          onChange: getHandleOnChangeTextGridStyle("rowGap")
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-          label: "Justify Content",
-          className: "site-section__editor-control",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
-            value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.JustifyContentOptions, "justifyContent"),
-            options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.JustifyContentOptions,
-            onChange: getHandleOnChangeSelectGridStyle("justifyContent")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: "Padding",
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Block (Top and Bottom)",
+            value: attributes.styles.padding.paddingBlock || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingBlock")
           })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-          label: "Align Content",
-          className: "site-section__editor-control",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
-            value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.AlignContentOptions, "alignContent"),
-            options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.AlignContentOptions,
-            onChange: getHandleOnChangeSelectGridStyle("alignContent")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Inline (Left and Right)",
+            value: attributes.styles.padding.paddingInline || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingInline")
           })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-          label: "Justify Items",
-          className: "site-section__editor-control",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
-            value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.JustifyItemsOptions, "justifyItems"),
-            options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.JustifyItemsOptions,
-            onChange: getHandleOnChangeSelectGridStyle("justifyItems")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Block Start (Top)",
+            value: attributes.styles.padding.paddingBlockStart || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingBlockStart")
           })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-          label: "Align Items",
-          className: "site-section__editor-control",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
-            value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.AlignItemsOptions, "alignItems"),
-            options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.AlignItemsOptions,
-            onChange: getHandleOnChangeSelectGridStyle("alignItems")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Block End (Bottom)",
+            value: attributes.styles.padding.paddingBlockEnd || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingBlockEnd")
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Inline Start (Left)",
+            value: attributes.styles.padding.paddingInlineStart || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingInlineStart")
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+            label: "Inline End (Right)",
+            value: attributes.styles.padding.paddingInlineEnd || "",
+            onChange: getHandleOnChangeTextPaddingStyle("paddingInlineEnd")
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_4__.EditorGridSettings, {
+        grid: attributes.styles.grid,
+        setGrid: handleSetSectionGrid,
+        initialOpen: false
       })]
     })]
   });
@@ -232,8 +200,8 @@ function SectionBlockControls({
   attributes,
   setAttributes
 }) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
       children: "Configuration here"
     })
   });
@@ -259,10 +227,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/isEqual.js");
 /* harmony import */ var lodash_isEqual__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_isEqual__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_editor_wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/editor-wrapper */ "./src/components/editor-wrapper.tsx");
-/* harmony import */ var _hooks_useBlockDefaultAttributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @hooks/useBlockDefaultAttributes */ "./src/hooks/useBlockDefaultAttributes.ts");
-/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/section/components/controls.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/editor-grid-settings */ "./src/components/editor-grid-settings.tsx");
+/* harmony import */ var _components_editor_background_image_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-background-image-settings */ "./src/components/editor-background-image-settings.tsx");
+/* harmony import */ var _components_editor_padding_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/editor-padding-settings */ "./src/components/editor-padding-settings.tsx");
+/* harmony import */ var _hooks_useBlockDefaultAttributes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @hooks/useBlockDefaultAttributes */ "./src/hooks/useBlockDefaultAttributes.ts");
+/* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/section/components/controls.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
 
 
 
@@ -274,14 +248,20 @@ const {
   default: sectionBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_section_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! ./block.json */ "./src/blocks/section/block.json", 19));
 const {
-  default: blobContainerBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_blob-container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/blob-container/block.json */ "./src/blocks/blob-container/block.json", 19));
+  default: welcomeContainerBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_welcome-container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/welcome-container/block.json */ "./src/blocks/welcome-container/block.json", 19));
+const {
+  default: containerBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/container/block.json */ "./src/blocks/container/block.json", 19));
 const {
   default: imageBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_image_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/image/block.json */ "./src/blocks/image/block.json", 19));
 const {
   default: headingBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_heading_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/heading/block.json */ "./src/blocks/heading/block.json", 19));
+const {
+  default: paragraphBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_paragraph_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/paragraph/block.json */ "./src/blocks/paragraph/block.json", 19));
 const {
   default: buttonBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_button_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/button/block.json */ "./src/blocks/button/block.json", 19));
@@ -299,53 +279,34 @@ function EditComponent(props) {
   const {
     styles
   } = attributes;
-  const defaultAttributes = (0,_hooks_useBlockDefaultAttributes__WEBPACK_IMPORTED_MODULE_4__.useBlockDefaultAttributes)(sectionBlock.name);
+  const defaultAttributes = (0,_hooks_useBlockDefaultAttributes__WEBPACK_IMPORTED_MODULE_7__.useBlockDefaultAttributes)(sectionBlock.name);
   if (!defaultAttributes) return null;
   if (!lodash_isEqual__WEBPACK_IMPORTED_MODULE_2___default()(Object.keys(defaultAttributes), Object.keys(attributes))) {
     setAttributes(lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()(defaultAttributes, props.attributes));
     return null;
   }
   ;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_3__.EditorWrapper, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_5__.SectionInspectorControls, {
+  const gridStyles = (0,_components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_4__.getGridSettingsVariables)(styles.grid);
+  const paddingStyles = (0,_components_editor_padding_settings__WEBPACK_IMPORTED_MODULE_6__.getPaddingSettingsVariables)(styles.padding);
+  const backgroundImageStyles = (0,_components_editor_background_image_settings__WEBPACK_IMPORTED_MODULE_5__.getBackgroundImageSettingVariables)(attributes.backgroundImage);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_3__.EditorWrapper, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_8__.SectionInspectorControls, {
       attributes: attributes,
       setAttributes: setAttributes
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       className: "site-section site-section--editor",
       style: {
-        "--grid-template-columns": styles.grid.gridTemplateColumns,
-        "--grid-template-rows": styles.grid.gridTemplateRows,
-        "--grid-auto-flow": styles.grid.gridAutoFlow,
-        "--grid-auto-columns": styles.grid.gridAutoColumns,
-        "--grid-auto-rows": styles.grid.gridAutoRows,
-        "--row-gap": styles.grid.rowGap,
-        "--column-gap": styles.grid.columnGap,
-        "--justify-content": styles.grid.justifyContent,
-        "--justify-items": styles.grid.justifyItems,
-        "--align-content": styles.grid.alignContent,
-        "--align-items": styles.grid.alignItems,
-        ...(styles.padding.paddingBlock && {
-          "--padding-block": styles.padding.paddingBlock
-        }),
-        ...(styles.padding.paddingInline && {
-          "--padding-inline": styles.padding.paddingInline
-        }),
-        ...(styles.padding.paddingBlockStart && {
-          "--padding-block-start": styles.padding.paddingBlockStart
-        }),
-        ...(styles.padding.paddingBlockEnd && {
-          "--padding-block-start": styles.padding.paddingBlockEnd
-        }),
-        ...(styles.padding.paddingInlineStart && {
-          "--padding-inline-start": styles.padding.paddingInlineStart
-        }),
-        ...(styles.padding.paddingInlineEnd && {
-          "--padding-inline-end": styles.padding.paddingInlineEnd
-        }),
-        "--min-height": styles.minHeight
+        ...gridStyles,
+        ...paddingStyles,
+        ...backgroundImageStyles,
+        "--min-height": styles.minHeight,
+        "--background-color": styles.backgroundColor,
+        ...(!attributes.backgroundImage.backgroundImage && {
+          "--background-image": styles.backgroundGradient
+        })
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
-        allowedBlocks: [blobContainerBlock.name, imageBlock.name, headingBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name]
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
+        allowedBlocks: [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name]
       })
     })]
   });
@@ -389,11 +350,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit.scss */ "./src/blocks/section/edit.scss");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/section/edit.tsx");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/blocks/section/save.tsx");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_edit__WEBPACK_IMPORTED_MODULE_3__]);
-_edit__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
+/* harmony import */ var _components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/editor-grid-settings */ "./src/components/editor-grid-settings.tsx");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/blocks/section/edit.tsx");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./save */ "./src/blocks/section/save.tsx");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_edit__WEBPACK_IMPORTED_MODULE_4__]);
+_edit__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -410,30 +373,548 @@ const {
     styles: {
       type: "object",
       default: {
-        grid: {
-          gridTemplateColumns: "1fr",
-          gridTemplateRows: "auto",
-          gridAutoFlow: "row",
-          gridAutoColumns: "1fr",
-          gridAutoRows: "auto",
-          rowGap: "0px",
-          columnGap: "0px",
-          justifyContent: "normal",
-          alignContent: "normal",
-          justifyItems: "normal",
-          alignItems: "normal"
-        },
+        grid: _components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_3__.defaultGridSettingsVariables,
         padding: {},
         minHeight: "900px"
       }
+    },
+    backgroundImage: {
+      type: "object",
+      default: {}
     }
   },
-  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__.EditComponent,
-  save: _save__WEBPACK_IMPORTED_MODULE_4__.SaveComponent
+  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_4__.EditComponent,
+  save: _save__WEBPACK_IMPORTED_MODULE_5__.SaveComponent
 });
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ "./src/components/editor-background-image-settings.tsx":
+/*!*************************************************************!*\
+  !*** ./src/components/editor-background-image-settings.tsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorBackgroundImageSettings: () => (/* binding */ EditorBackgroundImageSettings),
+/* harmony export */   getBackgroundImageSettingVariables: () => (/* binding */ getBackgroundImageSettingVariables)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _editor_media_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor-media-picker */ "./src/components/editor-media-picker.tsx");
+/* harmony import */ var _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @constants/block-styles */ "./src/constants/block-styles.ts");
+/* harmony import */ var _editor_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor-select */ "./src/components/editor-select.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+function EditorBackgroundImageSettings(props) {
+  const {
+    backgroundImageStyles,
+    setBackgroundImageStyles,
+    title,
+    initialOpen,
+    mediaPickerProps
+  } = props;
+  function getBackgroundImageStylePropertySelected(options, property) {
+    return options.find(option => {
+      return option.value === backgroundImageStyles[property];
+    });
+  }
+  function handleOnChangeBackgroundImage(newImage) {
+    if (!newImage.imageId || !newImage.imageUrl) {
+      setBackgroundImageStyles({
+        backgroundImageId: 0,
+        backgroundImage: ""
+      });
+      return;
+    }
+    setBackgroundImageStyles({
+      backgroundImageId: newImage.imageId,
+      backgroundImage: newImage.imageUrl
+    });
+  }
+  function getHandleOnChangeSelectBackgroundImageStyle(property) {
+    return option => {
+      if (!option) return;
+      setBackgroundImageStyles({
+        [property]: option.value
+      });
+    };
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+    title: title,
+    initialOpen: initialOpen,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Image Source",
+        className: "portfolio-editor__control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_editor_media_picker__WEBPACK_IMPORTED_MODULE_1__.EditorMediaPicker, {
+          attributes: {
+            imageId: backgroundImageStyles.backgroundImageId,
+            imageUrl: backgroundImageStyles.backgroundImage
+          },
+          setAttributes: handleOnChangeBackgroundImage,
+          ...mediaPickerProps
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Background Attachment",
+        className: "portfolio-editor__control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
+          value: getBackgroundImageStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundAttachmentOptions, "backgroundAttachment"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundAttachmentOptions,
+          onChange: getHandleOnChangeSelectBackgroundImageStyle("backgroundAttachment")
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Background Clip",
+        className: "portfolio-editor__control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
+          value: getBackgroundImageStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundClipOptions, "backgroundClip"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundClipOptions,
+          onChange: getHandleOnChangeSelectBackgroundImageStyle("backgroundClip")
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Background Origin",
+        className: "portfolio-editor__control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_3__.EditorSelect, {
+          value: getBackgroundImageStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundOriginOptions, "backgroundOrigin"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_2__.BackgroundOriginOptions,
+          onChange: getHandleOnChangeSelectBackgroundImageStyle("backgroundOrigin")
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Background Position",
+        value: backgroundImageStyles.backgroundPosition || "",
+        onChange: value => setBackgroundImageStyles({
+          backgroundPosition: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Background Position X",
+        value: backgroundImageStyles.backgroundPositionX || "",
+        onChange: value => setBackgroundImageStyles({
+          backgroundPositionX: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Background Position Y",
+        value: backgroundImageStyles.backgroundPositionY || "",
+        onChange: value => setBackgroundImageStyles({
+          backgroundPositionY: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Background Repeat",
+        value: backgroundImageStyles.backgroundRepeat || "",
+        onChange: value => setBackgroundImageStyles({
+          backgroundRepeat: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Background Size",
+        value: backgroundImageStyles.backgroundSize || "",
+        onChange: value => setBackgroundImageStyles({
+          backgroundSize: value
+        })
+      })
+    })]
+  });
+}
+function getBackgroundImageSettingVariables(backgroundImage) {
+  return {
+    "--background-image": backgroundImage.backgroundImage,
+    "--background-attachment": backgroundImage.backgroundAttachment,
+    "--background-clip": backgroundImage.backgroundClip,
+    "--background-origin": backgroundImage.backgroundOrigin,
+    "--background-position": backgroundImage.backgroundPosition,
+    "--background-position-x": backgroundImage.backgroundPositionX,
+    "--background-position-y": backgroundImage.backgroundPositionY,
+    "--background-repeat": backgroundImage.backgroundRepeat,
+    "--background-size": backgroundImage.backgroundSize
+  };
+}
+
+/***/ }),
+
+/***/ "./src/components/editor-grid-settings.tsx":
+/*!*************************************************!*\
+  !*** ./src/components/editor-grid-settings.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorGridSettings: () => (/* binding */ EditorGridSettings),
+/* harmony export */   defaultGridSettingsVariables: () => (/* binding */ defaultGridSettingsVariables),
+/* harmony export */   getGridSettingsVariables: () => (/* binding */ getGridSettingsVariables)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @constants/block-styles */ "./src/constants/block-styles.ts");
+/* harmony import */ var _editor_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor-select */ "./src/components/editor-select.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function EditorGridSettings(props) {
+  const {
+    grid,
+    setGrid,
+    disableGridProperties
+  } = props;
+  function getGridStylePropertySelected(options, property) {
+    return options.find(option => {
+      return option.value === grid[property];
+    });
+  }
+  function getHandleOnChangeSelectGridStyle(property) {
+    return option => {
+      if (!option) return;
+      setGrid({
+        [property]: option.value
+      });
+    };
+  }
+  function getHandleOnChangeTextGridStyle(property) {
+    return value => {
+      setGrid({
+        [property]: value
+      });
+    };
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+    title: props.title ? props.title : "Grid",
+    initialOpen: props.initialOpen ? props.initialOpen : false,
+    children: [disableGridProperties?.gridTemplateColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Grid Template Columns",
+        value: grid.gridTemplateColumns,
+        onChange: getHandleOnChangeTextGridStyle("gridTemplateColumns")
+      })
+    }), disableGridProperties?.gridTemplateRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Grid Template Rows",
+        value: grid.gridTemplateRows,
+        onChange: getHandleOnChangeTextGridStyle("gridTemplateRows")
+      })
+    }), disableGridProperties?.gridAutoFlow ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Grid Auto Flow",
+        className: "site-section__editor-control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions, "gridAutoFlow"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions,
+          onChange: getHandleOnChangeSelectGridStyle("gridAutoFlow")
+        })
+      })
+    }), disableGridProperties?.gridAutoColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Grid Auto Columns",
+        value: grid.gridAutoColumns,
+        onChange: getHandleOnChangeTextGridStyle("gridAutoColumns")
+      })
+    }), disableGridProperties?.gridAutoRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Grid Auto Rows",
+        value: grid.gridAutoRows,
+        onChange: getHandleOnChangeTextGridStyle("gridAutoRows")
+      })
+    }), disableGridProperties?.columnGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Column Gap",
+        value: grid.columnGap,
+        onChange: getHandleOnChangeTextGridStyle("columnGap")
+      })
+    }), disableGridProperties?.rowGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Row Gap",
+        value: grid.rowGap,
+        onChange: getHandleOnChangeTextGridStyle("rowGap")
+      })
+    }), disableGridProperties?.justifyContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Justify Content",
+        className: "site-section__editor-control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions, "justifyContent"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions,
+          onChange: getHandleOnChangeSelectGridStyle("justifyContent")
+        })
+      })
+    }), disableGridProperties?.alignContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Align Content",
+        className: "site-section__editor-control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions, "alignContent"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions,
+          onChange: getHandleOnChangeSelectGridStyle("alignContent")
+        })
+      })
+    }), disableGridProperties?.justifyItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Justify Items",
+        className: "site-section__editor-control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions, "justifyItems"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions,
+          onChange: getHandleOnChangeSelectGridStyle("justifyItems")
+        })
+      })
+    }), disableGridProperties?.alignItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
+        label: "Align Items",
+        className: "site-section__editor-control",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
+          value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions, "alignItems"),
+          options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions,
+          onChange: getHandleOnChangeSelectGridStyle("alignItems")
+        })
+      })
+    })]
+  });
+}
+function getGridSettingsVariables(grid) {
+  return {
+    "--grid-template-columns": grid.gridTemplateColumns,
+    "--grid-template-rows": grid.gridTemplateRows,
+    "--grid-auto-flow": grid.gridAutoFlow,
+    "--grid-auto-columns": grid.gridAutoColumns,
+    "--grid-auto-rows": grid.gridAutoRows,
+    "--row-gap": grid.rowGap,
+    "--column-gap": grid.columnGap,
+    "--justify-content": grid.justifyContent,
+    "--justify-items": grid.justifyItems,
+    "--align-content": grid.alignContent,
+    "--align-items": grid.alignItems
+  };
+  ;
+}
+const defaultGridSettingsVariables = {
+  gridTemplateColumns: "1fr",
+  gridTemplateRows: "auto",
+  gridAutoFlow: "row",
+  gridAutoColumns: "1fr",
+  gridAutoRows: "auto",
+  rowGap: "0px",
+  columnGap: "0px",
+  justifyContent: "normal",
+  alignContent: "normal",
+  justifyItems: "normal",
+  alignItems: "normal"
+};
+
+/***/ }),
+
+/***/ "./src/components/editor-media-picker.tsx":
+/*!************************************************!*\
+  !*** ./src/components/editor-media-picker.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorMediaPicker: () => (/* binding */ EditorMediaPicker)
+/* harmony export */ });
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function EditorMediaPicker({
+  attributes,
+  setAttributes,
+  defaultToClear: defaultToNone,
+  defaultImage,
+  defaultImageAlt,
+  sizePriority
+}) {
+  function getImageSizeFromMediaDetails(mediaDetails) {
+    return sizePriority?.reduce((imageSize, imageSizeName) => {
+      if (imageSize) return imageSize;
+      const mediaImageSizes = mediaDetails.sizes;
+      if (imageSizeName in mediaImageSizes && mediaImageSizes[imageSizeName]) {
+        return mediaImageSizes[imageSizeName];
+      }
+      return imageSize;
+    }, undefined);
+  }
+  async function onSelectMedia(media) {
+    try {
+      const {
+        source_url,
+        media_details
+      } = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+        path: `/wp/v2/media/${media.id}`
+      });
+      const imageSize = getImageSizeFromMediaDetails(media_details);
+      setAttributes({
+        imageId: media.id,
+        imageUrl: imageSize ? imageSize.source_url : source_url,
+        imageAlt: media.alt
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function onClickSetToDefault() {
+    if (defaultToNone) {
+      setAttributes({
+        imageId: undefined,
+        imageUrl: undefined,
+        imageAlt: undefined
+      });
+      return;
+    }
+    if (!defaultImage) return;
+    setAttributes({
+      imageId: undefined,
+      imageUrl: defaultImage,
+      imageAlt: defaultImageAlt || "Image of a guy sitting on a chair, in front of a computer coding"
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, {
+    justify: "flex-start",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+        onSelect: onSelectMedia,
+        value: attributes.imageId,
+        render: ({
+          open
+        }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            variant: "primary",
+            onClick: open,
+            children: "Choose Image"
+          }), !defaultImage && !defaultToNone ? null : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            variant: "secondary",
+            onClick: onClickSetToDefault,
+            children: "Set to Default"
+          })]
+        })
+      })
+    })
+  });
+}
+;
+
+/***/ }),
+
+/***/ "./src/components/editor-padding-settings.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/editor-padding-settings.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorPaddingSettings: () => (/* binding */ EditorPaddingSettings),
+/* harmony export */   getPaddingSettingsVariables: () => (/* binding */ getPaddingSettingsVariables)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function EditorPaddingSettings(props) {
+  const {
+    padding,
+    setPadding,
+    title,
+    initialOpen
+  } = props;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+    title: title,
+    initialOpen: initialOpen,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Block (Top and Bottom)",
+        value: padding.paddingBlock || "",
+        onChange: value => setPadding({
+          paddingBlock: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Inline (Left and Right)",
+        value: padding.paddingInline || "",
+        onChange: value => setPadding({
+          paddingInline: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Block Start (Top)",
+        value: padding.paddingBlockStart || "",
+        onChange: value => setPadding({
+          paddingBlockStart: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Block End (Bottom)",
+        value: padding.paddingBlockEnd || "",
+        onChange: value => setPadding({
+          paddingBlockEnd: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Inline Start (Left)",
+        value: padding.paddingInlineStart || "",
+        onChange: value => setPadding({
+          paddingInlineStart: value
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+        label: "Inline End (Right)",
+        value: padding.paddingInlineEnd || "",
+        onChange: value => setPadding({
+          paddingInlineEnd: value
+        })
+      })
+    })]
+  });
+}
+function getPaddingSettingsVariables(padding) {
+  return {
+    "--padding-block": padding.paddingBlock,
+    "--padding-inline": padding.paddingInline,
+    "--padding-block-start": padding.paddingBlockStart,
+    "--padding-block-end": padding.paddingBlockEnd,
+    "--padding-inline-start": padding.paddingInlineStart,
+    "--padding-inline-end": padding.paddingInlineEnd
+  };
+}
 
 /***/ }),
 
@@ -557,14 +1038,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AlignContentOptions: () => (/* binding */ AlignContentOptions),
 /* harmony export */   AlignItemsOptions: () => (/* binding */ AlignItemsOptions),
+/* harmony export */   BackgroundAttachmentOptions: () => (/* binding */ BackgroundAttachmentOptions),
+/* harmony export */   BackgroundBoxCommonOptions: () => (/* binding */ BackgroundBoxCommonOptions),
+/* harmony export */   BackgroundClipOptions: () => (/* binding */ BackgroundClipOptions),
+/* harmony export */   BackgroundOriginOptions: () => (/* binding */ BackgroundOriginOptions),
 /* harmony export */   BoxContentAlignmentCommonOptions: () => (/* binding */ BoxContentAlignmentCommonOptions),
 /* harmony export */   BoxItemsAlignmentCommonOptions: () => (/* binding */ BoxItemsAlignmentCommonOptions),
 /* harmony export */   GridAutoFlowOptions: () => (/* binding */ GridAutoFlowOptions),
 /* harmony export */   JustifyContentOptions: () => (/* binding */ JustifyContentOptions),
 /* harmony export */   JustifyItemsOptions: () => (/* binding */ JustifyItemsOptions),
+/* harmony export */   PositionOptions: () => (/* binding */ PositionOptions),
 /* harmony export */   StyleGlobalOptions: () => (/* binding */ StyleGlobalOptions),
 /* harmony export */   WhiteSpaceSelectOptions: () => (/* binding */ WhiteSpaceSelectOptions)
 /* harmony export */ });
+// Global Styles Options
 const StyleGlobalOptions = [{
   label: "Inherit",
   value: "inherit"
@@ -581,6 +1068,8 @@ const StyleGlobalOptions = [{
   label: "Revert Layer",
   value: "revert-layer"
 }];
+
+// White Space Options 
 const WhiteSpaceSelectOptions = [{
   label: "Normal",
   value: "normal"
@@ -600,6 +1089,7 @@ const WhiteSpaceSelectOptions = [{
   label: "Break Words",
   value: "break-word"
 }, ...StyleGlobalOptions];
+// Grid Options
 const GridAutoFlowOptions = [{
   label: "Row",
   value: "row"
@@ -721,6 +1211,49 @@ const JustifyItemsOptions = [...BoxItemsAlignmentCommonOptions, {
   value: "legacy center"
 }, ...StyleGlobalOptions];
 const AlignItemsOptions = [...BoxItemsAlignmentCommonOptions, ...StyleGlobalOptions];
+// Background Options
+const BackgroundAttachmentOptions = [{
+  label: "Scroll",
+  value: "scroll"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Local",
+  value: "local"
+}, ...StyleGlobalOptions];
+const BackgroundBoxCommonOptions = [{
+  label: "Border Box",
+  value: "border-box"
+}, {
+  label: "Padding Box",
+  value: "padding-box"
+}, {
+  label: "Content Box",
+  value: "content-box"
+}];
+const BackgroundClipOptions = [...BackgroundBoxCommonOptions, {
+  label: "Text",
+  value: "text"
+}, ...StyleGlobalOptions];
+const BackgroundOriginOptions = [...BackgroundBoxCommonOptions, ...StyleGlobalOptions];
+// Position Options
+const PositionOptions = [{
+  label: "Static",
+  value: "static"
+}, {
+  label: "Relative",
+  value: "relative"
+}, {
+  label: "Absolute",
+  value: "absolute"
+}, {
+  label: "Fixed",
+  value: "fixed"
+}, {
+  label: "Sticky",
+  value: "sticky"
+}, ...StyleGlobalOptions];
 
 /***/ }),
 
@@ -755,6 +1288,22 @@ function useBlockDefaultAttributes(blockName, deps) {
     return Object.fromEntries(newBlockAttributesEntries);
   }, deps || []);
   return defaultAttributes;
+}
+
+/***/ }),
+
+/***/ "./src/utils/isEmptyString.ts":
+/*!************************************!*\
+  !*** ./src/utils/isEmptyString.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   isEmptyString: () => (/* binding */ isEmptyString)
+/* harmony export */ });
+function isEmptyString(value) {
+  return typeof value === 'string' && (value.trim().length === 0 || !value);
 }
 
 /***/ }),
@@ -810,6 +1359,16 @@ module.exports = window["ReactDOM"];
 /***/ ((module) => {
 
 module.exports = window["ReactJSXRuntime"];
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 

@@ -1,0 +1,39 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.portfolio-container {
+    $portfolio-container-selector: &;
+
+    &--about{
+        @include with-priority(2) {
+            left: 0;
+            width: min(100vw, 45rem);
+    
+            @include media-breakpoint-md {
+                left: var(--left);
+                width: var(--width);
+            }
+        }
+    }
+
+    &--about-wrapper {
+        @include with-priority(2){
+            left: 0;
+
+            @include media-breakpoint-md {
+                left: var(--left);
+            }
+
+            > #{$portfolio-container-selector}__content, 
+            > #{$portfolio-container-selector} > #{$portfolio-container-selector}__content
+            {
+                max-width: var(--max-width);
+    
+                @include media-breakpoint-md{
+                    max-width: none;
+                }
+            }
+        }
+    }
+}

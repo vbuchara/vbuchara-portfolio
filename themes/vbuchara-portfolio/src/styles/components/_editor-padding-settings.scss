@@ -1,0 +1,28 @@
+@use "@styles/abstract/mixins" as *;
+
+@mixin editor-padding-settings-variables {
+    
+    @include if-inline-style-has("--padding-inline"){
+        padding-inline: var(--padding-inline);
+    }
+    
+    @include if-inline-style-has("--padding-block"){
+        padding-block: var(--padding-block);
+    };
+
+    @include if-inline-style-has("--padding-block-start"){
+        padding-block-start: var(--padding-block-start);
+    }
+
+    @include if-inline-style-has("--padding-block-end"){
+        padding-block-end: var(--padding-block-end);
+    }
+
+    @include if-inline-style-has("--padding-inline-start"){
+        padding-inline-start: var(--padding-inline-start);
+    }
+
+    @include if-inline-style-has("--padding-inline-end"){
+        padding-inline-end: var(--padding-inline-end);
+    }
+}

@@ -322,6 +322,14 @@
     }
 }
 
+@mixin if-inline-style-has(
+    $style: string
+){
+    &[style*=#{$style}]{
+        @content;
+    }
+}
+
 // Support Mixins
 @mixin supports-has-selector(){
     @supports(selector(*:has(*))){

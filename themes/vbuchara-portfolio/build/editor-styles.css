@@ -5,4 +5,8 @@
   padding: 1rem;
 }
 
+.portfolio-editor__control {
+  flex: 1;
+}
+
 /*# sourceMappingURL=editor-styles.css.map*/

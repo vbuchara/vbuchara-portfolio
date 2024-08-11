@@ -75,13 +75,14 @@ function vbuchara_portfolio_init_blocks(){
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/footer"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/header"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/section"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/blob-container"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/heading"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/paragraph"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/button"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/image"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/skills"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/projects"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/container"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/welcome-container"));
 }
 
 add_action("enqueue_block_editor_assets", 'vbuchara_portfolio_enqueue_block_editor_assets');

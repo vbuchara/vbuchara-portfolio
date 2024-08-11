@@ -64,21 +64,27 @@ export function EditComponent(props: ProjectsEditComponentProps){
 
     const [cardsScrollLeft, setCardsScrollLeft] = useState(0);
 
+    const activeScroll = useMemo(() => {
+        const cardsDivElement = portfolioCardsRef.current;
+        if(!cardsDivElement) return false;
+        const divPadding = 10;
+
+        return cardsDivElement.scrollWidth - divPadding > cardsDivElement.clientWidth;
+    }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
+
     const activeScrollLeft = useMemo(() => {
         const cardsDivElement = portfolioCardsRef.current;
         if(!cardsDivElement) return false;
 
-        return cardsDivElement.scrollWidth > cardsDivElement.clientWidth
-            && cardsDivElement.scrollLeft > 0;
-    }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
+        return activeScroll && cardsDivElement.scrollLeft > 0;
+    }, [activeScroll, mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
 
     const activeScrollRight = useMemo(() => {
         const cardsDivElement = portfolioCardsRef.current;
         if(!cardsDivElement) return false;
 
-        return cardsDivElement.scrollWidth > cardsDivElement.clientWidth
-            && !hasElementTotallyScrolled(cardsDivElement, "horizontal");
-    }, [mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
+        return activeScroll && !hasElementTotallyScrolled(cardsDivElement, "horizontal");
+    }, [activeScroll, mainDivMeasure.width, portfolioCardsMeasure.width, cardsScrollLeft]);
 
     const portfolioProjectsClasses = useMemo(() => {
         return clsx({
@@ -195,6 +201,7 @@ export function EditComponent(props: ProjectsEditComponentProps){
                 type="button"
                 className={scrollLeftClasses}
                 onClick={handleScrollLeft}
+                disabled={!activeScrollLeft}
             >{"<"}</button>
             <div 
                 className="portfolio-projects__cards"
@@ -220,6 +227,7 @@ export function EditComponent(props: ProjectsEditComponentProps){
                 type="button"
                 className={scrollRightClasses}
                 onClick={handleScrollRight}
+                disabled={!activeScrollRight}
             >{">"}</button>
         </div>
     </EditorWrapper>

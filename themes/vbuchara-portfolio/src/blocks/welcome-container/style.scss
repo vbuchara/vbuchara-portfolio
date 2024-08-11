@@ -2,7 +2,7 @@
 @use "@styles/abstract/mixins" as *;
 @use "@styles/abstract/breakpoints" as *;
 
-.blob-container {
+.welcome-container {
     --container-width: 375px;
     --container-height: fit-content;
     --grid-template-columns: 5fr 90fr 5fr;

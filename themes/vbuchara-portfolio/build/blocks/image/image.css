@@ -1,53 +1,79 @@
 /*!***************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/image/edit.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************/
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--position"] {
+  position: var(--position);
+}
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--top"] {
+  top: var(--top);
+}
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--right"] {
+  right: var(--right);
+}
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--bottom"] {
+  bottom: var(--bottom);
+}
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--left"] {
+  left: var(--left);
+}
+.wp-block-vbuchara-portfolio-image:is(*, #priority1)[style*="--z-index"] {
+  z-index: var(--z-index);
+}
+
 .portfolio-image__editor-control {
   flex: 1;
 }
+.portfolio-image--editor:is(*, #priority1#priority2#priority3) {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 @media (0 <= width < 360px) {
-  .portfolio-image[data-hide-on-xxs]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-xxs]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (360px <= width < 576px) {
-  .portfolio-image[data-hide-on-xs]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-xs]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (576px <= width < 768px) {
-  .portfolio-image[data-hide-on-sm]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-sm]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (768px <= width < 992px) {
-  .portfolio-image[data-hide-on-md]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-md]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (992px <= width < 1200px) {
-  .portfolio-image[data-hide-on-lg]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-lg]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (1200px <= width < 1400px) {
-  .portfolio-image[data-hide-on-xl]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-xl]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
   }
 }
 @media (min-width: 1400px) {
-  .portfolio-image[data-hide-on-xxl]:is(*, #priority1#priority2) {
+  .portfolio-image--editor[data-hide-on-xxl]:is(*, #priority1#priority2) {
     display: block;
     height: 1.6rem;
     pointer-events: auto;
