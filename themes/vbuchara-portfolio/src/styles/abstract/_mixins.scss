@@ -84,7 +84,8 @@
     $outline-width: 2px,
     $outline-offset: 2px,
     $background-color: rgba($white-smoke, 0),
-    $animation-delay: 0s
+    $animation-delay: 0s,
+    $iteration-count: 3,
 ){
     $animation-id: unique-id();
     $outline-inset: calc(-1 * (#{$outline-offset} + #{$outline-width}));
@@ -114,7 +115,7 @@
         animation-name: element-highlight-animation-#{$animation-id};
         animation-duration: 1s;
         animation-timing-function: linear;
-        animation-iteration-count: 3;
+        animation-iteration-count: $iteration-count;
         animation-delay: $animation-delay;
 
         border-radius: 10px;
@@ -301,6 +302,25 @@
     }
 }
 
+@mixin underline-decoration($always-active: false){
+    $base-selector: if($always-active == true, "&", '&:is([style*="--underline-color"],[style*="--underline-image"])');
+
+    #{$base-selector}::after {
+        position: relative;
+        display: block;
+        content: '';
+        width: 80%;
+        height: 0.5rem;
+
+        margin-inline: auto;
+
+        border-radius: 10px;
+
+        background-image: var(--underline-image);
+        background-color: var(--underline-color);
+    }
+}
+
 // Set Fonts
 @mixin set-font-faces($font-family, $fonts){
     @each $file, $info in $fonts {
@@ -341,6 +361,12 @@
     $linear-easing: linear(0, 1.33495 14.241%, 0.88722 28.953%, 1.03791 43.634%, 0.98731 58.256%, 1.00031);
      
     @supports(animation-timing-function: #{$linear-easing}){
+        @content;
+    }
+}
+
+@mixin supports-line-clamp(){
+    @supports(-webkit-line-clamp: 2){
         @content;
     }
 }

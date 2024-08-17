@@ -1,4 +1,5 @@
-import { useEffectOnce } from "react-use";
+import { useEffect, useRef } from "react";
+import { store as editorStore } from "@wordpress/editor";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { v4 as uuid } from "uuid";
 
@@ -18,6 +19,8 @@ export interface UserRegisterIdsProps<ItemType extends RegisterableItem = Regist
 export function useRegisterIds<
     ItemsType extends RegisterableItem
 >(props: UserRegisterIdsProps<ItemsType>){
+    const hasRegisteredIds = useRef(false);
+
     const {
         items,
         setItems,
@@ -25,6 +28,10 @@ export function useRegisterIds<
     } = props;
 
     const itemsDependency = getArrayDependency<RegisterableItem>(items, ["id"]);
+
+    const templateId = useSelect((select) => {
+        return select(editorStore).getCurrentPostId();
+    }, [itemsDependency, clientId]);
 
     const { 
         getRegisteredBlock, 
@@ -35,12 +42,12 @@ export function useRegisterIds<
         removeRegisteredBlockById
     } = useDispatch(portfolioBlocksStore);
 
-    useEffectOnce(() => {
+    useEffect(() => {
         const registeredBlock = getRegisteredBlock(clientId);
         const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
-
+        
         const validatedMenuItems = items.map((item) => {
-            if(!isRegisteredId(item.id) && item.id){
+            if(!isRegisteredId(item.id, String(templateId)) && item.id){
                 blockRegisteredIds.add(item.id);
                 return item;
             }
@@ -58,7 +65,7 @@ export function useRegisterIds<
             validatedMenuItems, 
             ["id"]
         );
-
+        
         if(itemsDependency !== validatedMenuItemsDependency){
             setItems(validatedMenuItems);
         }
@@ -66,11 +73,12 @@ export function useRegisterIds<
         registerBlock({
             ...registeredBlock,
             clientId: clientId,
-            registeredIds: blockRegisteredIds
+            registeredIds: blockRegisteredIds,
+            pageTemplateId: String(templateId)
         });
 
         return () => {
             removeRegisteredBlockById(clientId);
         };
-    });
+    }, [itemsDependency, templateId]);
 }

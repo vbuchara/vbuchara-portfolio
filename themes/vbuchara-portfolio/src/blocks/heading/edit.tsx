@@ -37,8 +37,8 @@ export function EditComponent(props: HeadingEditComponentProps){
                 "--text-align": attributes.textAlignment,
                 "--line-height": attributes.styles.lineHeight,
                 "--white-space": attributes.styles.whiteSpace,
-                ...(attributes.styles.underlineColor && { "--underline-color": attributes.styles.underlineColor }),
-                ...(attributes.styles.underlineGradient && { "--underline-image": attributes.styles.underlineGradient })
+                "--underline-color": attributes.styles.underlineColor || undefined,
+                "--underline-image": attributes.styles.underlineGradient || undefined
             }}
         />
     </EditorWrapper>

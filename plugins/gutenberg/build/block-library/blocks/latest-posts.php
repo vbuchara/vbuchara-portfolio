@@ -38,7 +38,7 @@ function gutenberg_block_core_latest_posts_get_excerpt_length() {
  * @return string Returns the post content with latest posts added.
  */
 function gutenberg_render_block_core_latest_posts( $attributes ) {
-	global $post, $block_core_latest_posts_excerpt_length;
+	global $project, $block_core_latest_posts_excerpt_length;
 
 	$args = array(
 		'posts_per_page'      => $attributes['postsToShow'],
@@ -68,9 +68,9 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 
 	$list_items_markup = '';
 
-	foreach ( $recent_posts as $post ) {
-		$post_link = esc_url( get_permalink( $post ) );
-		$title     = get_the_title( $post );
+	foreach ( $recent_posts as $project ) {
+		$post_link = esc_url( get_permalink( $project ) );
+		$title     = get_the_title( $project );
 
 		if ( ! $title ) {
 			$title = __( '(no title)' );
@@ -78,7 +78,7 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 
 		$list_items_markup .= '<li>';
 
-		if ( $attributes['displayFeaturedImage'] && has_post_thumbnail( $post ) ) {
+		if ( $attributes['displayFeaturedImage'] && has_post_thumbnail( $project ) ) {
 			$image_style = '';
 			if ( isset( $attributes['featuredImageSizeWidth'] ) ) {
 				$image_style .= sprintf( 'max-width:%spx;', $attributes['featuredImageSizeWidth'] );
@@ -93,7 +93,7 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 			}
 
 			$featured_image = get_the_post_thumbnail(
-				$post,
+				$project,
 				$attributes['featuredImageSizeSlug'],
 				array(
 					'style' => esc_attr( $image_style ),
@@ -121,7 +121,7 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 		);
 
 		if ( isset( $attributes['displayAuthor'] ) && $attributes['displayAuthor'] ) {
-			$author_display_name = get_the_author_meta( 'display_name', $post->post_author );
+			$author_display_name = get_the_author_meta( 'display_name', $project->post_author );
 
 			/* translators: byline. %s: current author. */
 			$byline = sprintf( __( 'by %s' ), $author_display_name );
@@ -137,15 +137,15 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 		if ( isset( $attributes['displayPostDate'] ) && $attributes['displayPostDate'] ) {
 			$list_items_markup .= sprintf(
 				'<time datetime="%1$s" class="wp-block-latest-posts__post-date">%2$s</time>',
-				esc_attr( get_the_date( 'c', $post ) ),
-				get_the_date( '', $post )
+				esc_attr( get_the_date( 'c', $project ) ),
+				get_the_date( '', $project )
 			);
 		}
 
 		if ( isset( $attributes['displayPostContent'] ) && $attributes['displayPostContent']
 			&& isset( $attributes['displayPostContentRadio'] ) && 'excerpt' === $attributes['displayPostContentRadio'] ) {
 
-			$trimmed_excerpt = get_the_excerpt( $post );
+			$trimmed_excerpt = get_the_excerpt( $project );
 
 			/*
 			 * Adds a "Read more" link with screen reader text.
@@ -165,7 +165,7 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 				}
 			}
 
-			if ( post_password_required( $post ) ) {
+			if ( post_password_required( $project ) ) {
 				$trimmed_excerpt = __( 'This content is password protected.' );
 			}
 
@@ -178,9 +178,9 @@ function gutenberg_render_block_core_latest_posts( $attributes ) {
 		if ( isset( $attributes['displayPostContent'] ) && $attributes['displayPostContent']
 			&& isset( $attributes['displayPostContentRadio'] ) && 'full_post' === $attributes['displayPostContentRadio'] ) {
 
-			$post_content = html_entity_decode( $post->post_content, ENT_QUOTES, get_option( 'blog_charset' ) );
+			$post_content = html_entity_decode( $project->post_content, ENT_QUOTES, get_option( 'blog_charset' ) );
 
-			if ( post_password_required( $post ) ) {
+			if ( post_password_required( $project ) ) {
 				$post_content = __( 'This content is password protected.' );
 			}
 

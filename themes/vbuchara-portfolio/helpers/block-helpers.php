@@ -195,6 +195,32 @@ class BlockHelpers {
     }
 
     /**
+     * @param InlineStyle $inlineStyle
+     * @param array{
+     *  underlineColor: string | null,
+     *  underlineGradient: string | null,
+     * } $underline
+     * @return void
+     */
+    public static function set_underline_style_variables(InlineStyle $inlineStyle, array $underline){
+        $inlineStyle->setProperty("--underline-color", $underline['underlineColor']);
+        $inlineStyle->setProperty("--underline-image", $underline['underlineGradient']);
+    }
+
+    /**
+     * @return array{
+     *  underlineColor: string | null,
+     *  underlineGradient: string | null,
+     * }
+     */
+    public static function get_default_underline_style(){
+        return [
+            "underlineColor" => null,
+            "underlineGradient" => null
+        ];
+    }
+
+    /**
      * @return array{
      *  none: null,
      *  welcome: string,

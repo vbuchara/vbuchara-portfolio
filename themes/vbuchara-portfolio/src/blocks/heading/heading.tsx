@@ -17,8 +17,8 @@ export type HeadingAlignment = "left" | "center" | "right";
 export interface HeadingStyles {
     lineHeight: string,
     whiteSpace: WhiteSpaceValue,
-    underlineColor?: string,
-    underlineGradient?: string
+    underlineColor?: string | null,
+    underlineGradient?: string | null
 }
 
 export type HeadingAttributesType = {

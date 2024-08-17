@@ -1,4 +1,5 @@
 == Changelog ==
+
 = 8.0.2 =
 * Removed the GLOB_BRACE from the code, as that is not available on some non GNU systems
 

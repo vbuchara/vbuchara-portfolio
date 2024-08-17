@@ -17,7 +17,7 @@
 		<p><?php esc_html_e( 'You can change the title below, then click the button to rename the identifies images associated with this post, and their generated image sizes.', 'sirsc' ); ?></p>
 
 		<div class="label-row">
-			<input type="text" name="sirsc_imgseo-renamefile-title" id="sirsc_imgseo-renamefile-title" value="<?php echo esc_attr( $post->post_title ); ?>">
+			<input type="text" name="sirsc_imgseo-renamefile-title" id="sirsc_imgseo-renamefile-title" value="<?php echo esc_attr( $project->post_title ); ?>">
 
 			<button type="submit" class="sirsc-button-icon button-primary has-icon tiny" onclick="sirscToggleProcesing( 'sirsc-is-rename-wrap' );" title="<?php esc_attr_e( 'Rename', 'sirsc' ); ?>"><span class="dashicons dashicons-image-rotate-right"></span></button>
 		</div>
@@ -49,8 +49,8 @@
 
 			<li class="label-row">
 				- <?php esc_html_e( 'Go to', 'sirsc' ); ?>
-				<a href="<?php echo esc_url( admin_url( 'post.php?post=' . $id . '&action=edit' ) ); ?>"><em><?php echo esc_attr( $post->post_title ); ?></em></a>
-				| <?php echo esc_html( $post->post_type ); ?>
+				<a href="<?php echo esc_url( admin_url( 'post.php?post=' . $id . '&action=edit' ) ); ?>"><em><?php echo esc_attr( $project->post_title ); ?></em></a>
+				| <?php echo esc_html( $project->post_type ); ?>
 			</li>
 		</ul>
 

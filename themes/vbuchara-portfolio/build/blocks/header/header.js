@@ -926,60 +926,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   useRegisterIds: () => (/* binding */ useRegisterIds)
 /* harmony export */ });
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useEffectOnce.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
-/* harmony import */ var _stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @stores/portfolio-blocks */ "./src/stores/portfolio-blocks.ts");
-/* harmony import */ var _src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @src/utils/getArrayDependency */ "./src/utils/getArrayDependency.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var _stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @stores/portfolio-blocks */ "./src/stores/portfolio-blocks.ts");
+/* harmony import */ var _src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @src/utils/getArrayDependency */ "./src/utils/getArrayDependency.ts");
+
 
 
 
 
 
 function useRegisterIds(props) {
+  const hasRegisteredIds = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
   const {
     items,
     setItems,
     clientId
   } = props;
-  const itemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__.getArrayDependency)(items, ["id"]);
+  const itemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_4__.getArrayDependency)(items, ["id"]);
+  const templateId = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    return select(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.store).getCurrentPostId();
+  }, [itemsDependency, clientId]);
   const {
     getRegisteredBlock,
     isRegisteredId
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => select(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__["default"]), [itemsDependency, clientId]);
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => select(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_3__["default"]), [itemsDependency, clientId]);
   const {
     registerBlock,
     removeRegisteredBlockById
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useDispatch)(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  (0,react_use__WEBPACK_IMPORTED_MODULE_3__["default"])(() => {
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(_stores_portfolio_blocks__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const registeredBlock = getRegisteredBlock(clientId);
     const blockRegisteredIds = registeredBlock?.registeredIds || new Set();
     const validatedMenuItems = items.map(item => {
-      if (!isRegisteredId(item.id) && item.id) {
+      if (!isRegisteredId(item.id, String(templateId)) && item.id) {
         blockRegisteredIds.add(item.id);
         return item;
       }
-      const newId = (0,uuid__WEBPACK_IMPORTED_MODULE_4__["default"])();
+      const newId = (0,uuid__WEBPACK_IMPORTED_MODULE_5__["default"])();
       blockRegisteredIds.add(newId);
       return {
         ...item,
         id: newId
       };
     });
-    const validatedMenuItemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_2__.getArrayDependency)(validatedMenuItems, ["id"]);
+    const validatedMenuItemsDependency = (0,_src_utils_getArrayDependency__WEBPACK_IMPORTED_MODULE_4__.getArrayDependency)(validatedMenuItems, ["id"]);
     if (itemsDependency !== validatedMenuItemsDependency) {
       setItems(validatedMenuItems);
     }
     registerBlock({
       ...registeredBlock,
       clientId: clientId,
-      registeredIds: blockRegisteredIds
+      registeredIds: blockRegisteredIds,
+      pageTemplateId: String(templateId)
     });
     return () => {
       removeRegisteredBlockById(clientId);
     };
-  });
+  }, [itemsDependency, templateId]);
 }
 
 /***/ }),
@@ -1105,8 +1114,9 @@ const selectors = {
     });
     return new Map(formattedRegisteredBlocks);
   },
-  isRegisteredId: (state, id) => {
-    const registeredBlocksMap = new Map(state.registeredBlocks);
+  isRegisteredId: (state, id, pageTemplateId) => {
+    const filteredRegisteredBlocks = !pageTemplateId ? state.registeredBlocks : state.registeredBlocks.filter(([, block]) => pageTemplateId === block.pageTemplateId);
+    const registeredBlocksMap = new Map(filteredRegisteredBlocks);
     const allRegisteredIds = new Set(Array.from(registeredBlocksMap).reduce((result, [, {
       registeredIds
     }]) => [...result, ...registeredIds], []));
@@ -1303,6 +1313,16 @@ module.exports = window["wp"]["data"];
 
 /***/ }),
 
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["editor"];
+
+/***/ }),
+
 /***/ "@wordpress/primitives":
 /*!************************************!*\
   !*** external ["wp","primitives"] ***!
@@ -1333,7 +1353,7 @@ module.exports = window["wp"]["primitives"];
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;

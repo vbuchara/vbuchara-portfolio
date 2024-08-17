@@ -786,7 +786,7 @@ function allow_resize_from_original( $filename, $image, $all_sizes = [], $size =
 		}
 	}
 
-	if ( '.svg' === substr( $filename, -4 ) ) {
+	if ( ! empty( $filename ) && '.svg' === substr( $filename, -4 ) ) {
 		$result['can_be_generated'] = 0;
 	}
 

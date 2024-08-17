@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image optimization, crop, regenerate, cleanup, bulk regenerate
 Requires at least: 4.9.2
 Tested up to: 6.6
-Stable tag: 8.0.2
+Stable tag: 8.0.3
 Requires PHP: 7.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,31 +36,11 @@ For the latest updates and detailed feature descriptions, visit [https://iuliaca
 
 
 == Changelog ==
-= 8.0.2 =
-* Removed the GLOB_BRACE from the code, as that is not available on some non GNU systems
+= 8.0.3 =
+* Attempt to fix the SVG dimensions when the core feature fails on upload (when SSL operation failed due to routines:tls_process_server_certificate:certificate verify)
+* Fixed cron schedule warning for custom frequency
 
-= 8.0.1 =
-* Tested up to 6.6
-* Refined the filter for fixing the file name on upload, following the best practice for SEO and accessibility
-
-= 8.0.0 =
-* This is a major update, please keep a backup of your files before updating
-* Tested up to 6.5.3
-* Compatibility updates for core >= 6.5
-* Set default quality to 90 (aligned with the most recent core changes)
-* Styles updates to inherit the main color from the admin theme and simplified the theme colors
-* Accessibility improvements
-* Performance improvements
-* Placeholders optimization
-* Translations updates
-* Improved the placement of the buttons in the media dialogs
-* Improved the upscale option so that sub-sizes with both width and height bigger than the original file to be generated (previously, at least one dimension needed to match the original)
-* Added a note in the debug screen if the site configuration does not allow for the logs to be written
-* Fixed the error produced in the custom logs when the FS_METHOD is defined and not direct
-* Fixed the buttons for the featured image when selected in new draft posts
-* Fixed the loaded rules for the image details lightbox
-* Fixed the issue that made videos have 0x0 dimensions in the media library
-
+See the [changelog](changelog.txt) for detailed information on changes made in the earlier versions.
 
 == License ==
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

@@ -16,6 +16,8 @@ import { useRegisterIds } from "@hooks/useRegisterIds";
 import { FooterInspectorControls } from "./components/controls";
 
 import type { FooterAttributesType } from "./footer";
+import clsx from "clsx";
+import { EditorAnimatedElement } from "@src/components/editor-animated-element";
 
 export type FooterEditComponentProps = BlockEditProps<FooterAttributesType>;
 
@@ -24,35 +26,33 @@ export function EditComponent(props: FooterEditComponentProps){
 
     const socialLinkItemsRef = useRef<HTMLUListElement>(null);
 
-    const socialLinksAnimationTimeout = useRef<number>();
     const gmailHasBeingCopiedTimeout = useRef<number>();
 
-    const [shouldSocialLinksAnimate, setShouldSocialLinksAnimate] = useState(false);
     const [gmailHasBeingCopied, setGmailHasBeingCopied] = useState(false);
 
-    const SocialLinksIntersectionEntry = useIntersection(
+    const socialLinksIntersectionEntry = useIntersection(
         socialLinkItemsRef,
         { root: null, threshold: 0.2 }
     );
-
-    const socialLinkClasses = useMemo(() => {
-        return `site-footer__social-contact-item-link ${
-            shouldSocialLinksAnimate ? "site-footer__social-contact-item-link--animate" : ""
-        }`;
-    }, [shouldSocialLinksAnimate]);
+    
     const linkedinClasses = useMemo(() => {
-        return `${socialLinkClasses}`;
-    }, [socialLinkClasses]);
+        return clsx({
+            "site-footer__social-contact-item-link": true
+        });
+    }, []);
 
     const githubClasses = useMemo(() => {
-        return `${socialLinkClasses}`;
-    }, [socialLinkClasses]);
+        return clsx({
+            "site-footer__social-contact-item-link": true
+        });
+    }, []);
 
     const gmailLinkClasses = useMemo(() => {
-        return `${socialLinkClasses} ${
-            gmailHasBeingCopied? "site-footer__social-contact-item-link--copied" : ""
-        }`;
-    }, [gmailHasBeingCopied, socialLinkClasses]);
+        return clsx({
+            "site-footer__social-contact-item-link": true,
+            "site-footer__social-contact-item-link--copied": gmailHasBeingCopied,
+        });
+    }, [gmailHasBeingCopied]);
 
     async function handleOnClickGmailLink(){
         if(!navigator.clipboard) return;
@@ -67,35 +67,11 @@ export function EditComponent(props: FooterEditComponentProps){
         }, 2000);
     }
 
-    function handleOnAnimationEndSocialLinks(event: React.AnimationEvent){
-        if(!event.animationName.includes("element-highlight-animation")) return;
-
-        window.clearTimeout(socialLinksAnimationTimeout.current);
-        setShouldSocialLinksAnimate(false);
-        socialLinksAnimationTimeout.current = window.setTimeout(() => {
-            setShouldSocialLinksAnimate(true);
-        }, 2000);
-    }
-
     useRegisterIds({
         clientId: clientId,
         items: attributes.menuItems,
         setItems: (items) => setAttributes({ menuItems: items })
     });
-
-    useEffect(() => {
-        const isSocialLinksIntersecting = SocialLinksIntersectionEntry 
-            ? SocialLinksIntersectionEntry.isIntersecting
-            : false;
-        
-        window.clearTimeout(socialLinksAnimationTimeout.current);
-        
-        setShouldSocialLinksAnimate(isSocialLinksIntersecting);
-
-        return () => {
-            window.clearTimeout(socialLinksAnimationTimeout.current);
-        };
-    }, [SocialLinksIntersectionEntry?.isIntersecting]);
     
     useUnmount(() => {
         window.clearTimeout(gmailHasBeingCopiedTimeout.current);
@@ -144,48 +120,66 @@ export function EditComponent(props: FooterEditComponentProps){
                     className="site-footer__social-contact-items"
                 >
                     <li className="site-footer__social-contact-item">
-                        <EditorAnchor
+                        <EditorAnimatedElement
+                            tagName="a"
                             className={linkedinClasses}
+                            animateClass="site-footer__social-contact-item-link--animate"
+                            animationName="element-highlight-animation"
+                            intersectionEntry={socialLinksIntersectionEntry}
+
                             href={attributes.socialLinks.linkedin}
                             title={`Linkedin: ${attributes.socialLinks.linkedin}`}
                             target="_blank"
                             rel="noopener"
-                            onAnimationEnd={handleOnAnimationEndSocialLinks}
                         >
                             <Linkedin
                                 className="site-footer__social-contact-item-icon"
+                                width="61" 
+                                height="60" 
                             />
-                        </EditorAnchor>
+                        </EditorAnimatedElement>
                     </li>
                     <li className="site-footer__social-contact-item">
-                        <EditorAnchor
+                        <EditorAnimatedElement
+                            tagName="a"
                             className={githubClasses}
+                            animateClass="site-footer__social-contact-item-link--animate"
+                            animationName="element-highlight-animation"
+                            intersectionEntry={socialLinksIntersectionEntry}
+
                             href={attributes.socialLinks.github}
                             title={`Github: ${attributes.socialLinks.github}`}
                             target="_blank"
                             rel="noopener"
-                            onAnimationEnd={handleOnAnimationEndSocialLinks}
                         >
                             <Github
                                 className="site-footer__social-contact-item-icon"
+                                width="61" 
+                                height="60" 
                             />
-                        </EditorAnchor>
+                        </EditorAnimatedElement>
                     </li>
                     <li className="site-footer__social-contact-item">
-                        <button
+                        <EditorAnimatedElement
+                            tagName="button"
+                            animateClass="site-footer__social-contact-item-link--animate"
+                            animationName="element-highlight-animation"
+                            intersectionEntry={socialLinksIntersectionEntry}
+
                             type="button"
                             title={`Gmail: ${attributes.socialLinks.gmail}`}
                             className={gmailLinkClasses}
                             onClick={handleOnClickGmailLink}
-                            onAnimationEnd={handleOnAnimationEndSocialLinks}
                         >
                             <div className="site-footer__social-contact-item-link-popover">
                                 Copied to clipboard!
                             </div>
                             <Gmail
                                 className="site-footer__social-contact-item-icon"
+                                width="71" 
+                                height="60"
                             />
-                        </button>
+                        </EditorAnimatedElement>
                     </li>
                 </ul>
             </div>

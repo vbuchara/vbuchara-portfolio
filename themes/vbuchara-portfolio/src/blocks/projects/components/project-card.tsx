@@ -23,7 +23,7 @@ export function ProjectCard(props: ProjectCardProps){
     } = props;
 
     const projectImage = project.acf.project_image?.size_urls["project-image"] || ProjectDefaultImageSrc;
-    const projectImageAlt = project.acf.project_image?.alt || "No image for the project provided";
+    const projectImageAlt = project.acf.project_image?.alt || "No image or alt text for the project provided";
 
     const projectLink = projectArchiveLink ? `${projectArchiveLink}#${project.slug}` : "";
 

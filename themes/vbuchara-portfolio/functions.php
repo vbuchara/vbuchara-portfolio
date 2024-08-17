@@ -83,6 +83,8 @@ function vbuchara_portfolio_init_blocks(){
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/projects"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/container"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/welcome-container"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-header"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-projects"));
 }
 
 add_action("enqueue_block_editor_assets", 'vbuchara_portfolio_enqueue_block_editor_assets');

@@ -602,8 +602,8 @@ function on_settings_update_notice() {
  * Append the image sizes generator button to the edit media page.
  */
 function register_image_meta() {
-	global $post;
-	if ( ! empty( $post->post_type ) && 'attachment' === $post->post_type ) {
+	global $project;
+	if ( ! empty( $project->post_type ) && 'attachment' === $project->post_type ) {
 		\add_action( 'edit_form_top', __NAMESPACE__ . '\\append_image_generate_button_tiny', 10, 2 );
 	}
 }
@@ -1022,16 +1022,16 @@ function register_media_columns( $columns ) { // phpcs:ignore
  */
 function media_column_value( $column, $value ) { // phpcs:ignore
 	if ( 'sirsc_buttons' === $column ) {
-		global $post, $sirsc_column_summary;
+		global $project, $sirsc_column_summary;
 		if ( ! empty( \SIRSC::$settings['listing_show_summary'] ) ) {
 			$sirsc_column_summary = true;
 		}
-		if ( ! empty( $post ) && ! empty( $post->post_mime_type )
-			&& substr_count( $post->post_mime_type, 'image/' ) ) {
+		if ( ! empty( $project ) && ! empty( $project->post_mime_type )
+			&& substr_count( $project->post_mime_type, 'image/' ) ) {
 			$extra_class = ( ! empty( \SIRSC::$settings['listing_tiny_buttons'] ) ) ? 'tiny' : '';
-			echo append_image_generate_button( '', '', $post->ID, $extra_class ); // phpcs:ignore
+			echo append_image_generate_button( '', '', $project->ID, $extra_class ); // phpcs:ignore
 			if ( ! empty( \SIRSC::$settings['listing_show_summary'] ) ) {
-				\SIRSC\Helper\attachment_listing_summary( $post->ID );
+				\SIRSC\Helper\attachment_listing_summary( $project->ID );
 			}
 		}
 	}

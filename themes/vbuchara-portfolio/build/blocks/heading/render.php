@@ -1,6 +1,39 @@
 <?php 
    use VBucharaPortfolio\Classes\InlineStyle;
+   use VBucharaPortfolio\Helpers\BlockHelpers;
    use Masterminds\HTML5;
+
+   /**
+    * @var array{
+    *  tagName?: string,
+    *  textContent?: string,
+    *  textAlignment?: string,
+    *  extraClasses?: string[],
+    *  styles?: array{
+    *    lineHeight: string,
+    *    whiteSpace: string,
+    *    underlineColor?: string | null,
+    *    underlineGradient?: string | null
+    *  },
+    * } $attributes
+    * @var string $content
+    * @var WP_Block $block
+    */
+
+   $defaultUnderline = BlockHelpers::get_default_underline_style();
+
+   $defaultAttributes = [
+      "tagName" => "h1",
+      "textContent" => "",
+      "textAlignment" => "left",
+      "extraClasses" => [],
+      "styles" => [
+         "lineHeight" => "1.5",
+         "whiteSpace" => "normal",
+         "underlineColor" => $defaultUnderline['underlineColor'],
+         "underlineGradient" => $defaultUnderline['underlineGradient']
+      ]
+   ];
 
    /**
     * @var array{
@@ -11,62 +44,42 @@
     *  styles: array{
     *    lineHeight: string,
     *    whiteSpace: string,
-    *    underlineColor?: string,
-    *    underlineGradient?: string
+    *    underlineColor: string | null,
+    *    underlineGradient: string | null
     *  },
-    * } $attributes
-    * @var string $content
-    * @var WP_Block $block
+    * }
     */
+   $attributesWithDefaults = array_replace_recursive($defaultAttributes, $attributes);
 
-   $tagName = isset($attributes['tagName']) ? $attributes['tagName'] : "h1";
-   $textContent = isset($attributes['textContent']) ? $attributes['textContent'] : "";
-   $textAlign = isset($attributes["textAlignment"]) ? $attributes['textAlignment'] : "left";
+   $extraClasses = array_reduce(
+      $attributesWithDefaults["extraClasses"], 
+      fn(string $result, string $className) => "$result $className", 
+      ""
+   );
 
-   $extraClasses = isset($attributes['extraClasses']) 
-      ? array_reduce($attributes["extraClasses"], fn(string $result, string $className) => "$result $className", "") 
-      : "";
-
-   /**
-    * @var array{
-    *    lineHeight: string,
-    *    whiteSpace: string,
-    *    underlineColor: string|null,
-    *    underlineGradient: string|null
-    *  }
-    */
-   $defaultStyles = [
-      "lineHeight" => "1.5",
-      "whiteSpace" => "normal",
-      "underlineColor" => null,
-      "underlineGradient" => null
-   ];
-   $styles = isset($attributes['styles']) ? array_merge($defaultStyles, $attributes['styles']) : $defaultStyles;
+   $styles = $attributesWithDefaults["styles"];
 
    $html5 = new HTML5();
    $domDocument = new DOMDocument();
 
-   $heading = $domDocument->createElement($tagName);
+   $heading = $domDocument->createElement($attributesWithDefaults["tagName"]);
    $heading->setAttribute('class', 'portfolio-heading' . $extraClasses);
 
-   $textContentFragment = $html5->loadHTMLFragment($textContent, [
+   $textContentFragment = $html5->loadHTMLFragment($attributesWithDefaults["textContent"], [
       "target_document" => $domDocument,
       "disable_html_ns" => true
    ]);
    $heading->append($textContentFragment);
 
    $inlineStyle = new InlineStyle();
-   $inlineStyle->setProperty("--text-align", "$textAlign");
+   $inlineStyle->setProperty("--text-align", $attributesWithDefaults["textAlignment"]);
    $inlineStyle->setProperty("--line-height", $styles['lineHeight']);
    $inlineStyle->setProperty("--white-space", $styles['whiteSpace']);
 
-   if(!empty($styles['underlineColor'])){
-      $inlineStyle->setProperty("--underline-color", $styles['underlineColor']);
-   }
-
-   if(!empty($styles['underlineGradient'])){
-      $inlineStyle->setProperty("--underline-image", $styles['underlineGradient']);
-   }
+   BlockHelpers::set_underline_style_variables($inlineStyle, [
+      "underlineColor" => $styles['underlineColor'],
+      "underlineGradient" => $styles['underlineGradient']
+   ]);
 
    $heading->setAttribute('style', $inlineStyle->getStyleString());
 ?>

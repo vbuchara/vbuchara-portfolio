@@ -23,6 +23,8 @@ const { default: paragraphBlock } = await import("@blocks/paragraph/block.json")
 const { default: buttonBlock } = await import("@blocks/button/block.json") as BlockJsonDefault;
 const { default: skillsBlock } = await import("@blocks/skills/block.json") as BlockJsonDefault;
 const { default: projectsBlock } = await import("@blocks/projects/block.json") as BlockJsonDefault;
+const { default: archiveHeaderBlock } = await import("@blocks/archive-header/block.json") as BlockJsonDefault;
+const { default: archiveProjectsBlock } = await import("@blocks/archive-projects/block.json") as BlockJsonDefault;
 
 export type SectionEditComponentProps = BlockEditProps<SectionAttributesType>;
 
@@ -69,7 +71,9 @@ export function EditComponent(props: SectionEditComponentProps){
                     paragraphBlock.name,
                     buttonBlock.name,
                     skillsBlock.name,
-                    projectsBlock.name
+                    projectsBlock.name,
+                    archiveHeaderBlock.name,
+                    archiveProjectsBlock.name
                 ]}
             />
         </div>

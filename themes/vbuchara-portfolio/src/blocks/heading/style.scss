@@ -2,6 +2,8 @@
 @use "@styles/abstract/mixins" as *;
 @use "@styles/abstract/breakpoints" as *;
 
+@use "@styles/components/editor-underline-settings" as *;
+
 .portfolio-heading {
     --text-align: left;
     --line-height: 1.5;
@@ -36,18 +38,5 @@
         font-size: var(--text-md);
     }
 
-    &:is([style*="--underline-color"],[style*="--underline-image"])::after {
-        position: relative;
-        display: block;
-        content: '';
-        width: 80%;
-        height: 0.5rem;
-
-        margin-inline: auto;
-
-        border-radius: 10px;
-
-        background-image: var(--underline-image);
-        background-color: var(--underline-color);
-    }
+    @include editor-underline-settings-variables();
 }

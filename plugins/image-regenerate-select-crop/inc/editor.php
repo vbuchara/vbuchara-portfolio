@@ -106,14 +106,14 @@ function calculate_dimensions_up( $ow, $oh, $ew, $eh ) {
 
 	if ( empty( $ew ) ) {
 		// Scale based only on height.
-		$factor = $eh / $oh;
+		$factor = ! empty( $oh ) ? $eh / $oh : 0;
 	} elseif ( empty( $eh ) ) {
 		// Scale based only on width.
-		$factor = $ew / $ow;
+		$factor = ! empty( $ow ) ? $ew / $ow : 0;
 	} else {
 		// Scaling factors needed to reach the crop size.
-		$sw = $ew / $ow;
-		$sh = $eh / $oh;
+		$sw = ! empty( $ow ) ? $ew / $ow : 0;
+		$sh = ! empty( $oh ) ? $eh / $oh : 0;
 
 		// Use the larger scale factor to ensure the image covers the crop dimensions.
 		$factor = max( $sw, $sh );

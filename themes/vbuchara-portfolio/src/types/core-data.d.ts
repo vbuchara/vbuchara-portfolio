@@ -23,6 +23,7 @@ declare module "@wordpress/core-data" {
         meta_query_value?: string | number | boolean;
         meta_query_compare?: string;
         meta_query_type?: string;
+        include?: number[];
         [x: `meta_query_key_${number}`]: string;
         [x: `meta_query_value_${number}`]: string;
         [x: `meta_query_compare_${number}`]: string;

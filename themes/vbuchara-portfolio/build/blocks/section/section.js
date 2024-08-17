@@ -271,6 +271,12 @@ const {
 const {
   default: projectsBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/projects/block.json */ "./src/blocks/projects/block.json", 19));
+const {
+  default: archiveHeaderBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-header_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-header/block.json */ "./src/blocks/archive-header/block.json", 19));
+const {
+  default: archiveProjectsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-projects/block.json */ "./src/blocks/archive-projects/block.json", 19));
 function EditComponent(props) {
   const {
     attributes,
@@ -306,7 +312,7 @@ function EditComponent(props) {
         })
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
-        allowedBlocks: [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name]
+        allowedBlocks: [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name, archiveHeaderBlock.name, archiveProjectsBlock.name]
       })
     })]
   });
@@ -1442,7 +1448,7 @@ module.exports = window["wp"]["primitives"];
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;

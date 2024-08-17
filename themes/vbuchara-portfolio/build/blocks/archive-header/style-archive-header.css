@@ -1,0 +1,37 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/archive-header/style.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+.portfolio-archive-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-auto-rows: auto;
+  row-gap: 2rem;
+  justify-content: center;
+  justify-items: center;
+}
+.portfolio-archive-header__title {
+  text-align: center;
+  line-height: 1.5;
+  font-size: clamp(var(--text-lg), 4.26vw + 0.5rem, var(--text-xxl));
+  position: relative;
+}
+.portfolio-archive-header__title:is([style*="--underline-color"], [style*="--underline-image"])::after {
+  position: relative;
+  display: block;
+  content: "";
+  width: 80%;
+  height: 0.5rem;
+  margin-inline: auto;
+  border-radius: 10px;
+  background-image: var(--underline-image);
+  background-color: var(--underline-color);
+}
+.portfolio-archive-header__subtitle {
+  text-align: center;
+  line-height: 1;
+  font-size: clamp(var(--text-md) + 2px, 2.18vw + 0.5rem, var(--text-lg));
+  position: relative;
+}
+
+/*# sourceMappingURL=style-archive-header.css.map*/

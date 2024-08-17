@@ -1,0 +1,5 @@
+@use "@styles/abstract/mixins" as *;
+
+@mixin editor-underline-settings-variables() {
+    @include underline-decoration($always-active: false);
+}

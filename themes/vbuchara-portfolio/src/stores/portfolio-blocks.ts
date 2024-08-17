@@ -6,6 +6,7 @@ export type ClientId = string;
 export interface BlockInfoJSON {
     clientId: ClientId;
     registeredIds: string[];
+    pageTemplateId: string;
 }
 
 export interface BlockInfo extends Omit<BlockInfoJSON, "registeredIds"> {
@@ -65,8 +66,12 @@ const selectors = {
         });
         return new Map(formattedRegisteredBlocks);
     },
-    isRegisteredId: (state: PortfolioBlocksStoreState, id: string) => {
-        const registeredBlocksMap = new Map(state.registeredBlocks);
+    isRegisteredId: (state: PortfolioBlocksStoreState, id: string, pageTemplateId?: string) => {
+        const filteredRegisteredBlocks = !pageTemplateId 
+            ? state.registeredBlocks 
+            : state.registeredBlocks.filter(([, block]) => pageTemplateId === block.pageTemplateId);
+        const registeredBlocksMap = new Map(filteredRegisteredBlocks);
+ 
         const allRegisteredIds = new Set(
             Array.from(registeredBlocksMap).reduce(
                 (result, [, { registeredIds }]) => [...result, ...registeredIds], [] as string[]

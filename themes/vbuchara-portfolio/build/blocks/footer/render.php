@@ -55,12 +55,18 @@
     $html5 = new HTML5();
     $linkedinIcon = SvgHelpers::get_svg_element("linkedin");
     $linkedinIcon->setAttribute("class", "site-footer__social-contact-item-icon");
+    $linkedinIcon->setAttribute("width", "61");
+    $linkedinIcon->setAttribute("height", "60");
 
     $githubIcon = SvgHelpers::get_svg_element("github");
     $githubIcon->setAttribute("class", "site-footer__social-contact-item-icon");
+    $githubIcon->setAttribute("width", "61");
+    $githubIcon->setAttribute("height", "60");
 
     $gmailIcon = SvgHelpers::get_svg_element("gmail");
     $gmailIcon->setAttribute("class", "site-footer__social-contact-item-icon");
+    $gmailIcon->setAttribute("width", "71");
+    $gmailIcon->setAttribute("height", "60");
 
 ?>
 <footer 

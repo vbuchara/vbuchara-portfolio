@@ -204,8 +204,8 @@ if ( ! class_exists( 'acf_revisions' ) ) :
 
 			// compatibility with WP < 4.5 (test)
 			if ( ! $post_id ) {
-				global $post;
-				$post_id = $post->ID;
+				global $project;
+				$post_id = $project->ID;
 			}
 
 			// get all postmeta

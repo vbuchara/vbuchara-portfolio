@@ -4,6 +4,9 @@
     "name": "vbuchara-portfolio/projects",
     "title": "Projects",
     "category": "vbuchara-portfolio",
+    "supports": {
+        "interactivity": true
+    },
     "editorScript": ["file:./projects.tsx", "vbuchara-portfolio-blocks-vendor"],
     "editorStyle": "file:./projects.css",
     "viewScriptModule": "file:./view.ts",

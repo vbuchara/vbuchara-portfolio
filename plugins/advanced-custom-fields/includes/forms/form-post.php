@@ -178,18 +178,18 @@ if ( ! class_exists( 'ACF_Form_Post' ) ) :
 		public function edit_form_after_title() {
 
 			// globals
-			global $post, $wp_meta_boxes;
+			global $project, $wp_meta_boxes;
 
 			// render post data
 			acf_form_data(
 				array(
 					'screen'  => 'post',
-					'post_id' => $post->ID,
+					'post_id' => $project->ID,
 				)
 			);
 
 			// render 'acf_after_title' metaboxes
-			do_meta_boxes( get_current_screen(), 'acf_after_title', $post );
+			do_meta_boxes( get_current_screen(), 'acf_after_title', $project );
 
 			$style = '';
 			if ( is_string( $this->style ) ) {

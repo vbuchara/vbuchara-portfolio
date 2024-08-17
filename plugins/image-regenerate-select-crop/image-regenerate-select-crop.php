@@ -5,7 +5,7 @@
  * Description: Regenerate and crop images, details and actions for image sizes registered and image sizes generated, clean up, placeholders, custom rules, register new image sizes, crop medium settings, WP-CLI commands, optimize images.
  * Text Domain: sirsc
  * Domain Path: /langs
- * Version:     8.0.2
+ * Version:     8.0.3
  * Author:      Iulia Cazan
  * Author URI:  https://profiles.wordpress.org/iulia-cazan
  * Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JJA37EHZXWUTJ
@@ -29,7 +29,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-define( 'SIRSC_VER', 8.02 );
+define( 'SIRSC_VER', 8.03 );
 define( 'SIRSC_FILE', __FILE__ );
 define( 'SIRSC_DIR', \plugin_dir_path( __FILE__ ) );
 define( 'SIRSC_URL', \plugin_dir_url( __FILE__ ) );
@@ -2657,6 +2657,50 @@ class SIRSC_Image_Regenerate_Select_Crop {
 	}
 
 	/**
+	 * Get SVG size from the viewport.
+	 *
+	 * @param  string|false $svg The file path to where the SVG file should be, false otherwise.
+	 * @return array|bool
+	 */
+	public static function svg_dimensions( $svg ) {
+		if ( empty( $svg ) ) {
+			return false;
+		}
+
+		$svg  = @simplexml_load_file( $svg );
+		$view = '';
+		if ( ! empty( $svg ) ) {
+			$attributes = $svg->attributes();
+			if ( ! empty( $attributes->viewBox ) ) {
+				if ( is_array( $attributes->viewBox ) ) {
+					$view = reset( $attributes->viewBox );
+				} else {
+					$view = $attributes->viewBox;
+				}
+			}
+		}
+
+		if ( empty( $view ) ) {
+			$svg = file_get_contents( $svg );
+			if ( ! empty( $svg ) && preg_match('/viewBox="([\d.\s-]+)"/', $svg, $matches ) ) {
+				$view = $matches[1];
+			}
+		}
+
+		if ( ! empty( $view ) ) {
+			list( $min_x, $min_y, $width, $height ) = explode( ' ', $view );
+
+			return [
+				'width'       => (int) $width,
+				'height'      => (int) $height,
+				'orientation' => ( $width > $height ) ? 'landscape' : 'portrait'
+			];
+		}
+
+		return false;
+	}
+
+	/**
 	 * Maybe filter initial metadata.
 	 *
 	 * @param  array $metadata      Computed metadata.
@@ -2672,6 +2716,18 @@ class SIRSC_Image_Regenerate_Select_Crop {
 		if ( ! wp_attachment_is_image( $attachment_id ) ) {
 			// Fail-fast.
 			return $metadata;
+		}
+
+		// Attempt to fix the SVG dimension when SSL operation failed due to routines:tls_process_server_certificate:certificate verify.
+		$mime = get_post_mime_type( $attachment_id );
+		if ( ! empty( $mime ) && substr_count( $mime, 'svg' ) ) {
+			$extra = self::svg_dimensions( wp_get_original_image_path( $attachment_id ) );
+			if ( ! empty( $extra ) ) {
+				$metadata = array_merge( $metadata, $extra );
+
+				// Fail-fast.
+				return $metadata;
+			}
 		}
 
 		if ( self::$wp_ver >= 5.3 ) {

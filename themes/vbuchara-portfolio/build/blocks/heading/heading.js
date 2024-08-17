@@ -27,10 +27,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/align-left.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/align-center.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/align-right.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/format-underline.js");
 /* harmony import */ var _constants_block_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @constants/block-styles */ "./src/constants/block-styles.ts");
 /* harmony import */ var _components_editor_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/editor-select */ "./src/components/editor-select.tsx");
-/* harmony import */ var _components_editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-color-gradient-picker */ "./src/components/editor-color-gradient-picker.tsx");
+/* harmony import */ var _components_editor_underline_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/editor-underline-settings */ "./src/components/editor-underline-settings.tsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 
@@ -95,34 +94,23 @@ function HeadingBlockControls({
   attributes,
   setAttributes
 }) {
-  const underlineButtonRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  const [showUnderlinePopover, setShowUnderlinePopover] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const headingIcon = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     return headingIcons.get(attributes.tagName) || _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"];
   }, [attributes.tagName]);
   const textAlignmentIcon = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     return textAlignmentIcons.get(attributes.textAlignment) || _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"];
   }, [attributes.textAlignment]);
-  function handleOnChangeUnderlineColor(value) {
+  function handleSetUnderline(newUnderline) {
     setAttributes({
       styles: {
         ...attributes.styles,
-        underlineColor: value,
-        underlineGradient: undefined
+        underlineColor: newUnderline.underlineColor,
+        underlineGradient: newUnderline.underlineGradient
       }
     });
   }
-  function handleOnChangeUnderlineGradient(value) {
-    setAttributes({
-      styles: {
-        ...attributes.styles,
-        underlineColor: undefined,
-        underlineGradient: value
-      }
-    });
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarDropdownMenu, {
         label: "Heading Size",
         icon: headingIcon,
@@ -187,24 +175,14 @@ function HeadingBlockControls({
           }),
           isActive: attributes.textAlignment === "right"
         }]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-        label: "Underline Color",
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_15__["default"],
-        ref: underlineButtonRef,
-        isActive: Boolean(attributes.styles.underlineColor || attributes.styles.underlineGradient),
-        onClick: () => setShowUnderlinePopover(true)
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_editor_underline_settings__WEBPACK_IMPORTED_MODULE_5__.EditorUnderlineSettings, {
+        underline: {
+          underlineColor: attributes.styles.underlineColor,
+          underlineGradient: attributes.styles.underlineGradient
+        },
+        setUnderline: handleSetUnderline
       })]
-    }), !showUnderlinePopover ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
-      anchor: underlineButtonRef.current,
-      variant: "toolbar",
-      onClose: () => setShowUnderlinePopover(false),
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_5__.EditorColorGradientPicker, {
-        colorValue: attributes.styles.underlineColor,
-        gradientValue: attributes.styles.underlineGradient,
-        onColorChange: handleOnChangeUnderlineColor,
-        onGradientChange: handleOnChangeUnderlineGradient
-      })
-    })]
+    })
   });
 }
 
@@ -256,12 +234,8 @@ function EditComponent(props) {
         "--text-align": attributes.textAlignment,
         "--line-height": attributes.styles.lineHeight,
         "--white-space": attributes.styles.whiteSpace,
-        ...(attributes.styles.underlineColor && {
-          "--underline-color": attributes.styles.underlineColor
-        }),
-        ...(attributes.styles.underlineGradient && {
-          "--underline-image": attributes.styles.underlineGradient
-        })
+        "--underline-color": attributes.styles.underlineColor || undefined,
+        "--underline-image": attributes.styles.underlineGradient || undefined
       }
     })]
   });
@@ -464,6 +438,74 @@ function EditorSelect({
     isSearchable: true,
     styles: selectStyles,
     ...props
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/editor-underline-settings.tsx":
+/*!******************************************************!*\
+  !*** ./src/components/editor-underline-settings.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EditorUnderlineSettings: () => (/* binding */ EditorUnderlineSettings)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/format-underline.js");
+/* harmony import */ var _editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor-color-gradient-picker */ "./src/components/editor-color-gradient-picker.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+function EditorUnderlineSettings(props) {
+  const {
+    underline,
+    setUnderline,
+    label
+  } = props;
+  const underlineButtonRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [showUnderlinePopover, setShowUnderlinePopover] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  function handleOnChangeUnderlineColor(value) {
+    setUnderline({
+      underlineColor: value,
+      underlineGradient: null
+    });
+  }
+  function handleOnChangeUnderlineGradient(value) {
+    setUnderline({
+      underlineColor: null,
+      underlineGradient: value
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+        label: label,
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+        ref: underlineButtonRef,
+        isActive: Boolean(underline.underlineColor || underline.underlineGradient),
+        onClick: () => setShowUnderlinePopover(true)
+      })
+    }), !showUnderlinePopover ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      anchor: underlineButtonRef.current,
+      variant: "toolbar",
+      onClose: () => setShowUnderlinePopover(false),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_color_gradient_picker__WEBPACK_IMPORTED_MODULE_2__.EditorColorGradientPicker, {
+        colorValue: underline.underlineColor || undefined,
+        gradientValue: underline.underlineGradient || undefined,
+        onColorChange: handleOnChangeUnderlineColor,
+        onGradientChange: handleOnChangeUnderlineGradient
+      })
+    })]
   });
 }
 
@@ -859,7 +901,7 @@ module.exports = window["wp"]["primitives"];
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;

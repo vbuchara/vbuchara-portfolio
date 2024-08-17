@@ -170,7 +170,7 @@ function ProjectCard(props) {
     idPrefix
   } = props;
   const projectImage = project.acf.project_image?.size_urls["project-image"] || _assets_images_project_default_image_png__WEBPACK_IMPORTED_MODULE_1__;
-  const projectImageAlt = project.acf.project_image?.alt || "No image for the project provided";
+  const projectImageAlt = project.acf.project_image?.alt || "No image or alt text for the project provided";
   const projectLink = projectArchiveLink ? `${projectArchiveLink}#${project.slug}` : "";
   const projectHtmlId = idPrefix ? `${idPrefix}-${project.slug}` : `project-card-${project.slug}`;
   const projectLinkRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
@@ -1006,7 +1006,7 @@ module.exports = window["wp"]["data"];
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;

@@ -23,13 +23,12 @@ import {
     headingLevel3,
     headingLevel4,
     headingLevel5,
-    formatUnderline
 } from "@wordpress/icons";
 
 import { WhiteSpaceOption, WhiteSpaceSelectOptions } from "@constants/block-styles";
 
 import { EditorSelect } from "@components/editor-select";
-import { EditorColorGradientPicker } from "@components/editor-color-gradient-picker";
+import { EditorUnderlineSettings, UnderlineStyles } from "@components/editor-underline-settings";
 
 import type { HeadingEditComponentProps } from "../edit";
 import type { HeadingAlignment, HeadingTagName } from "../heading";
@@ -116,10 +115,6 @@ export function HeadingBlockControls({
     attributes,
     setAttributes
 }: HeadingBlockControlsProps){
-    const underlineButtonRef = useRef<HTMLElement>(null);
-
-    const [showUnderlinePopover, setShowUnderlinePopover] = useState(false);
-
     const headingIcon = useMemo(() => {
         return headingIcons.get(attributes.tagName) || headingLevel1;
     }, [attributes.tagName]);
@@ -127,22 +122,12 @@ export function HeadingBlockControls({
         return textAlignmentIcons.get(attributes.textAlignment) || alignLeft;
     }, [attributes.textAlignment]);
 
-    function handleOnChangeUnderlineColor(value?: string){
+    function handleSetUnderline(newUnderline: UnderlineStyles){
         setAttributes({
             styles: {
                 ...attributes.styles,
-                underlineColor: value,
-                underlineGradient: undefined
-            }
-        });
-    }
-
-    function handleOnChangeUnderlineGradient(value?: string){
-        setAttributes({
-            styles: {
-                ...attributes.styles,
-                underlineColor: undefined,
-                underlineGradient: value
+                underlineColor: newUnderline.underlineColor,
+                underlineGradient: newUnderline.underlineGradient
             }
         });
     }
@@ -210,28 +195,14 @@ export function HeadingBlockControls({
                     },
                 ]}
             />
-            <ToolbarButton
-                label="Underline Color"
-                icon={formatUnderline}
-                ref={underlineButtonRef}
-                isActive={Boolean(attributes.styles.underlineColor || attributes.styles.underlineGradient)}
-                onClick={() => setShowUnderlinePopover(true)}
+            <EditorUnderlineSettings
+                underline={{ 
+                    underlineColor: attributes.styles.underlineColor, 
+                    underlineGradient: attributes.styles.underlineGradient
+                }}
+                setUnderline={handleSetUnderline}
             />
         </ToolbarGroup>
-        {!showUnderlinePopover ? "" : (
-        <Popover
-            anchor={underlineButtonRef.current}
-            variant="toolbar"
-            onClose={() => setShowUnderlinePopover(false)}
-        >
-            <EditorColorGradientPicker
-                colorValue={attributes.styles.underlineColor}
-                gradientValue={attributes.styles.underlineGradient}
-                onColorChange={handleOnChangeUnderlineColor}
-                onGradientChange={handleOnChangeUnderlineGradient}
-            />
-        </Popover>
-        )}
     </BlockControls>
     );
 }

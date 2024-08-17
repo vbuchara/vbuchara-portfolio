@@ -10,10 +10,17 @@ namespace SIRSC\Cron;
 
 define( 'SIRSC_JOBS_DB_VER', 2.0 );
 
-\add_filter( 'cron_schedules', __NAMESPACE__ . '\\custom_cron_frequency' ); // phpcs:ignore
-\add_action( 'shutdown', __NAMESPACE__ . '\\cron_sanity_check' );
+\add_action( 'init', __NAMESPACE__ . '\\add_cron_scheduled', 0 );
 \add_action( 'init', __NAMESPACE__ . '\\check_cron_scheduled_tasks' );
 \add_action( 'init', __NAMESPACE__ . '\\hookup_tasks', 60 );
+\add_action( 'shutdown', __NAMESPACE__ . '\\cron_sanity_check' );
+
+/**
+ * Add filter for the custom cron schedule.
+ */
+function add_cron_scheduled() {
+	\add_filter( 'cron_schedules', __NAMESPACE__ . '\\custom_cron_frequency' );
+}
 
 /**
  * Filter the usable args.
@@ -284,7 +291,7 @@ function run_task( $hook = '', $args = [] ) { // phpcs:ignore
 function custom_cron_frequency( array $schedules ): array {
 	if ( ! isset( $schedules['every_minute'] ) ) {
 		$schedules['every_minute'] = [
-			'interval' => 1 * 60,
+			'interval' => 60,
 			'display'  => \__( 'Every minute', 'sirsc' ),
 		];
 	}

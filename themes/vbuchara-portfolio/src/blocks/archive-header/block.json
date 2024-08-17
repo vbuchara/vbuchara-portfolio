@@ -1,0 +1,11 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "vbuchara-portfolio/archive-header",
+    "title": "Archive Header",
+    "category": "vbuchara-portfolio",
+    "editorScript": ["file:./archive-header.tsx", "vbuchara-portfolio-blocks-vendor"],
+    "editorStyle": "file:./archive-header.css",
+    "style": "file:./style-archive-header.css",
+    "render": "file:./render.php"
+}   

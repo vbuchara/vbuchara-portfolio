@@ -412,10 +412,10 @@ class SIRSC_Adons_Images_SEO {
 	 * Add the plugin menu.
 	 */
 	public static function rename_metaboxes() {
-		global $post;
+		global $project;
 
-		if ( ! empty( self::$settings['types'] ) && ! empty( $post->ID ) ) {
-			if ( 'attachment' === $post->post_type && ! \SIRSC\Helper\file_is_image( $post->guid ) ) {
+		if ( ! empty( self::$settings['types'] ) && ! empty( $project->ID ) ) {
+			if ( 'attachment' === $project->post_type && ! \SIRSC\Helper\file_is_image( $project->guid ) ) {
 				// Nor an image type.
 				return;
 			}
@@ -435,15 +435,15 @@ class SIRSC_Adons_Images_SEO {
 	 * Exposes the buttons info in the attachemnt edit page sidebar box.
 	 */
 	public static function rename_metaboxes_meta() {
-		global $post;
-		if ( empty( $post->ID ) ) {
+		global $project;
+		if ( empty( $project->ID ) ) {
 			return;
 		}
 		?>
 		<div class="sirsc_imgseo_meta sirsc-feature">
 			<p>
 				<?php
-				if ( 'attachment' === $post->post_type ) {
+				if ( 'attachment' === $project->post_type ) {
 					esc_html_e( 'You can rename this attachment files (including the files generated as image sizes) and other attributes.', 'sirsc' );
 				} else {
 					esc_html_e( 'You can rename and update attributes of some of the files already uploaded or attached to this post.', 'sirsc' );
@@ -456,7 +456,7 @@ class SIRSC_Adons_Images_SEO {
 					<span class="dashicons dashicons-admin-plugins"></span>
 					<span><?php esc_html_e( 'Settings', 'sirsc' ); ?></span>
 				</a>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::ADON_PAGE_SLUG . '&tab=rename&target=' . $post->ID ) ); ?>" class="button has-icon button-primary last">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . self::ADON_PAGE_SLUG . '&tab=rename&target=' . $project->ID ) ); ?>" class="button has-icon button-primary last">
 					<span class="dashicons dashicons-image-rotate-right"></span>
 					<span><?php esc_html_e( 'Images SEO', 'sirsc' ); ?></span>
 				</a>

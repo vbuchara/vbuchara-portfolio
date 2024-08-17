@@ -78,11 +78,30 @@ class PostHelpers {
         self::assert_post_type($projectPost, "project");
 
         $projectsArchive = get_post_type_archive_link("project");
-        $projectLink = !empty($projectsArchive) 
-            ? "$projectsArchive#$projectPost->post_name"
+        $formattedProjectsArchive = str_ends_with($projectsArchive, "/")
+            ? rtrim($projectsArchive, "/")
+            : $projectsArchive;
+
+        $projectLink = !empty($formattedProjectsArchive) 
+            ? "$formattedProjectsArchive#$projectPost->post_name"
             : "";
 
         return $projectLink;
+    }
+
+    public static function get_skill_link(WP_Post $skillPost){
+        self::assert_post_type($skillPost, "skill");
+
+        $skillsArchive = get_post_type_archive_link("skill");
+        $formattedSkillsArchive = str_ends_with($skillsArchive, "/")
+            ? rtrim($skillsArchive, "/")
+            : $skillsArchive;
+
+        $skillLink = !empty($formattedSkillsArchive) 
+           ? "$formattedSkillsArchive#$skillPost->post_name"
+            : "";
+
+        return $skillLink;
     }
 
     /**
