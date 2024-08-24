@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vbuchara-portfolio/experiences",
+  "title": "Experiences",
+  "category": "vbuchara-portfolio",
+  "editorScript": [
+    "file:./experiences.js",
+    "vbuchara-portfolio-blocks-vendor"
+  ],
+  "editorStyle": "file:./experiences.css",
+  "style": "file:./style-experiences.css",
+  "render": "file:./render.php"
+}

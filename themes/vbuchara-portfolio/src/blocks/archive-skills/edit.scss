@@ -1,0 +1,11 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+.wp-block-vbuchara-portfolio-archive-skills {
+    width: 100%;
+
+    @include media-breakpoint-md {
+        width: auto;
+    }
+}

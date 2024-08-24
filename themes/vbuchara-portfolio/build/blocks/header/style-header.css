@@ -268,6 +268,9 @@
   outline-width: 0px;
   outline-style: solid;
   z-index: 100;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   transition: color 0.5s ease-out, background-color 0.5s ease-out, border-color 0.5s ease-out;
 }
 @media (min-width: 768px) {

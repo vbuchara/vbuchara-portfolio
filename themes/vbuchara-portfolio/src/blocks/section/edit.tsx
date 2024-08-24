@@ -12,19 +12,10 @@ import { useBlockDefaultAttributes } from "@hooks/useBlockDefaultAttributes";
 
 import { SectionInspectorControls } from "./components/controls";
 
+import { sectionAllowedBlocks } from "./allowed-blocks";
 import type { SectionAttributesType } from "./section";
 
 const { default: sectionBlock } = await import("./block.json") as BlockJsonDefault<SectionAttributesType>;
-const { default: welcomeContainerBlock } = await import("@blocks/welcome-container/block.json") as BlockJsonDefault;
-const { default: containerBlock } = await import("@blocks/container/block.json") as BlockJsonDefault;
-const { default: imageBlock } = await import("@blocks/image/block.json") as BlockJsonDefault;
-const { default: headingBlock } = await import("@blocks/heading/block.json") as BlockJsonDefault;
-const { default: paragraphBlock } = await import("@blocks/paragraph/block.json") as BlockJsonDefault;
-const { default: buttonBlock } = await import("@blocks/button/block.json") as BlockJsonDefault;
-const { default: skillsBlock } = await import("@blocks/skills/block.json") as BlockJsonDefault;
-const { default: projectsBlock } = await import("@blocks/projects/block.json") as BlockJsonDefault;
-const { default: archiveHeaderBlock } = await import("@blocks/archive-header/block.json") as BlockJsonDefault;
-const { default: archiveProjectsBlock } = await import("@blocks/archive-projects/block.json") as BlockJsonDefault;
 
 export type SectionEditComponentProps = BlockEditProps<SectionAttributesType>;
 
@@ -63,18 +54,7 @@ export function EditComponent(props: SectionEditComponentProps){
             }}
         >
             <InnerBlocks
-                allowedBlocks={[
-                    welcomeContainerBlock.name,
-                    containerBlock.name,
-                    imageBlock.name,
-                    headingBlock.name,
-                    paragraphBlock.name,
-                    buttonBlock.name,
-                    skillsBlock.name,
-                    projectsBlock.name,
-                    archiveHeaderBlock.name,
-                    archiveProjectsBlock.name
-                ]}
+                allowedBlocks={sectionAllowedBlocks}
             />
         </div>
     </EditorWrapper>

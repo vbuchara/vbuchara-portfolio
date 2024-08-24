@@ -1,6 +1,7 @@
-import { store as coreStore, type GetRecordsHttpQuery } from "@wordpress/core-data";
-import { useSelect } from "@wordpress/data";
-import type { ProjectPost, SkillPost } from "wordpress-types";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useIntersection, useMeasure } from "react-use";
+import clsx from "clsx";
+import type { ProjectPost } from "wordpress-types";
 import SVG from "react-inlinesvg";
 
 import ProjectDefaultImageSrc from "@assets/images/project-default-image.png";
@@ -10,12 +11,11 @@ import { ReactComponent as OpenEye } from "@assets/svgs/eye-open.svg";
 import { ReactComponent as ClosedEye } from "@assets/svgs/eye-closed.svg";
 
 import { EditorAnchor } from "@components/editor-anchor";
+import { EditorAnimatedElement } from "@components/editor-animated-element";
+
+import { useDevelopedSkills } from "@hooks/useDevelopedSkills";
 
 import { getTitle } from "@utils/getTitle";
-import { useEffect, useMemo, useRef, useState } from "react";
-import clsx from "clsx";
-import { useIntersection, useMeasure } from "react-use";
-import { EditorAnimatedElement } from "@src/components/editor-animated-element";
 
 export interface ProjectItemProps {
     project: ProjectPost,
@@ -29,23 +29,7 @@ export function ProjectItem(props: ProjectItemProps){
     const projectImage = project.acf.project_image?.size_urls["project-image"] || ProjectDefaultImageSrc;
     const projectImageAlt = project.acf.project_image?.alt || "No image or alt text for the project provided";
 
-    const skillPostType = useSelect((select) => {
-        return select(coreStore).getPostType("skill");
-    }, []);
-
-    const skills = useSelect((select) => {
-        const skills = select(coreStore).getEntityRecords("postType", "skill", {
-            context: "view",
-            per_page: -1,
-            include: project.acf.developed_skills
-        } satisfies GetRecordsHttpQuery) as SkillPost[] | null;
-
-        return skills?.toSorted((leftSkill, rightSkill) => {
-            const { developed_skills } = project.acf;
-
-            return developed_skills.indexOf(leftSkill.id) - developed_skills.indexOf(rightSkill.id);
-        });
-    }, []);
+    const { skills, skillsArchive } = useDevelopedSkills(project.acf.developed_skills);
 
     const descriptionRef = useRef<HTMLParagraphElement | null>(null);
     const skillsListRef = useRef<HTMLUListElement | null>(null);
@@ -166,7 +150,7 @@ export function ProjectItem(props: ProjectItemProps){
                     >
                         <EditorAnchor 
                             className={`${classPrefix}__item-skills-link`}
-                            href={`${skillPostType?.archive_link || ""}#${skill.slug}`}
+                            href={`${skillsArchive || ""}#${skill.slug}`}
                             title={getTitle(skill)}
                         >
                             <SVG

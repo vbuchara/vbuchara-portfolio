@@ -147,6 +147,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Min Height"
+                        className="portfolio-editor__control"
                         value={attributes.styles.minHeight}
                         onChange={(value) => setAttributes({ 
                             ...attributes.styles,
@@ -165,6 +166,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Block (Top and Bottom)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingBlock || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingBlock")}
                     />
@@ -172,6 +174,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Inline (Left and Right)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingInline || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingInline")}
                     />
@@ -179,6 +182,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Block Start (Top)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingBlockStart || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingBlockStart")}
                     />
@@ -186,6 +190,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Block End (Bottom)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingBlockEnd || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingBlockEnd")}
                     />
@@ -193,6 +198,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Inline Start (Left)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingInlineStart || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingInlineStart")}
                     />
@@ -200,6 +206,7 @@ export function SectionInspectorControls({
                 <PanelRow>
                     <TextControl
                         label="Inline End (Right)"
+                        className="portfolio-editor__control"
                         value={attributes.styles.padding.paddingInlineEnd || ""}
                         onChange={getHandleOnChangeTextPaddingStyle("paddingInlineEnd")}
                     />

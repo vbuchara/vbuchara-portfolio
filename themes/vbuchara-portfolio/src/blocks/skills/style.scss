@@ -16,6 +16,6 @@
     }
 
     &__card {
-        @include skill-card.skill-card();
+        @include skill-card.skill-card($hide-cards-on-card-count: 5);
     }
 }

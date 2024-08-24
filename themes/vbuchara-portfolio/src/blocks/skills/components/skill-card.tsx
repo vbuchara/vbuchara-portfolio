@@ -8,11 +8,12 @@ import { getSkillLevel } from "@utils/getSkillLevel";
 
 export interface SkillCardProps {
     skill: SkillPost,
-    classPrefix: string
+    classPrefix: string,
+    htmlId?: string
 }
 
 export function SkillCard(props: SkillCardProps){
-    const { skill, classPrefix } = props;
+    const { skill, classPrefix, htmlId } = props;
     const skillCardClasses = clsx({ 
         [`${classPrefix}__card`]: true, 
         [`${classPrefix}__card--animated`]: true
@@ -20,6 +21,7 @@ export function SkillCard(props: SkillCardProps){
 
     return (
     <div 
+        id={htmlId}
         className={skillCardClasses}
     >
         <div className={`${classPrefix}__card-front`}>

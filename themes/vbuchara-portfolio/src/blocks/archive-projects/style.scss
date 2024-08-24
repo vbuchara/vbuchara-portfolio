@@ -2,6 +2,8 @@
 @use "@styles/abstract/mixins" as *;
 @use "@styles/abstract/breakpoints" as *;
 
+@use "@styles/components/developed-skills" with ($mixin-only: true);
+
 .portfolio-archive-projects {
     display: grid;
     grid-template-columns: 1fr;
@@ -171,61 +173,9 @@
         }
 
         &-skills {
-            $skills-selector: &;
-
-            --font-size: clamp(1.6rem, 1.39vw, 2rem);
-            --icon-size: 3.5rem;
-            --row-gap: clamp(0.5rem, 0.695vw, 1rem);
-
-            display: grid;
-            grid-template-columns: 1fr fit-content(100%);
-            grid-template-rows: repeat(2, fit-content(100%));
+            @include developed-skills.developed-skills();
 
             margin-block-start: 2rem;
-            
-            @include media-breakpoint-md {
-                margin-block-start: clamp(1rem, 1.0417vw, 1.5rem);
-            }
-
-            &--expanded {
-                #{$skills-selector}-list {
-                    max-height: none;
-                }
-            }
-
-            &-title {
-                font-size: var(--font-size);
-                line-height: var(--line-height);
-                font-weight: 600;
-
-                margin-block-end: clamp(0.5rem, 0.695vw, 1rem);
-            }
-
-            &-list {
-                list-style: none;
-
-                grid-column: 1 / -1;
-                display: grid;
-                grid-template-columns: repeat(auto-fill, 3.5rem);
-                row-gap: var(--row-gap);
-                column-gap: clamp(1rem, 1.0417vw, 1.5rem);
-                align-items: center;
-
-                max-height: var(--icon-size);
-                height: 100%;
-
-                overflow: hidden;
-            }
-
-            &-link {
-                text-decoration: none;
-                color: inherit;
-            }
-
-            &-icon {
-                width: var(--icon-size);
-                height: var(--icon-size);
-            }
         }   
 
         &-links {

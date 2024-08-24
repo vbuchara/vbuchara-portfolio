@@ -228,6 +228,7 @@ declare module "wordpress-types" {
 
     export * from "wordpress-types/skill";
     export * from "wordpress-types/project";
+    export * from "wordpress-types/experience";
 }
 
 declare module "wordpress-types/skill" {
@@ -257,4 +258,47 @@ declare module "wordpress-types/project" {
         project_github_link: string,
         project_site_link: string
     }
+}
+
+declare module "wordpress-types/experience" {
+    import { WP_Post } from "wordpress-types";
+
+    export type ExperienceType = "educational" | "work";
+
+    export type ExperiencePost = 
+        | WorkExperiencePost
+        | EducationalExperiencePost; 
+
+    export interface WorkExperiencePost extends WP_Post {
+        acf: WorkExperiencePostCustomFields
+    }
+
+    export interface EducationalExperiencePost extends WP_Post {
+        acf: EducationalExperiencePostCustomFields
+    }
+
+    export interface ExperiencePostCommonCustomFields {
+        type: ExperienceType,
+        description: string,
+        period_start: string,
+        period_end: string,
+        company?: string,
+        institution?: string,
+        developed_skills: number[]
+    }
+
+    export interface WorkExperiencePostCustomFields extends ExperiencePostCommonCustomFields{
+        type: "work",
+        company: string,
+        institution?: undefined,
+    }
+
+    export interface EducationalExperiencePostCustomFields extends ExperiencePostCommonCustomFields {
+        type: "educational",
+        company?: undefined,
+        institution: string,
+    }
+    export type ExperiencePostCustomFields = 
+        | WorkExperiencePostCustomFields
+        | EducationalExperiencePostCustomFields;
 }

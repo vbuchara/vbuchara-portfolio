@@ -55,13 +55,13 @@
 ?>
 <div class="portfolio-skills">
     <?php foreach($skills as $skill): ?>
-    <?php
-        $iconSvg = SvgHelpers::get_svg_element_from_media(get_field("skill_icon", $skill->ID));
-        if(empty($iconSvg)) continue;
+        <?php
+            $iconSvg = SvgHelpers::get_svg_element_from_media(get_field("skill_icon", $skill->ID));
+            if(empty($iconSvg)) continue;
 
-        $iconSvg->setAttribute("class", "portfolio-skills__card-front-icon");
-        $iconSvg->setAttribute("fill", "currentColor");
-    ?>
+            $iconSvg->setAttribute("class", "portfolio-skills__card-front-icon");
+            $iconSvg->setAttribute("fill", "currentColor");
+        ?>
         <div 
             class="portfolio-skills__card portfolio-skills__card--animated"
         >

@@ -2,6 +2,59 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/blocks/section/allowed-blocks.ts":
+/*!**********************************************!*\
+  !*** ./src/blocks/section/allowed-blocks.ts ***!
+  \**********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   sectionAllowedBlocks: () => (/* binding */ sectionAllowedBlocks)
+/* harmony export */ });
+const {
+  default: welcomeContainerBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_welcome-container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/welcome-container/block.json */ "./src/blocks/welcome-container/block.json", 19));
+const {
+  default: containerBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/container/block.json */ "./src/blocks/container/block.json", 19));
+const {
+  default: imageBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_image_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/image/block.json */ "./src/blocks/image/block.json", 19));
+const {
+  default: headingBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_heading_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/heading/block.json */ "./src/blocks/heading/block.json", 19));
+const {
+  default: paragraphBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_paragraph_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/paragraph/block.json */ "./src/blocks/paragraph/block.json", 19));
+const {
+  default: buttonBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_button_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/button/block.json */ "./src/blocks/button/block.json", 19));
+const {
+  default: skillsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_skills_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/skills/block.json */ "./src/blocks/skills/block.json", 19));
+const {
+  default: projectsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/projects/block.json */ "./src/blocks/projects/block.json", 19));
+const {
+  default: archiveHeaderBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-header_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-header/block.json */ "./src/blocks/archive-header/block.json", 19));
+const {
+  default: archiveProjectsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-projects/block.json */ "./src/blocks/archive-projects/block.json", 19));
+const {
+  default: archiveSkillsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-skills_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-skills/block.json */ "./src/blocks/archive-skills/block.json", 19));
+const {
+  default: experiencesBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_experiences_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/experiences/block.json */ "./src/blocks/experiences/block.json", 19));
+const sectionAllowedBlocks = [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name, archiveHeaderBlock.name, archiveProjectsBlock.name, archiveSkillsBlock.name, experiencesBlock.name];
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
 /***/ "./src/blocks/section/components/controls.tsx":
 /*!****************************************************!*\
   !*** ./src/blocks/section/components/controls.tsx ***!
@@ -137,6 +190,7 @@ function SectionInspectorControls({
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Min Height",
+            className: "portfolio-editor__control",
             value: attributes.styles.minHeight,
             onChange: value => setAttributes({
               ...attributes.styles,
@@ -153,36 +207,42 @@ function SectionInspectorControls({
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Block (Top and Bottom)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingBlock || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingBlock")
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Inline (Left and Right)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingInline || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingInline")
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Block Start (Top)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingBlockStart || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingBlockStart")
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Block End (Bottom)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingBlockEnd || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingBlockEnd")
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Inline Start (Left)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingInlineStart || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingInlineStart")
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
             label: "Inline End (Right)",
+            className: "portfolio-editor__control",
             value: attributes.styles.padding.paddingInlineEnd || "",
             onChange: getHandleOnChangeTextPaddingStyle("paddingInlineEnd")
           })
@@ -232,8 +292,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editor_padding_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @components/editor-padding-settings */ "./src/components/editor-padding-settings.tsx");
 /* harmony import */ var _hooks_useBlockDefaultAttributes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @hooks/useBlockDefaultAttributes */ "./src/hooks/useBlockDefaultAttributes.ts");
 /* harmony import */ var _components_controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/controls */ "./src/blocks/section/components/controls.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _allowed_blocks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./allowed-blocks */ "./src/blocks/section/allowed-blocks.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_allowed_blocks__WEBPACK_IMPORTED_MODULE_9__]);
+_allowed_blocks__WEBPACK_IMPORTED_MODULE_9__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -247,36 +311,6 @@ __webpack_require__.r(__webpack_exports__);
 const {
   default: sectionBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_section_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! ./block.json */ "./src/blocks/section/block.json", 19));
-const {
-  default: welcomeContainerBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_welcome-container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/welcome-container/block.json */ "./src/blocks/welcome-container/block.json", 19));
-const {
-  default: containerBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_container_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/container/block.json */ "./src/blocks/container/block.json", 19));
-const {
-  default: imageBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_image_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/image/block.json */ "./src/blocks/image/block.json", 19));
-const {
-  default: headingBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_heading_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/heading/block.json */ "./src/blocks/heading/block.json", 19));
-const {
-  default: paragraphBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_paragraph_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/paragraph/block.json */ "./src/blocks/paragraph/block.json", 19));
-const {
-  default: buttonBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_button_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/button/block.json */ "./src/blocks/button/block.json", 19));
-const {
-  default: skillsBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_skills_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/skills/block.json */ "./src/blocks/skills/block.json", 19));
-const {
-  default: projectsBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/projects/block.json */ "./src/blocks/projects/block.json", 19));
-const {
-  default: archiveHeaderBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-header_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-header/block.json */ "./src/blocks/archive-header/block.json", 19));
-const {
-  default: archiveProjectsBlock
-} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-projects_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-projects/block.json */ "./src/blocks/archive-projects/block.json", 19));
 function EditComponent(props) {
   const {
     attributes,
@@ -295,11 +329,11 @@ function EditComponent(props) {
   const gridStyles = (0,_components_editor_grid_settings__WEBPACK_IMPORTED_MODULE_4__.getGridSettingsVariables)(styles.grid);
   const paddingStyles = (0,_components_editor_padding_settings__WEBPACK_IMPORTED_MODULE_6__.getPaddingSettingsVariables)(styles.padding);
   const backgroundImageStyles = (0,_components_editor_background_image_settings__WEBPACK_IMPORTED_MODULE_5__.getBackgroundImageSettingVariables)(attributes.backgroundImage);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_3__.EditorWrapper, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_8__.SectionInspectorControls, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_components_editor_wrapper__WEBPACK_IMPORTED_MODULE_3__.EditorWrapper, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_controls__WEBPACK_IMPORTED_MODULE_8__.SectionInspectorControls, {
       attributes: attributes,
       setAttributes: setAttributes
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
       className: "site-section site-section--editor",
       style: {
         ...gridStyles,
@@ -311,8 +345,8 @@ function EditComponent(props) {
           "--background-image": styles.backgroundGradient
         })
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
-        allowedBlocks: [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name, archiveHeaderBlock.name, archiveProjectsBlock.name]
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
+        allowedBlocks: _allowed_blocks__WEBPACK_IMPORTED_MODULE_9__.sectionAllowedBlocks
       })
     })]
   });
@@ -614,19 +648,21 @@ function EditorGridSettings(props) {
     children: [disableGridProperties?.gridTemplateColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Template Columns",
+        className: "portfolio-editor__control",
         value: grid.gridTemplateColumns,
         onChange: getHandleOnChangeTextGridStyle("gridTemplateColumns")
       })
     }), disableGridProperties?.gridTemplateRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Template Rows",
+        className: "portfolio-editor__control",
         value: grid.gridTemplateRows,
         onChange: getHandleOnChangeTextGridStyle("gridTemplateRows")
       })
     }), disableGridProperties?.gridAutoFlow ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Grid Auto Flow",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions, "gridAutoFlow"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions,
@@ -636,31 +672,35 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.gridAutoColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Auto Columns",
+        className: "portfolio-editor__control",
         value: grid.gridAutoColumns,
         onChange: getHandleOnChangeTextGridStyle("gridAutoColumns")
       })
     }), disableGridProperties?.gridAutoRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Auto Rows",
+        className: "portfolio-editor__control",
         value: grid.gridAutoRows,
         onChange: getHandleOnChangeTextGridStyle("gridAutoRows")
       })
     }), disableGridProperties?.columnGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Column Gap",
+        className: "portfolio-editor__control",
         value: grid.columnGap,
         onChange: getHandleOnChangeTextGridStyle("columnGap")
       })
     }), disableGridProperties?.rowGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Row Gap",
+        className: "portfolio-editor__control",
         value: grid.rowGap,
         onChange: getHandleOnChangeTextGridStyle("rowGap")
       })
     }), disableGridProperties?.justifyContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Justify Content",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions, "justifyContent"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions,
@@ -670,7 +710,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.alignContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Align Content",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions, "alignContent"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions,
@@ -680,7 +720,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.justifyItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Justify Items",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions, "justifyItems"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions,
@@ -690,7 +730,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.alignItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Align Items",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions, "alignItems"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions,

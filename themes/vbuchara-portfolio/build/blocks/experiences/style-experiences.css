@@ -1,0 +1,83 @@
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/experiences/style.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+.portfolio-experiences {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.portfolio-experiences__item {
+  --background-color: #14003f;
+  --background-image: none;
+  --color: #f7f4f3;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 0.347vw, 0.5rem);
+  border-radius: 10px;
+  padding-inline: 2.5rem;
+  padding-block: 2rem;
+  color: var(--color);
+  background-image: var(--background-image);
+  background-color: var(--background-color);
+  max-width: calc(100vw - 4rem);
+}
+.portfolio-experiences__item--work {
+  --background-image: linear-gradient(180deg, #f48498 0%, #92140c 70%);
+}
+.portfolio-experiences__item--educational {
+  --background-image: linear-gradient(180deg, #8F93EF 0%, #8789c0 100%);
+}
+.portfolio-experiences__item-title {
+  font-size: clamp(2.4rem, 2.223vw, 3.2rem);
+  color: var(--color);
+}
+.portfolio-experiences__item-subtitle {
+  font-size: clamp(2rem, 1.667vw, 2.4rem);
+  color: var(--color);
+}
+.portfolio-experiences__item-description {
+  font-size: clamp(1.8rem, 1.389vw, 2rem);
+  font-weight: 600;
+  color: var(--color);
+  margin-block: clamp(1.5rem, 1.39vw, 2rem);
+}
+.portfolio-experiences__item-skills {
+  --font-size: clamp(1.6rem, 1.39vw, 2rem);
+  --icon-size: 3.5rem;
+  --row-gap: clamp(0.5rem, 0.695vw, 1rem);
+  display: grid;
+  grid-template-columns: 1fr fit-content(100%);
+  grid-template-rows: repeat(2, fit-content(100%));
+}
+@media (min-width: 768px) {
+  .portfolio-experiences__item-skills {
+    margin-block-start: clamp(1rem, 1.0417vw, 1.5rem);
+  }
+}
+.portfolio-experiences__item-skills-title {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  font-weight: 600;
+  margin-block-end: clamp(0.5rem, 0.695vw, 1rem);
+}
+.portfolio-experiences__item-skills-list {
+  list-style: none;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 3.5rem);
+  row-gap: var(--row-gap);
+  -moz-column-gap: clamp(1rem, 1.0417vw, 1.5rem);
+       column-gap: clamp(1rem, 1.0417vw, 1.5rem);
+  align-items: center;
+  overflow: hidden;
+}
+.portfolio-experiences__item-skills-link {
+  text-decoration: none;
+  color: inherit;
+}
+.portfolio-experiences__item-skills-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+/*# sourceMappingURL=style-experiences.css.map*/

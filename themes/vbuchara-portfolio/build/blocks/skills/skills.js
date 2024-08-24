@@ -197,13 +197,15 @@ __webpack_require__.r(__webpack_exports__);
 function SkillCard(props) {
   const {
     skill,
-    classPrefix
+    classPrefix,
+    htmlId
   } = props;
   const skillCardClasses = (0,clsx__WEBPACK_IMPORTED_MODULE_0__["default"])({
     [`${classPrefix}__card`]: true,
     [`${classPrefix}__card--animated`]: true
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    id: htmlId,
     className: skillCardClasses,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: `${classPrefix}__card-front`,

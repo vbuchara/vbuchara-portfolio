@@ -93,6 +93,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Grid Template Columns"
+                className="portfolio-editor__control"
                 value={grid.gridTemplateColumns}
                 onChange={getHandleOnChangeTextGridStyle("gridTemplateColumns")}
             />
@@ -102,6 +103,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Grid Template Rows"
+                className="portfolio-editor__control"
                 value={grid.gridTemplateRows}
                 onChange={getHandleOnChangeTextGridStyle("gridTemplateRows")}
             />
@@ -111,7 +113,7 @@ export function EditorGridSettings<
         <PanelRow>
             <BaseControl
                 label="Grid Auto Flow"
-                className="site-section__editor-control"
+                className="portfolio-editor__control"
             >
                 <EditorSelect
                     value={getGridStylePropertySelected(GridAutoFlowOptions, "gridAutoFlow")}
@@ -125,6 +127,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Grid Auto Columns"
+                className="portfolio-editor__control"
                 value={grid.gridAutoColumns}
                 onChange={getHandleOnChangeTextGridStyle("gridAutoColumns")}
             />
@@ -134,6 +137,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Grid Auto Rows"
+                className="portfolio-editor__control"
                 value={grid.gridAutoRows}
                 onChange={getHandleOnChangeTextGridStyle("gridAutoRows")}
             />
@@ -143,6 +147,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Column Gap"
+                className="portfolio-editor__control"
                 value={grid.columnGap}
                 onChange={getHandleOnChangeTextGridStyle("columnGap")}
             />
@@ -152,6 +157,7 @@ export function EditorGridSettings<
         <PanelRow>
             <TextControl
                 label="Row Gap"
+                className="portfolio-editor__control"
                 value={grid.rowGap}
                 onChange={getHandleOnChangeTextGridStyle("rowGap")}
             />
@@ -161,7 +167,7 @@ export function EditorGridSettings<
         <PanelRow>
             <BaseControl
                 label="Justify Content"
-                className="site-section__editor-control"
+                className="portfolio-editor__control"
             >
                 <EditorSelect
                     value={getGridStylePropertySelected(JustifyContentOptions, "justifyContent")}
@@ -175,7 +181,7 @@ export function EditorGridSettings<
         <PanelRow>
             <BaseControl
                 label="Align Content"
-                className="site-section__editor-control"
+                className="portfolio-editor__control"
             >
                 <EditorSelect
                     value={getGridStylePropertySelected(AlignContentOptions, "alignContent")}
@@ -189,7 +195,7 @@ export function EditorGridSettings<
         <PanelRow>
             <BaseControl
                 label="Justify Items"
-                className="site-section__editor-control"
+                className="portfolio-editor__control"
             >
                 <EditorSelect
                     value={getGridStylePropertySelected(JustifyItemsOptions, "justifyItems")}
@@ -203,7 +209,7 @@ export function EditorGridSettings<
         <PanelRow>
             <BaseControl
                 label="Align Items"
-                className="site-section__editor-control"
+                className="portfolio-editor__control"
             >
                 <EditorSelect
                     value={getGridStylePropertySelected(AlignItemsOptions, "alignItems")}

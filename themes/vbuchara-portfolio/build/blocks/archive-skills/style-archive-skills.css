@@ -1,0 +1,163 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/archive-skills/style.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+.portfolio-archive-skills {
+  --card-size: clamp(13.5rem, 17.361vw, 25rem);
+  --cards-gap: clamp(1.5rem, 1.7361vw, 2.5rem);
+  --column-size: minmax(calc((var(--card-size) * 2) + var(--cards-gap)), min-content);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--column-size));
+  grid-auto-rows: auto;
+  -moz-column-gap: clamp(1rem, 5.555vw, 8rem);
+       column-gap: clamp(1rem, 5.555vw, 8rem);
+  row-gap: clamp(2rem, 2.777vw, 4rem);
+  justify-content: center;
+  width: 100%;
+  padding-inline: 1rem;
+}
+@media (min-width: 768px) {
+  .portfolio-archive-skills {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: normal;
+    width: auto;
+    padding-inline: 0;
+  }
+}
+.portfolio-archive-skills__card {
+  --background-color: #14003f;
+  --color: #f7f4f3;
+  --border-radius: 10px;
+  --focus-visible-outline-color: #92140c;
+  --card-size: inherit;
+  --cards-gap: inherit;
+  position: relative;
+  border-radius: var(--border-radius);
+  display: flex;
+  gap: var(--cards-gap);
+}
+@media (min-width: 768px) {
+  .portfolio-archive-skills__card {
+    justify-self: start;
+  }
+  .portfolio-archive-skills__card:nth-child(2n) {
+    justify-self: end;
+  }
+}
+.portfolio-archive-skills__card-front, .portfolio-archive-skills__card-back {
+  width: var(--card-size);
+  height: var(--card-size);
+}
+.portfolio-archive-skills__card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block-start: 1.5rem;
+  padding-block-end: 1.5rem;
+  padding-inline: clamp(1rem, 2.44vw, 3.5rem);
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+@media (min-width: 768px) {
+  .portfolio-archive-skills__card-front {
+    gap: clamp(0px, 1.39vw, 2rem);
+    padding-block-start: 2.4rem;
+    padding-block-end: 1rem;
+  }
+}
+.portfolio-archive-skills__card-front-icon {
+  color: var(--color);
+  width: clamp(5rem, 10.417vw, 15rem);
+  height: clamp(5rem, 10.417vw, 15rem);
+}
+.portfolio-archive-skills__card-front-title {
+  color: var(--color);
+  font-size: clamp(2.4rem, 2.5vw, 3.6rem);
+  white-space: nowrap;
+}
+.portfolio-archive-skills__card-back {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: var(--background-color);
+  padding-block: 1.5rem;
+  padding-inline: clamp(0.2rem, 0.695vw, 1rem);
+  border-radius: var(--border-radius);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.portfolio-archive-skills__card-back-title, .portfolio-archive-skills__card-back-link {
+  color: var(--color);
+  font-size: clamp(1.4rem, 1.806vw, 2.6rem);
+  font-weight: 600;
+}
+.portfolio-archive-skills__card-back-title {
+  text-align: center;
+  line-height: 1.1;
+}
+.portfolio-archive-skills__card-back-link {
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: auto;
+  position: relative;
+  outline-color: var(--focus-visible-outline-color);
+  outline-style: solid;
+  outline-width: 0px;
+}
+.portfolio-archive-skills__card-back-link:focus-visible {
+  outline-offset: 2px;
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--focus-visible-outline-color);
+}
+.portfolio-archive-skills__card-back-link:is(*, #priority1) {
+  text-decoration: none;
+}
+.portfolio-archive-skills__card-back-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 0.1em;
+  margin-inline: auto;
+  background-color: var(--color);
+  scale: 0 1;
+  transform-origin: center;
+  transition: scale 300ms ease-in 0s;
+  will-change: scale;
+}
+.portfolio-archive-skills__card-back-link:hover::after, .portfolio-archive-skills__card-back-link:focus-visible::after {
+  scale: 1 1;
+}
+.portfolio-archive-skills__card-back-link:focus-visible {
+  outline-offset: 4px;
+  outline-width: 2px;
+}
+.portfolio-archive-skills__card-back-icon {
+  color: var(--color);
+  width: clamp(4rem, 6.95vw, 10rem);
+  height: clamp(4rem, 6.95vw, 10rem);
+}
+.portfolio-archive-skills__card:nth-child(4n+1) {
+  --background-color: #14003f;
+}
+.portfolio-archive-skills__card:nth-child(4n+2) {
+  --background-color: #92140c;
+  --focus-visible-outline-color: #14003f;
+}
+.portfolio-archive-skills__card:nth-child(4n+3) {
+  --background-color: #f48498;
+  --focus-visible-outline-color: #14003f;
+}
+.portfolio-archive-skills__card:nth-child(4n+4) {
+  --background-color: #8789c0;
+}
+
+/*# sourceMappingURL=style-archive-skills.css.map*/

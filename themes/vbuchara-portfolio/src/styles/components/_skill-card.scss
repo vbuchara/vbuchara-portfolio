@@ -5,8 +5,10 @@
 $mixin-only: false !default;
 
 @mixin skill-card(
-    $animated: true,
-    $separate-front-and-back: false
+    $separate-front-and-back: false,
+    $hide-cards-on-card-count: null,
+    $card-size: clamp(13.5rem, 17.361vw, 25rem),
+    $cards-gap: clamp(1.5rem, 1.7361vw, 2.5rem),
 ){
     $card-selector: &;
     $card-id: unique-id();
@@ -16,50 +18,35 @@ $mixin-only: false !default;
     --border-radius: 10px;
     --focus-visible-outline-color: #{$penn-red};
 
-    width: clamp(13.5rem, 17.361vw, 25rem);
-    height: clamp(13.5rem, 17.361vw, 25rem);
+    --card-size: #{$card-size};
+    --cards-gap: #{$cards-gap};
 
     position: relative;
 
     border-radius: var(--border-radius);
 
-    &:nth-child(4n + 1) {
-        --background-color: #{$russian-violet};
-    }
+    @if ($separate-front-and-back == true) {
+        display: flex;
+        gap: var(--cards-gap);
 
-    &:nth-child(4n + 2) {
-        --background-color: #{$penn-red};
-        --focus-visible-outline-color: #{$russian-violet};
-    }
+        &-front, &-back {
+            width: var(--card-size);
+            height: var(--card-size);
+        } 
+    } @else {
+        width: var(--card-size);
+        height: var(--card-size);
 
-    &:nth-child(4n + 3) {
-        --background-color: #{$salmon-pink};
-        --focus-visible-outline-color: #{$russian-violet};
-    }
-
-    &:nth-child(4n + 4) {
-        --background-color: #{$cool-gray};
-    }
-
-    &:nth-child(n + 5) {
-        display: none;
-        visibility: hidden;
-        pointer-events: none;
-
-        @include media-breakpoint-md {
-            display: block;
-            visibility: visible;
-            pointer-events: auto;
-        }
+        &-front, &-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        } 
     }
 
     &-front {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -96,11 +83,6 @@ $mixin-only: false !default;
     }
 
     &-back {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         z-index: 1;
 
         display: flex;
@@ -156,7 +138,39 @@ $mixin-only: false !default;
         }
     }
 
-    @if($animated == true){
+    &:nth-child(4n + 1) {
+        --background-color: #{$russian-violet};
+    }
+
+    &:nth-child(4n + 2) {
+        --background-color: #{$penn-red};
+        --focus-visible-outline-color: #{$russian-violet};
+    }
+
+    &:nth-child(4n + 3) {
+        --background-color: #{$salmon-pink};
+        --focus-visible-outline-color: #{$russian-violet};
+    }
+
+    &:nth-child(4n + 4) {
+        --background-color: #{$cool-gray};
+    }
+
+    @if($hide-cards-on-card-count != null){
+        &:nth-child(n + #{$hide-cards-on-card-count}) {
+            display: none;
+            visibility: hidden;
+            pointer-events: none;
+    
+            @include media-breakpoint-md {
+                display: block;
+                visibility: visible;
+                pointer-events: auto;
+            }
+        }
+    }
+
+    @if($separate-front-and-back == false){
         &--animated {
             #{$card-selector}-front {
                 animation-name: flip-to-front-#{$card-id};

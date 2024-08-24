@@ -1,0 +1,64 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@use "@styles/components/developed-skills" with ($mixin-only: true);
+
+.portfolio-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    &__item {
+        $experience-item-selector: &;
+
+        --background-color: #{$russian-violet};
+        --background-image: none;
+        --color: #{$white-smoke};
+
+        display: flex;
+        flex-direction: column;
+        gap: clamp(0.4rem, 0.347vw, 0.5rem);
+        
+        border-radius: 10px;
+        
+        padding-inline: 2.5rem;
+        padding-block: 2rem;
+        
+        color: var(--color);
+        background-image: var(--background-image);
+        background-color: var(--background-color);
+
+        max-width: calc(100vw - 4rem);
+
+        &--work {
+            --background-image: #{$salmon-pink-penn-red-gradient};
+        }
+
+        &--educational {
+            --background-image: #{$tropical-indigo-cool-gray-gradient};
+        }
+
+        &-title {
+            font-size: clamp(2.4rem, 2.223vw, 3.2rem);
+            color: var(--color);
+        }
+
+        &-subtitle {
+            font-size: clamp(2rem, 1.667vw, 2.4rem);
+            color: var(--color);
+        }
+
+        &-description {
+            font-size: clamp(1.8rem, 1.389vw, 2rem);
+            font-weight: 600;
+            color: var(--color);
+
+            margin-block: clamp(1.5rem, 1.39vw, 2rem);
+        }
+
+        &-skills {
+            @include developed-skills.developed-skills($expandable: false);
+        }   
+    }
+}

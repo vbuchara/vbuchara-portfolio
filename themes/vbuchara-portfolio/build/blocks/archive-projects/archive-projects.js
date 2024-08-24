@@ -225,27 +225,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ProjectItem: () => (/* binding */ ProjectItem)
 /* harmony export */ });
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_inlinesvg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-inlinesvg */ "./node_modules/react-inlinesvg/dist/index.mjs");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useMeasure.js");
+/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useIntersection.js");
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.mjs");
+/* harmony import */ var react_inlinesvg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-inlinesvg */ "./node_modules/react-inlinesvg/dist/index.mjs");
 /* harmony import */ var _assets_images_project_default_image_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @assets/images/project-default-image.png */ "./assets/images/project-default-image.png");
 /* harmony import */ var _assets_svgs_github_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @assets/svgs/github.svg */ "./assets/svgs/github.svg");
 /* harmony import */ var _assets_svgs_site_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @assets/svgs/site.svg */ "./assets/svgs/site.svg");
 /* harmony import */ var _assets_svgs_eye_open_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @assets/svgs/eye-open.svg */ "./assets/svgs/eye-open.svg");
 /* harmony import */ var _assets_svgs_eye_closed_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @assets/svgs/eye-closed.svg */ "./assets/svgs/eye-closed.svg");
 /* harmony import */ var _components_editor_anchor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @components/editor-anchor */ "./src/components/editor-anchor.tsx");
-/* harmony import */ var _utils_getTitle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @utils/getTitle */ "./src/utils/getTitle.ts");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.mjs");
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useMeasure.js");
-/* harmony import */ var react_use__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-use */ "./node_modules/react-use/esm/useIntersection.js");
-/* harmony import */ var _src_components_editor_animated_element__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @src/components/editor-animated-element */ "./src/components/editor-animated-element.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
-
+/* harmony import */ var _components_editor_animated_element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @components/editor-animated-element */ "./src/components/editor-animated-element.tsx");
+/* harmony import */ var _hooks_useDevelopedSkills__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @hooks/useDevelopedSkills */ "./src/hooks/useDevelopedSkills.ts");
+/* harmony import */ var _utils_getTitle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @utils/getTitle */ "./src/utils/getTitle.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -267,61 +263,49 @@ function ProjectItem(props) {
   const classPrefix = props.classPrefix ? props.classPrefix : "portfolio-archive-projects";
   const projectImage = project.acf.project_image?.size_urls["project-image"] || _assets_images_project_default_image_png__WEBPACK_IMPORTED_MODULE_2__;
   const projectImageAlt = project.acf.project_image?.alt || "No image or alt text for the project provided";
-  const skillPostType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
-    return select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__.store).getPostType("skill");
-  }, []);
-  const skills = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
-    const skills = select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__.store).getEntityRecords("postType", "skill", {
-      context: "view",
-      per_page: -1,
-      include: project.acf.developed_skills
-    });
-    return skills?.toSorted((leftSkill, rightSkill) => {
-      const {
-        developed_skills
-      } = project.acf;
-      return developed_skills.indexOf(leftSkill.id) - developed_skills.indexOf(rightSkill.id);
-    });
-  }, []);
-  const descriptionRef = (0,react__WEBPACK_IMPORTED_MODULE_9__.useRef)(null);
-  const skillsListRef = (0,react__WEBPACK_IMPORTED_MODULE_9__.useRef)(null);
-  const linksRef = (0,react__WEBPACK_IMPORTED_MODULE_9__.useRef)(null);
-  const [shouldExpandInfo, setShouldExpandInfo] = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(false);
-  const [shouldExpandSkills, setShouldExpandSkills] = (0,react__WEBPACK_IMPORTED_MODULE_9__.useState)(false);
-  const [descriptionMeasureRef, descriptionMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_13__["default"])();
-  const [skillsListMeasureRef, skillsListMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_13__["default"])();
-  const [itemMeasureRef, itemMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_13__["default"])();
-  const infoButtonExpandClasses = (0,react__WEBPACK_IMPORTED_MODULE_9__.useMemo)(() => {
+  const {
+    skills,
+    skillsArchive
+  } = (0,_hooks_useDevelopedSkills__WEBPACK_IMPORTED_MODULE_9__.useDevelopedSkills)(project.acf.developed_skills);
+  const descriptionRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const skillsListRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const linksRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [shouldExpandInfo, setShouldExpandInfo] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [shouldExpandSkills, setShouldExpandSkills] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [descriptionMeasureRef, descriptionMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_12__["default"])();
+  const [skillsListMeasureRef, skillsListMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_12__["default"])();
+  const [itemMeasureRef, itemMeasure] = (0,react_use__WEBPACK_IMPORTED_MODULE_12__["default"])();
+  const infoButtonExpandClasses = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     const descriptionElement = descriptionRef.current;
     const isOverflowing = descriptionElement && descriptionElement.scrollHeight > descriptionElement.clientHeight;
-    return (0,clsx__WEBPACK_IMPORTED_MODULE_10__["default"])({
+    return (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])({
       [`${classPrefix}__item-expand`]: true,
       [`${classPrefix}__item-expand--visible`]: isOverflowing || shouldExpandInfo,
       [`${classPrefix}__item-expand--active`]: shouldExpandInfo
     });
   }, [classPrefix, descriptionMeasure.width, descriptionMeasure.height, shouldExpandInfo]);
-  const skillsButtonExpandClasses = (0,react__WEBPACK_IMPORTED_MODULE_9__.useMemo)(() => {
+  const skillsButtonExpandClasses = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     const skillsListElement = skillsListRef.current;
     const isOverflowing = skillsListElement && skillsListElement.scrollHeight > skillsListElement.clientHeight;
-    return (0,clsx__WEBPACK_IMPORTED_MODULE_10__["default"])({
+    return (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])({
       [`${classPrefix}__item-expand`]: true,
       [`${classPrefix}__item-expand--visible`]: isOverflowing || shouldExpandSkills,
       [`${classPrefix}__item-expand--active`]: shouldExpandSkills
     });
   }, [classPrefix, skillsListMeasure.width, skillsListMeasure.height, shouldExpandSkills]);
-  const infoDivClasses = (0,react__WEBPACK_IMPORTED_MODULE_9__.useMemo)(() => {
-    return (0,clsx__WEBPACK_IMPORTED_MODULE_10__["default"])({
+  const infoDivClasses = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    return (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])({
       [`${classPrefix}__item-info`]: true,
       [`${classPrefix}__item-info--expanded`]: shouldExpandInfo
     });
   }, [shouldExpandInfo]);
-  const skillsDivClasses = (0,react__WEBPACK_IMPORTED_MODULE_9__.useMemo)(() => {
-    return (0,clsx__WEBPACK_IMPORTED_MODULE_10__["default"])({
+  const skillsDivClasses = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    return (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])({
       [`${classPrefix}__item-skills`]: true,
       [`${classPrefix}__item-skills--expanded`]: shouldExpandSkills
     });
   }, [classPrefix, shouldExpandSkills]);
-  const linksIntersectionEntry = (0,react_use__WEBPACK_IMPORTED_MODULE_14__["default"])(linksRef, {
+  const linksIntersectionEntry = (0,react_use__WEBPACK_IMPORTED_MODULE_13__["default"])(linksRef, {
     root: null,
     threshold: 0.2
   });
@@ -331,34 +315,34 @@ function ProjectItem(props) {
   function handleOnClickExpandButtonSkills() {
     setShouldExpandSkills(prev => !prev);
   }
-  (0,react__WEBPACK_IMPORTED_MODULE_9__.useEffect)(() => {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setShouldExpandInfo(false);
     setShouldExpandSkills(false);
   }, [itemMeasure.width]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
     id: project.slug,
     className: `${classPrefix}__item`,
     ref: itemMeasureRef,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("img", {
       className: `${classPrefix}__item-image`,
       src: projectImage,
       alt: projectImageAlt
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
       className: `${classPrefix}__item-content`,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: infoDivClasses,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h4", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h4", {
           className: `${classPrefix}__item-title`,
-          children: (0,_utils_getTitle__WEBPACK_IMPORTED_MODULE_8__.getTitle)(project)
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+          children: (0,_utils_getTitle__WEBPACK_IMPORTED_MODULE_10__.getTitle)(project)
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
           className: infoButtonExpandClasses,
           onClick: handleOnClickExpandButtonInfo,
-          children: shouldExpandInfo ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_eye_open_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
+          children: shouldExpandInfo ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_eye_open_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
             color: "currentColor"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_eye_closed_svg__WEBPACK_IMPORTED_MODULE_6__.ReactComponent, {
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_eye_closed_svg__WEBPACK_IMPORTED_MODULE_6__.ReactComponent, {
             color: "currentColor"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("p", {
           className: `${classPrefix}__item-description`,
           ref: ref => {
             descriptionRef.current = ref;
@@ -367,33 +351,33 @@ function ProjectItem(props) {
           },
           children: project.acf.description
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: skillsDivClasses,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h5", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h5", {
           className: `${classPrefix}__item-skills-title`,
           children: "Skills for this project:"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("button", {
           className: skillsButtonExpandClasses,
           onClick: handleOnClickExpandButtonSkills,
-          children: shouldExpandSkills ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_eye_open_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
+          children: shouldExpandSkills ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_eye_open_svg__WEBPACK_IMPORTED_MODULE_5__.ReactComponent, {
             color: "currentColor"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_eye_closed_svg__WEBPACK_IMPORTED_MODULE_6__.ReactComponent, {
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_eye_closed_svg__WEBPACK_IMPORTED_MODULE_6__.ReactComponent, {
             color: "currentColor"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("ul", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("ul", {
           className: `${classPrefix}__item-skills-list`,
           ref: ref => {
             skillsListRef.current = ref;
             if (!ref) return;
             skillsListMeasureRef(ref);
           },
-          children: skills?.map(skill => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("li", {
+          children: skills?.map(skill => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("li", {
             className: `${classPrefix}__item-skills-item`,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_7__.EditorAnchor, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_editor_anchor__WEBPACK_IMPORTED_MODULE_7__.EditorAnchor, {
               className: `${classPrefix}__item-skills-link`,
-              href: `${skillPostType?.archive_link || ""}#${skill.slug}`,
-              title: (0,_utils_getTitle__WEBPACK_IMPORTED_MODULE_8__.getTitle)(skill),
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_inlinesvg__WEBPACK_IMPORTED_MODULE_15__["default"], {
+              href: `${skillsArchive || ""}#${skill.slug}`,
+              title: (0,_utils_getTitle__WEBPACK_IMPORTED_MODULE_10__.getTitle)(skill),
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_inlinesvg__WEBPACK_IMPORTED_MODULE_14__["default"], {
                 className: `${classPrefix}__item-skills-icon`,
                 src: skill.acf.skill_icon,
                 color: "inherit",
@@ -402,10 +386,10 @@ function ProjectItem(props) {
             })
           }, skill.id))
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: `${classPrefix}__item-links`,
         ref: linksRef,
-        children: [!project.acf.project_github_link ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_src_components_editor_animated_element__WEBPACK_IMPORTED_MODULE_11__.EditorAnimatedElement, {
+        children: [!project.acf.project_github_link ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_editor_animated_element__WEBPACK_IMPORTED_MODULE_8__.EditorAnimatedElement, {
           tagName: "a",
           animateClass: `${classPrefix}__item-links-link--animate`,
           animationName: "element-highlight-animation",
@@ -416,11 +400,11 @@ function ProjectItem(props) {
           target: "_blank",
           rel: "noopener",
           title: "Project Github Repository",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_github_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_github_svg__WEBPACK_IMPORTED_MODULE_3__.ReactComponent, {
             className: `${classPrefix}__item-links-icon`,
             fill: "currentColor"
           })
-        }), !project.acf.project_site_link ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_src_components_editor_animated_element__WEBPACK_IMPORTED_MODULE_11__.EditorAnimatedElement, {
+        }), !project.acf.project_site_link ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_editor_animated_element__WEBPACK_IMPORTED_MODULE_8__.EditorAnimatedElement, {
           tagName: "a",
           animateClass: `${classPrefix}__item-links-link--animate`,
           animationName: "element-highlight-animation",
@@ -431,7 +415,7 @@ function ProjectItem(props) {
           target: "_blank",
           rel: "noopener",
           title: "Project Site",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_assets_svgs_site_svg__WEBPACK_IMPORTED_MODULE_4__.ReactComponent, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_assets_svgs_site_svg__WEBPACK_IMPORTED_MODULE_4__.ReactComponent, {
             className: `${classPrefix}__item-links-icon`,
             color: "inherit"
           })
@@ -647,6 +631,45 @@ function EditorWrapper({
     },
     children: children
   });
+}
+
+/***/ }),
+
+/***/ "./src/hooks/useDevelopedSkills.ts":
+/*!*****************************************!*\
+  !*** ./src/hooks/useDevelopedSkills.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useDevelopedSkills: () => (/* binding */ useDevelopedSkills)
+/* harmony export */ });
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function useDevelopedSkills(developedSkills, deps) {
+  const skillPostType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    return select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__.store).getPostType("skill");
+  }, [...(deps || [])]);
+  const skills = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    const skills = select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_0__.store).getEntityRecords("postType", "skill", {
+      context: "view",
+      per_page: -1,
+      include: developedSkills
+    });
+    return skills?.toSorted((leftSkill, rightSkill) => {
+      return developedSkills.indexOf(leftSkill.id) - developedSkills.indexOf(rightSkill.id);
+    });
+  }, [...(deps || [])]);
+  return {
+    skillsArchive: skillPostType?.archive_link,
+    skillPostType: skillPostType,
+    skills: skills
+  };
 }
 
 /***/ }),

@@ -85,6 +85,8 @@ function vbuchara_portfolio_init_blocks(){
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/welcome-container"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-header"));
     register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-projects"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-skills"));
+    register_block_type_from_metadata(get_theme_file_path("/build/blocks/experiences"));
 }
 
 add_action("enqueue_block_editor_assets", 'vbuchara_portfolio_enqueue_block_editor_assets');
@@ -99,6 +101,20 @@ function vbuchara_portfolio_enqueue_block_editor_assets(){
         isset($editorStylesAssets['dependencies']) ? $editorStylesAssets['dependencies'] : [],
         isset($editorStylesAssets['version']) ? $editorStylesAssets['version'] : null
     );
+}
+
+add_action('pre_get_posts', 'vbuchara_portfolio_adjust_queries', 99, 1);
+function vbuchara_portfolio_adjust_queries(WP_Query $query){
+    $isMainQuery = $query->is_main_query();
+    $isNotInAdmin = !is_admin();
+
+    if($isMainQuery && $isNotInAdmin && $query->is_post_type_archive('project')){
+        $query->set("posts_per_page", -1);
+    }
+
+    if($isMainQuery && $isNotInAdmin && $query->is_post_type_archive('skill')){
+        $query->set("posts_per_page", -1);
+    }
 }
 
 add_filter('block_categories_all', 'vbuchara_portfolio_blocks_category');

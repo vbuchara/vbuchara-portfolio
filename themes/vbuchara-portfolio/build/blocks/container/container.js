@@ -554,19 +554,21 @@ function EditorGridSettings(props) {
     children: [disableGridProperties?.gridTemplateColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Template Columns",
+        className: "portfolio-editor__control",
         value: grid.gridTemplateColumns,
         onChange: getHandleOnChangeTextGridStyle("gridTemplateColumns")
       })
     }), disableGridProperties?.gridTemplateRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Template Rows",
+        className: "portfolio-editor__control",
         value: grid.gridTemplateRows,
         onChange: getHandleOnChangeTextGridStyle("gridTemplateRows")
       })
     }), disableGridProperties?.gridAutoFlow ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Grid Auto Flow",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions, "gridAutoFlow"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.GridAutoFlowOptions,
@@ -576,31 +578,35 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.gridAutoColumns ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Auto Columns",
+        className: "portfolio-editor__control",
         value: grid.gridAutoColumns,
         onChange: getHandleOnChangeTextGridStyle("gridAutoColumns")
       })
     }), disableGridProperties?.gridAutoRows ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Grid Auto Rows",
+        className: "portfolio-editor__control",
         value: grid.gridAutoRows,
         onChange: getHandleOnChangeTextGridStyle("gridAutoRows")
       })
     }), disableGridProperties?.columnGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Column Gap",
+        className: "portfolio-editor__control",
         value: grid.columnGap,
         onChange: getHandleOnChangeTextGridStyle("columnGap")
       })
     }), disableGridProperties?.rowGap ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
         label: "Row Gap",
+        className: "portfolio-editor__control",
         value: grid.rowGap,
         onChange: getHandleOnChangeTextGridStyle("rowGap")
       })
     }), disableGridProperties?.justifyContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Justify Content",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions, "justifyContent"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyContentOptions,
@@ -610,7 +616,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.alignContent ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Align Content",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions, "alignContent"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignContentOptions,
@@ -620,7 +626,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.justifyItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Justify Items",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions, "justifyItems"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.JustifyItemsOptions,
@@ -630,7 +636,7 @@ function EditorGridSettings(props) {
     }), disableGridProperties?.alignItems ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.BaseControl, {
         label: "Align Items",
-        className: "site-section__editor-control",
+        className: "portfolio-editor__control",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_editor_select__WEBPACK_IMPORTED_MODULE_2__.EditorSelect, {
           value: getGridStylePropertySelected(_constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions, "alignItems"),
           options: _constants_block_styles__WEBPACK_IMPORTED_MODULE_1__.AlignItemsOptions,

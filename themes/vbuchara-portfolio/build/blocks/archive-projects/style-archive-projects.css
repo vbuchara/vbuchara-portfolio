@@ -148,9 +148,6 @@
     margin-block-start: clamp(1rem, 1.0417vw, 1.5rem);
   }
 }
-.portfolio-archive-projects__item-skills--expanded .portfolio-archive-projects__item-skills-list {
-  max-height: none;
-}
 .portfolio-archive-projects__item-skills-title {
   font-size: var(--font-size);
   line-height: var(--line-height);
@@ -166,8 +163,6 @@
   -moz-column-gap: clamp(1rem, 1.0417vw, 1.5rem);
        column-gap: clamp(1rem, 1.0417vw, 1.5rem);
   align-items: center;
-  max-height: var(--icon-size);
-  height: 100%;
   overflow: hidden;
 }
 .portfolio-archive-projects__item-skills-link {
@@ -177,6 +172,13 @@
 .portfolio-archive-projects__item-skills-icon {
   width: var(--icon-size);
   height: var(--icon-size);
+}
+.portfolio-archive-projects__item-skills--expanded .portfolio-archive-projects__item-skills-list {
+  max-height: none;
+}
+.portfolio-archive-projects__item-skills-list {
+  max-height: var(--icon-size);
+  height: 100%;
 }
 .portfolio-archive-projects__item-links {
   align-self: end;
@@ -207,14 +209,14 @@
   z-index: -1;
   visibility: hidden;
   background: linear-gradient(to top, #92140c 0%, #f48498 50%, #8789c0 100%);
-  animation-name: element-highlight-animation-u1ga9df;
+  animation-name: element-highlight-animation-uiielog;
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
   animation-delay: 0s;
   border-radius: 10px;
 }
-@keyframes element-highlight-animation-u1ga9df {
+@keyframes element-highlight-animation-uiielog {
   0% {
     visibility: visible;
     top: calc(100% + 2px);

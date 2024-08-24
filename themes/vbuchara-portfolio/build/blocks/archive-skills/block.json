@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vbuchara-portfolio/archive-skills",
+  "title": "Archive Skills",
+  "category": "vbuchara-portfolio",
+  "editorScript": [
+    "file:./archive-skills.js",
+    "vbuchara-portfolio-blocks-vendor"
+  ],
+  "editorStyle": "file:./archive-skills.css",
+  "style": "file:./style-archive-skills.css",
+  "render": "file:./render.php"
+}
