@@ -170,10 +170,10 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * @since 3.1.8
 		 */
 		public function admin_head() {
-			global $project, $field_group;
+			global $post, $field_group;
 
 			// Set global var.
-			$field_group = acf_get_field_group( $project->ID );
+			$field_group = acf_get_field_group( $post->ID );
 
 			// metaboxes.
 			add_meta_box( 'acf-field-group-fields', __( 'Fields', 'acf' ), array( $this, 'mb_fields' ), 'acf-field-group', 'normal', 'high' );
@@ -195,13 +195,13 @@ if ( ! class_exists( 'acf_admin_field_group' ) ) :
 		 * This action will allow ACF to render metaboxes after the title.
 		 */
 		public function edit_form_after_title() {
-			global $project;
+			global $post;
 
 			// Render post data.
 			acf_form_data(
 				array(
 					'screen'        => 'field_group',
-					'post_id'       => $project->ID,
+					'post_id'       => $post->ID,
 					'delete_fields' => 0,
 					'validation'    => 0,
 				)

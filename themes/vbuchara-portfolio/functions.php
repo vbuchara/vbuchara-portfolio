@@ -35,6 +35,7 @@ function vbuchara_portfolio_after_theme_setup(){
 
     add_image_size("skill-icon", 150, 150, true);
     add_image_size("project-image", 350, 350, true);
+    add_image_size("post-image", 350, 350, true);
 }
 
 add_action("init", "vbuchara_portfolio_init_blocks");
@@ -47,6 +48,27 @@ function vbuchara_portfolio_init_blocks(){
      * @var array{dependencies: string[], version: string}
      */
     $indexAssets = include get_theme_file_path("/build/index.asset.php");
+    /**
+     * @var string[]
+     */
+    $blocksToRegister = [
+        "footer",
+        "header",
+        "section",
+        "heading",
+        "paragraph",
+        "button",
+        "image",
+        "skills",
+        "projects",
+        "container",
+        "welcome-container",
+        "archive-header",
+        "archive-projects",
+        "archive-skills",
+        "archive-posts",
+        "experiences",
+    ];
 
     wp_register_script(
         'react-jsx-runtime',
@@ -72,21 +94,10 @@ function vbuchara_portfolio_init_blocks(){
         isset($indexAssets['version']) ? $indexAssets["version"] : null,
         true
     );
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/footer"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/header"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/section"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/heading"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/paragraph"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/button"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/image"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/skills"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/projects"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/container"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/welcome-container"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-header"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-projects"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/archive-skills"));
-    register_block_type_from_metadata(get_theme_file_path("/build/blocks/experiences"));
+    
+    foreach($blocksToRegister as $blockToRegister) {
+        register_block_type_from_metadata(get_theme_file_path("/build/blocks/$blockToRegister"));
+    }
 }
 
 add_action("enqueue_block_editor_assets", 'vbuchara_portfolio_enqueue_block_editor_assets');
@@ -107,6 +118,11 @@ add_action('pre_get_posts', 'vbuchara_portfolio_adjust_queries', 99, 1);
 function vbuchara_portfolio_adjust_queries(WP_Query $query){
     $isMainQuery = $query->is_main_query();
     $isNotInAdmin = !is_admin();
+    $isForPosts = $query->is_posts_page;
+
+    if($isMainQuery && $isNotInAdmin && $isForPosts){
+        $query->set("orderby", ["date" => "desc", "title" => "asc"]);
+    }
 
     if($isMainQuery && $isNotInAdmin && $query->is_post_type_archive('project')){
         $query->set("posts_per_page", -1);
@@ -134,12 +150,14 @@ add_filter("rest_project_query", "vbuchara_portfolio_adjust_rest_query", 10, 2);
 add_filter("rest_experience_query", "vbuchara_portfolio_adjust_rest_query", 10, 2);
 function vbuchara_portfolio_adjust_rest_query(array $args, WP_REST_Request $request){
     $metaQuery = RequestHelpers::get_meta_queries($request);
+    $orderby = RequestHelpers::get_orderby($request);
 
     $newArgs = [
         'meta_key'   => $request->get_param('meta_key'),
         'meta_value' => $request->get_param('meta_value'),
         'meta_query' => $metaQuery,
-        'author' => $request->get_param("author")
+        'author' => $request->get_param("author"),
+        'orderby' => $orderby,
     ];
 
     return array_merge($args, $newArgs);
@@ -262,4 +280,14 @@ function vbuchara_portfolio_render_block(
     }
 
     return $block_content;
+}
+
+add_filter("excerpt_length", "vbuchara_portfolio_excerpt_length", 20);
+function vbuchara_portfolio_excerpt_length(){
+    return 20;
+}
+
+add_filter("excerpt_more", "vbuchara_portfolio_excerpt_more", 10);
+function vbuchara_portfolio_excerpt_more(){
+    return "...";
 }

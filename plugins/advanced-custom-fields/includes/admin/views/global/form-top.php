@@ -1,12 +1,12 @@
 <?php
-global $title, $post_new_file, $post_type_object, $project;
-$acf_title_placeholder = apply_filters( 'enter_title_here', __( 'Add title' ), $project );
-$acf_title             = $project->post_title;
+global $title, $post_new_file, $post_type_object, $post;
+$acf_title_placeholder = apply_filters( 'enter_title_here', __( 'Add title' ), $post );
+$acf_title             = $post->post_title;
 $acf_post_type         = is_object( $post_type_object ) ? $post_type_object->name : '';
 $acf_publish_btn_name  = 'save';
 $acf_duplicated_from   = '';
 
-if ( 'publish' !== $project->post_status ) {
+if ( 'publish' !== $post->post_status ) {
 	$acf_publish_btn_name = 'publish';
 }
 

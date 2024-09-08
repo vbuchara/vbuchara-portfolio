@@ -46,8 +46,10 @@
   }
 }
 .portfolio-archive-projects__item-image {
-  height: auto;
-  width: auto;
+  height: var(--image-size);
+  width: var(--image-size);
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .portfolio-archive-projects__item-content {
   display: grid;
@@ -209,14 +211,14 @@
   z-index: -1;
   visibility: hidden;
   background: linear-gradient(to top, #92140c 0%, #f48498 50%, #8789c0 100%);
-  animation-name: element-highlight-animation-uiielog;
+  animation-name: element-highlight-animation-uh4p0la;
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
   animation-delay: 0s;
   border-radius: 10px;
 }
-@keyframes element-highlight-animation-uiielog {
+@keyframes element-highlight-animation-uh4p0la {
   0% {
     visibility: visible;
     top: calc(100% + 2px);

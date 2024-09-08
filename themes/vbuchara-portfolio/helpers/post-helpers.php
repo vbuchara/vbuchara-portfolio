@@ -6,6 +6,7 @@ use VBucharaPortfolio\Helpers\ArrayHelpers;
 
 use Ds\Map;
 use Exception;
+use Masterminds\HTML5;
 use WP_Post;
 
 class PostHelpers {
@@ -74,6 +75,35 @@ class PostHelpers {
         ];
     }
 
+    /**
+     * @param \WP_Post $post
+     * @param string|null $defaultImageUrl
+     * @return array{
+     *  url: string,
+     *  alt: string
+     * }
+     */
+    public static function get_post_thumbnail(WP_Post $post, string $defaultImageUrl = null){
+        $defaultImage = empty($defaultImageUrl) 
+            ? get_theme_file_uri("/assets/images/post-default-image.png") 
+            : $defaultImageUrl;
+
+        $postThumbnailId = get_post_thumbnail_id($post);
+        $postThumbnailPossibleUrl = wp_get_attachment_image_url($postThumbnailId, "post-image");
+        $postThumbnailUrl = !empty($postThumbnailPossibleUrl) ? $postThumbnailPossibleUrl : $defaultImage;
+
+         /** @var string */
+         $postThumbnailPossibleAlt = get_post_meta($postThumbnailId, "_wp_attachment_image_alt", true);
+         $postThumbnailAlt = !empty($postThumbnailPossibleAlt) 
+             ? $postThumbnailPossibleAlt 
+             : "Post Thumbnail without description";
+
+        return [
+            "url" => $postThumbnailUrl,
+            "alt" => $postThumbnailAlt
+        ];
+    }   
+
     public static function get_project_link(WP_Post $projectPost){
         self::assert_post_type($projectPost, "project");
 
@@ -118,6 +148,65 @@ class PostHelpers {
     
             return $leftPostIndex - $rightPostIndex;
         });
+    }
+
+    public static function get_pagination_html(): string{
+        $previousPageHTML = get_previous_posts_link() ? get_previous_posts_link("") : "";
+        $nextPageHTML = get_next_posts_link() ? get_next_posts_link("") : "";
+        $paginateLinks = paginate_links([
+            "type" => "array",
+            "prev_text" => false,
+            "next_text" => false,
+         ]);
+
+        $html5 = new HTML5();
+        /** @var DOMElement|null */
+        $previousPageElement = $html5->loadHTML($previousPageHTML)
+            ->getElementsByTagName("a")->item(0);
+        /** @var DOMElement|null */
+        $nextPageElement = $html5->loadHTML($nextPageHTML)
+            ->getElementsByTagName("a")->item(0);
+
+        if(empty($paginateLinks)) return "";
+
+        ob_start();
+    ?>
+    <div class="portfolio-pagination">
+        <?php if(!empty($previousPageElement)): ?>
+            <?php 
+                $previousPageElement->setAttribute("class", "portfolio-pagination__controls");
+                $previousPageElement->append("<");
+            ?>
+            <?= $html5->saveHTML($previousPageElement) ?>
+        <?php endif; ?>
+        <?php foreach($paginateLinks as $paginateLink): ?>
+            <?php 
+                $pageNumberElement = $html5->loadHTML($paginateLink)->firstElementChild->firstElementChild;  
+                if(empty($pageNumberElement)) continue;
+
+                $pageNumberClasses = DomHelpers::get_class_list_from_element($pageNumberElement);
+                if($pageNumberClasses->hasClass("prev") || $pageNumberClasses->hasClass("next")) continue;
+
+                $pageNumberClasses->replaceClass("page-numbers", "portfolio-pagination__page-numbers");
+                $pageNumberClasses->replaceClass("current", "portfolio-pagination__page-numbers--current");
+                $pageNumberClasses->replaceClass("dots", "portfolio-pagination__page-numbers--dots");
+
+                $pageNumberElement->setAttribute("class", $pageNumberClasses->getClassListString());
+            ?>
+            <?= $html5->saveHTML($pageNumberElement) ?>  
+        <?php endforeach; ?>
+        <?php if(!empty($nextPageElement)): ?>
+            <?php 
+                $nextPageElement->setAttribute("class", "portfolio-pagination__controls");
+                $nextPageElement->append(">");
+            ?>
+            <?= $html5->saveHTML($nextPageElement) ?>
+        <?php endif; ?>
+    </div>
+    <?php 
+        $finalHtml = trim(ob_get_clean());
+
+        return $finalHtml;
     }
 
     private static function assert_post_type(WP_Post $post, string $postType){

@@ -1,6 +1,7 @@
 <?php 
     use VBucharaPortfolio\Classes\InlineStyle;
     use VBucharaPortfolio\Helpers\BlockHelpers;
+    use VBucharaPortfolio\Helpers\DebugHelpers;
 
     /**
      * @var array{
@@ -38,12 +39,15 @@
      * }
      */
     $attributesWithDefaults = array_replace_recursive($defaultAttributes, $attributes);
+
+    $archiveSubtitle = get_the_archive_title();
+    $isArchive = !str_starts_with($archiveSubtitle, "Archives");
     
     $styles = $attributesWithDefaults["styles"];
 
     $titleInlineStyles = new InlineStyle();
 
-    BlockHelpers::set_underline_style_variables($titleInlineStyles, $styles["underline"])
+    BlockHelpers::set_underline_style_variables($titleInlineStyles, $styles["underline"]);
 ?>
 <div class="portfolio-archive-header">
     <h1
@@ -52,9 +56,17 @@
     >
         <?= $attributesWithDefaults["titleText"] ?>
     </h1>
-    <h3
-        class="portfolio-archive-header__subtitle"
-    >
-        <?= $attributesWithDefaults["subtitleText"] ?>
-    </h3>
+    <?php if($isArchive): ?>
+        <h3
+            class="portfolio-archive-header__subtitle portfolio-archive-header__subtitle--archive"
+        >
+            <?= $archiveSubtitle ?>
+        </h3>
+    <?php else: ?>
+        <h3
+            class="portfolio-archive-header__subtitle"
+        >
+            <?= $attributesWithDefaults["subtitleText"] ?>
+        </h3>
+    <?php endif; ?>
 </div>

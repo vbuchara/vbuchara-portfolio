@@ -1,27 +1,30 @@
-import defaultAvatarLandscapeSrc from "@images/default-user-landscape.png";
+import defaultImage from "@assets/images/post-default-image.png";
 
 import { 
     ImageSizes, 
     WP_Post 
 } from "wordpress-types";
 
-export type GetThumbnailOptions = {
+export interface GetThumbnailOptions {
     size?: keyof ImageSizes;
-    defaultImg?: string
+    defaultImg?: string,
+    defaultAltText?: string
 };
+
+export interface GetThumbnailReturn {
+    url: string;
+    alt: string;
+}
 
 export function getThumbnail(
     post: WP_Post,
     options: GetThumbnailOptions = {}
-){
-    const allOptions = {
-        defaultImg: defaultAvatarLandscapeSrc,
+): GetThumbnailReturn{
+    const optionsWithDefault = {
+        defaultImg: defaultImage,
+        defaultAltText: "Thumbnail Image",
         ...options
     } satisfies GetThumbnailOptions;
-    const {
-        defaultImg,
-        size
-    } = allOptions;
 
     const {
         _embedded
@@ -38,27 +41,39 @@ export function getThumbnail(
         if(!featuredMedia) 
             throw new NoFeaturedImageError();
     
-        if(!size){
+        if(!optionsWithDefault.size){
             if(!featuredMedia?.source_url){
                 throw new NoFeaturedImageError();
             }
 
-            return featuredMedia.source_url;
+            return {
+                url: featuredMedia.source_url,
+                alt: featuredMedia.alt_text || optionsWithDefault.defaultAltText
+            };
         }
 
-        const imageInfo = featuredMedia.media_details.sizes[size];
+        const imageInfo = featuredMedia.media_details.sizes[optionsWithDefault.size];
             
         if(!imageInfo){
             if(!featuredMedia.source_url){
                 throw new NoFeaturedImageError();
             }
 
-            return featuredMedia.source_url;
+            return {
+                url: featuredMedia.source_url,
+                alt: featuredMedia.alt_text || optionsWithDefault.defaultAltText
+            };
         }
     
-        return imageInfo.source_url;
+        return {
+            url: imageInfo.source_url,
+            alt: optionsWithDefault.defaultAltText
+        };
     } catch(error){
-        return defaultImg;
+        return {
+            url: optionsWithDefault.defaultImg,
+            alt: optionsWithDefault.defaultAltText
+        };
     }
 
 }

@@ -143,10 +143,10 @@ if ( ! class_exists( 'ACF_Admin_Taxonomy' ) ) :
 		public function admin_head() {
 
 			// global.
-			global $project, $acf_taxonomy;
+			global $post, $acf_taxonomy;
 
 			// set global var.
-			$acf_taxonomy = acf_get_internal_post_type( $project->ID, $this->post_type );
+			$acf_taxonomy = acf_get_internal_post_type( $post->ID, $this->post_type );
 
 			if ( ! empty( $acf_taxonomy['not_registered'] ) ) {
 				acf_add_admin_notice(
@@ -180,13 +180,13 @@ if ( ! class_exists( 'ACF_Admin_Taxonomy' ) ) :
 		public function edit_form_after_title() {
 
 			// globals.
-			global $project;
+			global $post;
 
 			// render post data.
 			acf_form_data(
 				array(
 					'screen'        => 'taxonomy',
-					'post_id'       => $project->ID,
+					'post_id'       => $post->ID,
 					'delete_fields' => 0,
 					'validation'    => 1,
 				)

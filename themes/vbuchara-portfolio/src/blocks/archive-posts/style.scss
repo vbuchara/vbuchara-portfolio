@@ -1,0 +1,122 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+@use "@styles/components/portfolio-item" with ($mixin-only: true);
+
+.portfolio-archive-posts {
+    --focus-visible-outline-color: #{$penn-red};
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    row-gap: 3rem;
+    
+    &__item {
+        $post-item-selector: &;
+
+        --spring-easing: linear(0, 0.0346 2.07%, 0.14066 4.43%, 0.93834 16.722%, 1.07743 20.432%, 1.14934 24.312%, 1.16294 26.953%, 1.15356 29.933%, 1.01677 43.094%, 0.9766 50.995%, 0.97488 57.056%, 1.00329 76.878%, 0.99996);
+        --spring-duration: 1.333s;
+        --scale-transition: scale 0.5s linear;
+        
+        transform-origin: center;
+        will-change: scale;
+        scale: 1;
+        transition: var(--scale-transition);
+
+        @include supports-linear-easing-function(){
+            --scale-transition: scale var(--spring-duration) var(--spring-easing);
+        }
+
+        @include portfolio-item.portfolio-item(
+            $column-gap: clamp(1.5rem, 1.736vw, 2.5rem),
+            $content-grid-template-columns: 100%,
+            $content-grid-template-rows: repeat(2, fit-content(100%)) 1fr
+        );
+
+        @include media-breakpoint-xs {
+            &:hover, &:focus-within {
+                scale: 1.05;
+            }
+        }
+
+        &-image {
+            &-link {
+                outline-color: var(--focus-visible-outline-color);
+                outline-style: none;
+                outline-width: 0;
+                outline-offset: 0;
+
+                position: relative;
+                width: calc(100% - 2px);
+
+                &:hover::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+
+                    background-color: #{$light-gray};
+                    opacity: 0.25;
+                }
+
+                &:focus-visible {
+                    outline-style: solid;
+                    outline-offset: -4px;
+                    outline-width: 2px;
+                }
+            }
+        }
+
+        &-content {
+            padding-block: 1.5rem;
+            row-gap: 1.5rem;
+        }
+
+        &-title {
+            font-size: clamp(3.2rem, 2.4305vw + 0.5rem, 4rem);
+            line-height: 1.1;
+
+            &-link {
+                justify-self: start;
+                color: inherit;
+
+                @include underline-hover-animation($width: 100%);
+            }
+        }
+
+        &-description, &-tags {
+            font-size: clamp(1.8rem, 1.667vw, 2.4rem);
+            font-weight: 600;
+        }
+
+        &-description {
+            height: 100%;
+            max-height: 100%;
+
+            overflow: hidden;
+        }
+
+        &-tags {
+            align-self: end;
+
+            &-link {
+                --color: #{$cool-gray};
+
+                color: var(--color);
+
+                @include underline-hover-animation();
+            }
+        }
+    }
+
+    .portfolio-pagination {
+        justify-self: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

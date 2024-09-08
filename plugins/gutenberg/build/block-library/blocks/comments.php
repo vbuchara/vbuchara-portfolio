@@ -18,7 +18,7 @@
  *
  * @since 6.1.0
  *
- * @global WP_Post $project Global post object.
+ * @global WP_Post $post Global post object.
  *
  * @param array    $attributes Block attributes.
  * @param string   $content    Block default content.
@@ -26,7 +26,7 @@
  * @return string Returns the filtered post comments for the current post wrapped inside "p" tags.
  */
 function gutenberg_render_block_core_comments( $attributes, $content, $block ) {
-	global $project;
+	global $post;
 
 	$post_id = $block->context['postId'];
 	if ( ! isset( $post_id ) ) {
@@ -44,9 +44,9 @@ function gutenberg_render_block_core_comments( $attributes, $content, $block ) {
 		return $block->render( array( 'dynamic' => false ) );
 	}
 
-	$post_before = $project;
-	$project        = get_post( $post_id );
-	setup_postdata( $project );
+	$post_before = $post;
+	$post        = get_post( $post_id );
+	setup_postdata( $post );
 
 	ob_start();
 
@@ -60,7 +60,7 @@ function gutenberg_render_block_core_comments( $attributes, $content, $block ) {
 	remove_filter( 'deprecated_file_trigger_error', '__return_false' );
 
 	$output = ob_get_clean();
-	$project   = $post_before;
+	$post   = $post_before;
 
 	$classnames = array();
 	// Adds the old class name for styles' backwards compatibility.

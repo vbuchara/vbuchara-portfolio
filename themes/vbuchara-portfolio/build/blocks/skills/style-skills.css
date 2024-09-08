@@ -158,7 +158,7 @@
   }
 }
 .portfolio-skills__card--animated .portfolio-skills__card-front {
-  animation-name: flip-to-front-uiiellt;
+  animation-name: flip-to-front-uh4p0kr;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   z-index: 1;
@@ -166,7 +166,7 @@
   will-change: rotate;
 }
 .portfolio-skills__card--animated .portfolio-skills__card-back {
-  animation-name: flip-to-back-uiiellt;
+  animation-name: flip-to-back-uh4p0kr;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   z-index: -1;
@@ -174,20 +174,20 @@
   will-change: rotate;
 }
 .portfolio-skills__card--animated:hover .portfolio-skills__card-front, .portfolio-skills__card--animated:focus .portfolio-skills__card-front, .portfolio-skills__card--animated:focus-within .portfolio-skills__card-front {
-  animation-name: flip-to-back-uiiellt;
+  animation-name: flip-to-back-uh4p0kr;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   z-index: -1;
   rotate: y 180deg;
 }
 .portfolio-skills__card--animated:hover .portfolio-skills__card-back, .portfolio-skills__card--animated:focus .portfolio-skills__card-back, .portfolio-skills__card--animated:focus-within .portfolio-skills__card-back {
-  animation-name: flip-to-front-uiiellt;
+  animation-name: flip-to-front-uh4p0kr;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   z-index: 1;
   rotate: y 360deg;
 }
-@keyframes flip-to-front-uiiellt {
+@keyframes flip-to-front-uh4p0kr {
   0% {
     rotate: y 180deg;
     z-index: -1;
@@ -204,7 +204,7 @@
     z-index: 1;
   }
 }
-@keyframes flip-to-back-uiiellt {
+@keyframes flip-to-back-uh4p0kr {
   0% {
     rotate: y 0deg;
     z-index: 1;

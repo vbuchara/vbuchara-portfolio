@@ -5,9 +5,7 @@ namespace VBucharaPortfolio\Helpers;
 use WP_REST_Request;
 
 class RequestHelpers {
-    public static function get_meta_queries(
-        WP_REST_Request $request
-    ){
+    public static function get_meta_queries(WP_REST_Request $request){
         $params = $request->get_params();
     
         $meta_query_param_filter = fn(string $key) => str_starts_with($key, "meta_query_");
@@ -31,5 +29,27 @@ class RequestHelpers {
         }, []);
     
         return $meta_query;
+    }
+
+    public static function get_orderby(WP_REST_Request $request){
+        $params = $request->get_params();
+
+        $orderby_param_filter = fn(string $key) => str_starts_with($key, "orderby_");
+        $orderby_params = array_filter($params, $orderby_param_filter, ARRAY_FILTER_USE_KEY);
+
+        if(count($orderby_params) <= 0) return $request->get_param("orderby");
+
+        $orderby = array_reduce(array_keys($orderby_params), function(
+            array $orderby, 
+            string $param
+        ) use ($orderby_params){
+            $orderbyAttr = str_replace("orderby_", "", $param);
+
+            return array_merge($orderby, [
+                $orderbyAttr => $orderby_params[$param]
+            ]);
+        }, []);
+
+        return $orderby;
     }
 }

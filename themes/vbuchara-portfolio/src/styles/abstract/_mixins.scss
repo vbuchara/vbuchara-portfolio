@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @use "functions" as *;
 @use "variables" as *;
 
@@ -79,6 +81,55 @@
         }
     }
 }
+
+@mixin hidden() {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+@mixin visible() {
+    display: block;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+@mixin box-shadow($variant: "default"){
+    @if ($variant == "default"){
+        box-shadow: 
+            rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, 
+            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px
+        ;
+    }
+
+    @if ($variant == "inner"){
+        box-shadow: 
+            rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset
+        ;
+    }
+}
+
+@mixin underline-decoration($always-active: false){
+    $base-selector: if($always-active == true, "&", '&:is([style*="--underline-color"],[style*="--underline-image"])');
+
+    #{$base-selector}::after {
+        position: relative;
+        display: block;
+        content: '';
+        width: 80%;
+        height: 0.5rem;
+
+        margin-inline: auto;
+
+        border-radius: 10px;
+
+        background-image: var(--underline-image);
+        background-color: var(--underline-color);
+    }
+}
+
+// Animations
 
 @mixin highlight-animation(
     $outline-width: 2px,
@@ -274,50 +325,46 @@
     }
 }
 
-@mixin hidden() {
-    display: none;
-    visibility: hidden;
-    pointer-events: none;
-}
+@mixin item-hovering-animation(
+    $transform-origin: center,
+    $animation-duration: 5s,
+    $animation-delay: 1s,
+    $scale-to: 1.04,
+    $scale-hover-multiplier: 0.98
+){
+    $animation-id: unique-id();
+    
+    transform-origin: $transform-origin;
+    will-change: scale;
 
-@mixin visible() {
-    display: block;
-    visibility: visible;
-    pointer-events: auto;
-}
+    animation-name: 
+        element-item-starts-hovering-animation-#{$animation-id},
+        element-item-hovering-animation-#{$animation-id}
+    ;
+    animation-duration: $animation-delay, $animation-duration;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-iteration-count: 1, infinite;
+    animation-delay: 0s, $animation-delay;
 
-@mixin box-shadow($variant: "default"){
-    @if ($variant == "default"){
-        box-shadow: 
-            rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, 
-            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px
-        ;
+    @keyframes element-item-starts-hovering-animation-#{$animation-id} {
+        from {
+            scale: 1;
+        }
+        to {
+            scale: $scale-to;
+        }
     }
 
-    @if ($variant == "inner"){
-        box-shadow: 
-            rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
-            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset
-        ;
-    }
-}
-
-@mixin underline-decoration($always-active: false){
-    $base-selector: if($always-active == true, "&", '&:is([style*="--underline-color"],[style*="--underline-image"])');
-
-    #{$base-selector}::after {
-        position: relative;
-        display: block;
-        content: '';
-        width: 80%;
-        height: 0.5rem;
-
-        margin-inline: auto;
-
-        border-radius: 10px;
-
-        background-image: var(--underline-image);
-        background-color: var(--underline-color);
+    @keyframes element-item-hovering-animation-#{$animation-id} {
+        0% {
+            scale: $scale-to;
+        }
+        50% {
+            scale: $scale-to * $scale-hover-multiplier;
+        }
+        100% {
+            scale: $scale-to;
+        }
     }
 }
 
@@ -358,7 +405,7 @@
 }
 
 @mixin supports-linear-easing-function(){
-    $linear-easing: linear(0, 1.33495 14.241%, 0.88722 28.953%, 1.03791 43.634%, 0.98731 58.256%, 1.00031);
+    $linear-easing: linear(0, 1);
      
     @supports(animation-timing-function: #{$linear-easing}){
         @content;

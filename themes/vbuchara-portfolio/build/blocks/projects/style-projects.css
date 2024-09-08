@@ -8,12 +8,7 @@
   --scroll-button-column: clamp(2.5rem, 3.473vw, 5rem);
   --column-gap: clamp(0.5rem, 1.39vw, 2rem);
   --cards-padding-inline: 10px;
-  --spring-easing: linear(
-      0, 0.17867 2.9%, 1.1266 10.171%, 1.27337 12.191%, 1.33495 14.241%,
-      1.33042 15.752%, 1.28687 17.442%, 0.95171 25.153%, 0.88722 28.953%,
-      0.89789 31.773%, 1.00889 39.284%, 1.03791 43.634%, 0.98731 58.256%,
-      1.00419 72.717%, 1.00031
-  );
+  --spring-easing: linear(0, 0.17867 2.9%, 1.1266 10.171%, 1.27337 12.191%, 1.33495 14.241%, 1.33042 15.752%, 1.28687 17.442%, 0.95171 25.153%, 0.88722 28.953%, 0.89789 31.773%, 1.00889 39.284%, 1.03791 43.634%, 0.98731 58.256%, 1.00419 72.717%, 1.00031);
   --spring-duration: 1.833s;
   display: grid;
   grid-template-columns: var(--scroll-button-column) 1fr var(--scroll-button-column);
@@ -37,7 +32,7 @@
   translate: 0 0;
   transition: var(--translate-transition);
 }
-@supports (animation-timing-function: linear(0, 1.33495 14.241%, 0.88722 28.953%, 1.03791 43.634%, 0.98731 58.256%, 1.00031)) {
+@supports (animation-timing-function: linear(0, 1)) {
   .portfolio-projects--with-scroll .portfolio-projects__scroll-left,
   .portfolio-projects--with-scroll .portfolio-projects__scroll-right {
     --translate-transition: translate var(--spring-duration) var(--spring-easing);

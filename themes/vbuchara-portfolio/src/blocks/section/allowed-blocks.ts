@@ -9,6 +9,7 @@ const { default: projectsBlock } = await import("@blocks/projects/block.json") a
 const { default: archiveHeaderBlock } = await import("@blocks/archive-header/block.json") as BlockJsonDefault;
 const { default: archiveProjectsBlock } = await import("@blocks/archive-projects/block.json") as BlockJsonDefault;
 const { default: archiveSkillsBlock } = await import("@blocks/archive-skills/block.json") as BlockJsonDefault;
+const { default: archivePostsBlock } = await import("@blocks/archive-posts/block.json") as BlockJsonDefault;
 const { default: experiencesBlock } = await import("@blocks/experiences/block.json") as BlockJsonDefault;
 
 export const sectionAllowedBlocks = [
@@ -23,5 +24,6 @@ export const sectionAllowedBlocks = [
     archiveHeaderBlock.name,
     archiveProjectsBlock.name,
     archiveSkillsBlock.name,
-    experiencesBlock.name
+    archivePostsBlock.name,
+    experiencesBlock.name,
 ];

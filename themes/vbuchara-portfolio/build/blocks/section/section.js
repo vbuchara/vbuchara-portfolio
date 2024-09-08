@@ -47,9 +47,12 @@ const {
   default: archiveSkillsBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_archive-skills_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-skills/block.json */ "./src/blocks/archive-skills/block.json", 19));
 const {
+  default: archivePostsBlock
+} = await __webpack_require__.e(/*! import() */ "src_blocks_archive-posts_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/archive-posts/block.json */ "./src/blocks/archive-posts/block.json", 19));
+const {
   default: experiencesBlock
 } = await __webpack_require__.e(/*! import() */ "src_blocks_experiences_block_json").then(__webpack_require__.t.bind(__webpack_require__, /*! @blocks/experiences/block.json */ "./src/blocks/experiences/block.json", 19));
-const sectionAllowedBlocks = [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name, archiveHeaderBlock.name, archiveProjectsBlock.name, archiveSkillsBlock.name, experiencesBlock.name];
+const sectionAllowedBlocks = [welcomeContainerBlock.name, containerBlock.name, imageBlock.name, headingBlock.name, paragraphBlock.name, buttonBlock.name, skillsBlock.name, projectsBlock.name, archiveHeaderBlock.name, archiveProjectsBlock.name, archiveSkillsBlock.name, archivePostsBlock.name, experiencesBlock.name];
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
 

@@ -176,7 +176,7 @@ if ( ! class_exists( 'acf_form_comment' ) ) :
 		function comment_form_field_comment( $html ) {
 
 			// global
-			global $project;
+			global $post;
 
 			// vars
 			$post_id = false;
@@ -184,7 +184,7 @@ if ( ! class_exists( 'acf_form_comment' ) ) :
 			// get field groups
 			$field_groups = acf_get_field_groups(
 				array(
-					'comment' => $project->post_type,
+					'comment' => $post->post_type,
 				)
 			);
 

@@ -155,6 +155,7 @@ declare module "wordpress-types" {
         full:                  ImageInfo;
         "skill-icon":          ImageInfo;
         "project-image":       ImageInfo;
+        "post-image":          ImageInfo;
         "1536x1536":           ImageInfo;  
         "2048x2048":           ImageInfo;
     }

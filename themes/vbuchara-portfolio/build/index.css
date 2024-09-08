@@ -300,4 +300,69 @@ h5 {
   -webkit-text-fill-color: transparent;
 }
 
+.portfolio-pagination {
+  --font-size: clamp(1.8rem, 1.667vw, 2.4rem);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: var(--font-size);
+}
+.portfolio-pagination a {
+  text-decoration: none;
+}
+.portfolio-pagination__page-numbers {
+  --size: calc(var(--font-size) * 2);
+  --color: #f7f4f3;
+  --background-color: #14003f;
+  --border-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color);
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  width: var(--size);
+  height: var(--size);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+}
+.portfolio-pagination__page-numbers:not(.portfolio-pagination__page-numbers--current, .portfolio-pagination__page-numbers--dots):is(:hover, :focus-within) {
+  background-color: var(--color);
+  color: var(--background-color);
+}
+.portfolio-pagination__page-numbers--current {
+  --background-color: #92140c;
+}
+.portfolio-pagination__page-numbers--dots {
+  --background-color: transparent;
+  --color: #14003f;
+  font-weight: 600;
+}
+.portfolio-pagination__controls {
+  --size: calc(var(--font-size) * 1.5);
+  --color: #14003f;
+  --background-color: transparent;
+  --border-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color);
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  width: var(--size);
+  height: var(--size);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1.5em;
+  line-height: 1;
+}
+.portfolio-pagination__controls:hover, .portfolio-pagination__controls:focus-within {
+  --color: #92140c;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=index.css.map*/

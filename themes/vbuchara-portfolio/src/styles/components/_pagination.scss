@@ -1,0 +1,98 @@
+@use "@styles/abstract/variables" as *;
+@use "@styles/abstract/mixins" as *;
+@use "@styles/abstract/breakpoints" as *;
+
+$mixin-only: false !default;
+
+@mixin pagination(){
+    $pagination-selector: &;
+
+    --font-size: clamp(1.8rem, 1.667vw, 2.4rem);
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    font-size: var(--font-size);
+
+    a {
+        text-decoration: none;
+    }
+
+    &__page-numbers {
+        --size: calc(var(--font-size) * 2);
+        --color: #{$white-smoke};
+        --background-color: #{$russian-violet};
+        --border-color: var(--background-color); 
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--color);
+        background-color: var(--background-color);
+        border-color: var(--border-color);
+
+        width: var(--size);
+        height: var(--size);
+
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 50%;
+
+        transition: background-color 0.3s ease-out, color 0.3s ease-out;
+
+        &:not(&--current, &--dots):is(:hover, :focus-within){
+            background-color: var(--color);
+            color: var(--background-color);
+        }
+
+        &--current {
+            --background-color: #{$penn-red};
+        }
+
+        &--dots {
+            --background-color: transparent;
+            --color: #{$russian-violet};
+
+            font-weight: 600;
+        }
+    }
+
+    &__controls {
+        --size: calc(var(--font-size) * 1.5);
+        --color: #{$russian-violet};
+        --background-color: transparent;
+        --border-color: var(--background-color); 
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--color);
+        background-color: var(--background-color);
+        border-color: var(--border-color);
+
+        width: var(--size);
+        height: var(--size);
+
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 50%;
+
+        font-weight: 600;
+        font-size: 1.5em;
+        line-height: 1;
+
+        &:hover, &:focus-within {
+            --color: #{$penn-red};
+            text-decoration: underline;
+        }
+    }
+}
+
+@if ($mixin-only == false){
+    .portfolio-pagination {
+        @include pagination();
+    }
+}

@@ -12,7 +12,8 @@ declare module "@wordpress/core-data" {
      * HTTP Query parameters sent with the API request to fetch the entity records.
      */
     export type GetRecordsHttpQuery = {
-        context?: "view" | "edit",
+        context?: "view" | "edit";
+        _embed?: boolean;
         per_page?: number;
         author?: number;
         status?: "publish" | "private";
@@ -24,12 +25,37 @@ declare module "@wordpress/core-data" {
         meta_query_compare?: string;
         meta_query_type?: string;
         include?: number[];
-        [x: `meta_query_key_${number}`]: string;
-        [x: `meta_query_value_${number}`]: string;
-        [x: `meta_query_compare_${number}`]: string;
-        [x: `meta_query_type_${number}`]: string;
+        page?: number;
+        [key: `meta_query_key_${number}`]: string;
+        [key: `meta_query_value_${number}`]: string;
+        [key: `meta_query_compare_${number}`]: string;
+        [key: `meta_query_type_${number}`]: string;
+        [key: `orderby_${string}`]: "asc" | "desc";
     };
 
+    export interface SiteSettings {
+        title: string,
+        description: string,
+        url: string,
+        email: string,
+        timezone: string,
+        date_format: string,
+        time_format: string,
+        start_of_week: number,
+        language: string,
+        use_smilies: boolean,
+        default_category: number,
+        default_post_format: string,
+        posts_per_page: number,
+        show_on_front: string,
+        page_on_front: number,
+        page_for_posts: number,
+        default_ping_status: string,
+        default_comment_status: string,
+        site_logo: string | null,
+        site_icon: number
+    }
+    
     // ENTITY
 
     export namespace BaseEntityRecords {
@@ -43,7 +69,8 @@ declare module "@wordpress/core-data" {
     export type FixedCoreDataStoreSelectors = AppendStateToSelectors<{
         isRequestingEmbedPreview: () => boolean
         hasFetchedAutosaves: () => boolean,
-        getPostType: (entityType: string) => BaseEntityRecords.Type<"view"> | undefined 
+        getPostType: (entityType: string) => BaseEntityRecords.Type<"view"> | undefined,
+        getSite: () => SiteSettings
     }>;
 
     export type CoreDataStoreSelectors = Omit<
